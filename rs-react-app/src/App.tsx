@@ -1,13 +1,10 @@
-import { useState } from 'react';
+import Main from './features/Main';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <div>
-        <h1>React App</h1>
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
+      <div className="mx-auto flex items-center justify-center">
+        <Main />
       </div>
     </>
   );

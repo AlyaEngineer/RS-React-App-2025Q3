@@ -1,5 +1,10 @@
 @import 'tailwindcss';
 
+@theme {
+  --shadow-3xl: 0 0 35px 5px rgba(0, 0, 0, 0.25);
+  --color-dark: #372535;
+}
+
 :root {
   --main-gradient: linear-gradient(to right top, #4b374c, #5b5a79, #6381a2, #69aac4, #7ed3da);
 }
