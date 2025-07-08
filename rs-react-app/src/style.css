@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+
+:root {
+  --main-gradient: linear-gradient(to right top, #4b374c, #5b5a79, #6381a2, #69aac4, #7ed3da);
+}
+
+.dark {
+  --main-gradient: linear-gradient(
+    to right bottom,
+    oklch(35% 0.21 350),
+    oklch(40% 0.22 320),
+    oklch(45% 0.24 280)
+  );
+}
+
+@layer base {
+  body {
+    font-family: var(--font-josefin-sans);
+    background: var(--main-gradient);
+  }
+}
