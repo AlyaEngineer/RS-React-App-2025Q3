@@ -1,6 +1,7 @@
 import { cn } from '@/libs/utils';
 import { Component } from 'react';
 import Search from './Search';
+import ErrorButton from './ErrorButton';
 
 class Main extends Component {
   render() {
@@ -17,7 +18,7 @@ class Main extends Component {
         )}
       >
         <Search />
-        <h2>Results</h2>
+        <ErrorButton />
       </div>
     );
   }
