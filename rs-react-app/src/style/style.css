@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import 'tailwindcss';
 
 @theme {
@@ -6,7 +6,9 @@
   --color-dark: #372535;
   --color-input-background: #7c9bb5;
   --color-button-background: #93d744;
-  --color-button-background-hover: #7AC527;
+  --color-button-background-hover: #7ac527;
+  --color-button-reload: #9fded5;
+  --color-button-reload-hover: #7bcdc4;
 }
 
 :root {
