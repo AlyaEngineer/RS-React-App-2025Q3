@@ -1,10 +1,7 @@
 import { cn } from '@/libs/utils';
 import { Component } from 'react';
-import Search from './Search';
-import ErrorButton from './ErrorButton';
-import Results from './Results';
 
-class Main extends Component {
+class Results extends Component {
   render() {
     return (
       <div
@@ -15,15 +12,17 @@ class Main extends Component {
           'rounded-[30px]',
           'p-6',
           'backdrop-invert backdrop-opacity-5',
-          'max-sm:w-sm sm:w-xl md:w-2xl lg:w-4xl xl:w-6xl'
+          'w-full'
         )}
       >
-        <Search />
-        <Results />
-        <ErrorButton />
+        <h2>Results</h2>
+        <ul>
+          <li>Item 1 — description</li>
+          <li>Item 2 — description</li>
+        </ul>
       </div>
     );
   }
 }
 
-export default Main;
+export default Results;
