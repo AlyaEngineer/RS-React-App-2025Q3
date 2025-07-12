@@ -1,14 +1,42 @@
 import { cn } from '@/libs/utils';
 import { Rocket } from 'lucide-react';
 import { Component } from 'react';
+interface SearchProps {
+  onSearch: (query: string) => void;
+}
 
-class Search extends Component {
+interface SearchState {
+  query: string;
+}
+
+class Search extends Component<SearchProps, SearchState> {
+  constructor(props: SearchProps) {
+    super(props);
+    const savedQuery = localStorage.getItem('searchQuery') ?? '';
+    this.state = { query: savedQuery };
+  }
+
+  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newQuery = event.target.value;
+    this.setState({
+      query: newQuery,
+    });
+  };
+
+  handleSearchClick = () => {
+    const trimmed = this.state.query.trim();
+    localStorage.setItem('searchQuery', trimmed);
+    this.props.onSearch(trimmed);
+  };
+
   render() {
     return (
       <div className="flex w-full items-center justify-center gap-3 rounded-[80px] max-md:flex-col">
         <input
           type="text"
           name="searchInput"
+          value={this.state.query}
+          onChange={this.handleInputChange}
           placeholder="Search the Rick and Morty Multiverse"
           className={cn(
             'w-3/4',
@@ -29,6 +57,7 @@ class Search extends Component {
         />
         <button
           type="button"
+          onClick={this.handleSearchClick}
           className={cn(
             'flex',
             'w-1/4',
