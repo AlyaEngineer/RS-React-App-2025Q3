@@ -3,12 +3,12 @@ import { createRoot } from 'react-dom/client';
 import './style/style.css';
 import App from './App.tsx';
 import ErrorBoundary from './features/ErrorBoundary.tsx';
-import GlobalFallback from './features/GlobalFallback.tsx';
+import Fallback from './features/Fallback.tsx';
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ErrorBoundary fallback={<GlobalFallback />}>
+    <ErrorBoundary fallback={<Fallback />}>
       <App />
     </ErrorBoundary>
   </StrictMode>

@@ -1,6 +1,6 @@
 import { cn } from '@/libs/utils';
 
-function GlobalFallback() {
+function Fallback() {
   return (
     <div
       className={cn(
@@ -41,4 +41,4 @@ function GlobalFallback() {
   );
 }
 
-export default GlobalFallback;
+export default Fallback;
