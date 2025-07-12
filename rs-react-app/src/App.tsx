@@ -1,13 +1,14 @@
-import Main from './features/Main';
+import { Component } from 'react';
+import Main from './features/components/Main';
 
-function App() {
-  return (
-    <>
-      <div className="mx-auto flex items-center justify-center">
+class App extends Component {
+  render() {
+    return (
+      <div className="min-h-screen w-full overflow-x-hidden overflow-y-auto">
         <Main />
       </div>
-    </>
-  );
+    );
+  }
 }
 
 export default App;
