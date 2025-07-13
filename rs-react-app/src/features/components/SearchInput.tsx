@@ -10,7 +10,7 @@ class SearchInput extends Component<SearchInputProps> {
   render() {
     return (
       <input
-        type="text"
+        type="search"
         name="searchInput"
         value={this.props.value}
         onChange={this.props.onChange}

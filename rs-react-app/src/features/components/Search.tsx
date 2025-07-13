@@ -21,7 +21,7 @@ class Search extends Component<SearchProps, SearchState> {
     this.setState({ query: event.target.value });
   };
 
-  handleSearchClick = () => {
+  handleSearch = () => {
     const trimmed = this.state.query.trim();
     localStorage.setItem('searchQuery', trimmed);
     this.props.onSearch(trimmed);
@@ -29,10 +29,16 @@ class Search extends Component<SearchProps, SearchState> {
 
   render() {
     return (
-      <div className="flex w-full items-center justify-center gap-3 rounded-[80px] max-md:flex-col">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          this.handleSearch();
+        }}
+        className="flex w-full items-center justify-center gap-3 rounded-[80px] max-md:flex-col"
+      >
         <SearchInput value={this.state.query} onChange={this.handleInputChange} />
-        <SearchButton onClick={this.handleSearchClick} />
-      </div>
+        <SearchButton onClick={this.handleSearch} />
+      </form>
     );
   }
 }

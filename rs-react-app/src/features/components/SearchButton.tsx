@@ -10,7 +10,7 @@ class SearchButton extends Component<SearchButtonProps> {
   render() {
     return (
       <button
-        type="button"
+        type="submit"
         onClick={this.props.onClick}
         className={cn(
           'flex',
