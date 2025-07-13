@@ -9,6 +9,8 @@
   --color-button-background-hover: #7ac527;
   --color-button-reload: #9fded5;
   --color-button-reload-hover: #7bcdc4;
+  --color-button-error: #F58311;
+  --color-button-error-hover: #e66c10;
 }
 
 :root {

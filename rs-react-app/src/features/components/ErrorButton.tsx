@@ -30,13 +30,13 @@ class ErrorButton extends Component<object, State> {
           'items-center justify-center',
           'gap-2.5',
           'rounded-[15px]',
-          'bg-[#F58311]',
+          'bg-button-error',
           'p-2',
           'text-gray-600',
           'shadow-xl inset-shadow-sm',
           'transition delay-150 duration-300 ease-in-out',
           'text-shadow-2xs',
-          'hover:bg-[#e66c10] hover:shadow-xl/20',
+          'hover:bg-button-error-hover hover:shadow-xl/20',
           'max-md:w-full'
         )}
       >
