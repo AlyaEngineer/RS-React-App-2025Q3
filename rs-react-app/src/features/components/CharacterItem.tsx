@@ -11,7 +11,7 @@ class CharacterItem extends Component<CharacterItemProps> {
 
     return (
       <div className="flex h-full items-center rounded-md bg-slate-700/80 p-4 max-md:p-2.5">
-        <img src={image} alt={name} className="h-25 w-25 rounded-md object-cover" />
+        <img src={image} alt={name} className="h-24 w-24 rounded-md object-cover" />
         <div className="ml-4 flex flex-col">
           <h4 className="text-lg font-semibold text-white max-md:text-base">{name}</h4>
           <p className="text-left text-sm font-medium text-gray-400">race: {species}</p>
