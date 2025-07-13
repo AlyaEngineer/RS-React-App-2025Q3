@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Character } from '@/features/types';
-import { fetchCharactersByName } from '@/features/api/character';
+import { fetchCharactersByName } from '@/features/api/characterApi';
 
 type Props = {
   query: string;
