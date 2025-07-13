@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { cn } from '@/libs/utils';
-import { SearchInputProps } from '../types/componentTypes';
+import { SearchInputProps } from '../types/searchTypes';
 
 class SearchInput extends Component<SearchInputProps> {
   render() {

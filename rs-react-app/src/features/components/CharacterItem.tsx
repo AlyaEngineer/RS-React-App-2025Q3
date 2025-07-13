@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { CharacterItemProps } from '../types/componentTypes';
+import { CharacterItemProps } from '../types/viewTypes';
 
 class CharacterItem extends Component<CharacterItemProps> {
   render() {

@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { ErrorBoundaryProps, ErrorBoundaryState } from '../types/componentTypes';
+import { ErrorBoundaryProps, ErrorBoundaryState } from '../types/errorTypes';
 
 function logErrorToMyService(
   error: Error,

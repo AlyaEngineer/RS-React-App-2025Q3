@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import SearchInput from './SearchInput';
 import SearchButton from './SearchButton';
-import { SearchProps, SearchState } from '../types/componentTypes';
+import { SearchProps, SearchState } from '../types/searchTypes';
 
 class Search extends Component<SearchProps, SearchState> {
   constructor(props: SearchProps) {

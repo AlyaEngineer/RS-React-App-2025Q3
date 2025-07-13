@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import CharacterSkeleton from './CharacterSceleton';
-import { CharacterListSkeletonState } from '../types/componentTypes';
+import { CharacterListSkeletonState } from '../types/viewTypes';
 
 class CharacterListSkeleton extends Component<object, CharacterListSkeletonState> {
   constructor(props: object) {

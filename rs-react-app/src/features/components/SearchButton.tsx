@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Rocket } from 'lucide-react';
 import { cn } from '@/libs/utils';
-import { SearchButtonProps } from '../types/componentTypes';
+import { SearchButtonProps } from '../types/searchTypes';
 
 class SearchButton extends Component<SearchButtonProps> {
   render() {

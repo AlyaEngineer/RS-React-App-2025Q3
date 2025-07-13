@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import { ApiError } from '@/features/types/componentTypes';
+import { ApiError } from '@/features/types/apiTypes';
 import { fetchCharactersByName } from '@/features/api/characterApi';
-import { CharacterFetcherProps, CharacterFetcherState } from '@/features/types/componentTypes';
+import { CharacterFetcherProps, CharacterFetcherState } from '@/features/types/fetcherTypes';
 
 class CharacterFetcher extends Component<CharacterFetcherProps, CharacterFetcherState> {
   constructor(props: CharacterFetcherProps) {

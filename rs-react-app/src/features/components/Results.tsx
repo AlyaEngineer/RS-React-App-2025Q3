@@ -3,7 +3,7 @@ import { Component } from 'react';
 import CharacterFetcher from '@/features/components/fetcher/characterFetcher';
 import CharacterItems from './CharacterItems';
 import CharacterListSkeleton from './CharacterListSkeleton';
-import { ResultsProps } from '../types/componentTypes';
+import { ResultsProps } from '../types/searchTypes';
 
 class Results extends Component<ResultsProps> {
   render() {

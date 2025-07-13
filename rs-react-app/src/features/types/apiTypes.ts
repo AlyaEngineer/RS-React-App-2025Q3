@@ -22,3 +22,8 @@ export interface Location {
   name: string;
   url: string;
 }
+
+export interface ApiError {
+  status: number;
+  message: string;
+}
