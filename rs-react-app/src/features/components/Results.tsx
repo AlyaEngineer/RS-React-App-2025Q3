@@ -1,6 +1,6 @@
 import { cn } from '@/libs/utils';
 import { Component } from 'react';
-import CharacterFetcher from '@/features/fetcher/characterFetcher';
+import CharacterFetcher from '@/features/components/fetcher/characterFetcher';
 import CharacterItems from './CharacterItems';
 import CharacterListSkeleton from './CharacterListSkeleton';
 
