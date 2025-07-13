@@ -1,14 +1,7 @@
 import { Component } from 'react';
 import SearchInput from './SearchInput';
 import SearchButton from './SearchButton';
-
-interface SearchProps {
-  onSearch: (query: string) => void;
-}
-
-interface SearchState {
-  query: string;
-}
+import { SearchProps, SearchState } from '../types/componentTypes';
 
 class Search extends Component<SearchProps, SearchState> {
   constructor(props: SearchProps) {

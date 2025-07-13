@@ -1,10 +1,6 @@
 import { Component } from 'react';
 import { cn } from '@/libs/utils';
-
-interface SearchInputProps {
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
+import { SearchInputProps } from '../types/componentTypes';
 
 class SearchInput extends Component<SearchInputProps> {
   render() {

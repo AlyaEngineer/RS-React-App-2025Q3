@@ -1,10 +1,7 @@
 import { Component } from 'react';
 import CharacterItem from './CharacterItem';
 import { Character } from '../types/types';
-
-interface CharacterItemsProps {
-  characters: Character[];
-}
+import { CharacterItemsProps } from '../types/componentTypes';
 
 class CharacterItems extends Component<CharacterItemsProps> {
   render() {

@@ -1,14 +1,5 @@
-import { Component, ReactNode } from 'react';
-
-interface ErrorBoundaryProps {
-  fallback: ReactNode;
-  children: ReactNode;
-}
-
-interface ErrorBoundaryState {
-  hasError: boolean;
-  error?: Error;
-}
+import { Component } from 'react';
+import { ErrorBoundaryProps, ErrorBoundaryState } from '../types/componentTypes';
 
 function logErrorToMyService(
   error: Error,

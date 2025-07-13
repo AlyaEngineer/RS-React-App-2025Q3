@@ -1,11 +1,8 @@
 import { cn } from '@/libs/utils';
 import { Component } from 'react';
+import { ErrorButtonState } from '../types/componentTypes';
 
-interface State {
-  shouldThrow: boolean;
-}
-
-class ErrorButton extends Component<object, State> {
+class ErrorButton extends Component<object, ErrorButtonState> {
   constructor(props: object) {
     super(props);
     this.state = { shouldThrow: false };

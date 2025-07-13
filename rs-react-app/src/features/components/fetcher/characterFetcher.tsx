@@ -1,24 +1,10 @@
 import { Component } from 'react';
-import { ApiError, Character } from '@/features/types/types';
+import { ApiError } from '@/features/types/componentTypes';
 import { fetchCharactersByName } from '@/features/api/characterApi';
+import { CharacterFetcherProps, CharacterFetcherState } from '@/features/types/componentTypes';
 
-type Props = {
-  query: string;
-  children: (data: {
-    loading: boolean;
-    error: ApiError | null;
-    characters: Character[];
-  }) => React.ReactNode;
-};
-
-type State = {
-  loading: boolean;
-  error: ApiError | null;
-  characters: Character[];
-};
-
-class CharacterFetcher extends Component<Props, State> {
-  constructor(props: Props) {
+class CharacterFetcher extends Component<CharacterFetcherProps, CharacterFetcherState> {
+  constructor(props: CharacterFetcherProps) {
     super(props);
     this.state = {
       loading: false,
@@ -31,7 +17,7 @@ class CharacterFetcher extends Component<Props, State> {
     this.load();
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: CharacterFetcherProps) {
     if (prevProps.query !== this.props.query) {
       this.load();
     }

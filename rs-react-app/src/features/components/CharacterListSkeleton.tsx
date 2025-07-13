@@ -1,11 +1,8 @@
 import { Component } from 'react';
 import CharacterSkeleton from './CharacterSceleton';
+import { CharacterListSkeletonState } from '../types/componentTypes';
 
-interface State {
-  skeletonCount: number;
-}
-
-class CharacterListSkeleton extends Component<object, State> {
+class CharacterListSkeleton extends Component<object, CharacterListSkeletonState> {
   constructor(props: object) {
     super(props);
     this.state = {

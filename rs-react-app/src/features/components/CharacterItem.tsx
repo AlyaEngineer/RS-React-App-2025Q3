@@ -1,9 +1,5 @@
 import { Component } from 'react';
-import { Character } from '../types/types';
-
-interface CharacterItemProps {
-  character: Character;
-}
+import { CharacterItemProps } from '../types/componentTypes';
 
 class CharacterItem extends Component<CharacterItemProps> {
   render() {

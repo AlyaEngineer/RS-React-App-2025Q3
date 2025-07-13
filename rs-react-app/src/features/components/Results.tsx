@@ -3,10 +3,7 @@ import { Component } from 'react';
 import CharacterFetcher from '@/features/components/fetcher/characterFetcher';
 import CharacterItems from './CharacterItems';
 import CharacterListSkeleton from './CharacterListSkeleton';
-
-interface ResultsProps {
-  searchQuery: string;
-}
+import { ResultsProps } from '../types/componentTypes';
 
 class Results extends Component<ResultsProps> {
   render() {
