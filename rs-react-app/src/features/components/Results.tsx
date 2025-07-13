@@ -2,6 +2,7 @@ import { cn } from '@/libs/utils';
 import { Component } from 'react';
 import CharacterFetcher from '@/features/fetcher/characterFetcher';
 import CharacterItems from './CharacterItems';
+import CharacterListSkeleton from './CharacterListSkeleton';
 
 interface ResultsProps {
   searchQuery: string;
@@ -29,10 +30,7 @@ class Results extends Component<ResultsProps> {
 
         <CharacterFetcher query={searchQuery}>
           {(data) => {
-            if (data.loading)
-              return (
-                <p className="mb-4 text-center text-3xl font-bold text-lime-300">Loading...</p>
-              );
+            if (data.loading) return <CharacterListSkeleton />;
             if (data.error)
               return (
                 <p className="mb-4 text-center text-3xl font-bold text-red-400">{data.error}</p>
