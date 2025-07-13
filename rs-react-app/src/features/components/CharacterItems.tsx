@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import CharacterItem from './CharacterItem';
-import { Character } from '../types';
+import { Character } from '../types/types';
 
 interface CharacterItemsProps {
   characters: Character[];

@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { ApiError, Character } from '@/features/types';
+import { ApiError, Character } from '@/features/types/types';
 import { fetchCharactersByName } from '@/features/api/characterApi';
 
 type Props = {

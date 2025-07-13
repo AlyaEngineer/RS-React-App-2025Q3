@@ -1,4 +1,4 @@
-import { ApiError, Character } from '../types';
+import { ApiError, Character } from '../types/types';
 
 export async function fetchCharactersByName(query: string): Promise<Character[]> {
   const baseUrl = 'https://rickandmortyapi.com/api/character';
