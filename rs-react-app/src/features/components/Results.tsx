@@ -18,12 +18,12 @@ class Results extends Component<ResultsProps> {
           'shadow-3xl/20',
           'flex h-auto flex-col items-center justify-center gap-8',
           'rounded-[10px]',
-          'p-6',
+          'p-6 max-sm:p-4',
           'backdrop-invert backdrop-opacity-5',
           'w-full'
         )}
       >
-        <h2 className="text-2xl font-bold text-white">
+        <h2 className="text-center text-2xl font-bold text-white">
           Search results for the query &quot;{searchQuery}&quot;
         </h2>
 

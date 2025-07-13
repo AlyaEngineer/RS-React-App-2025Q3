@@ -72,7 +72,8 @@ class Search extends Component<SearchProps, SearchState> {
             'transition delay-150 duration-300 ease-in-out',
             'text-shadow-2xs',
             'hover:bg-button-background-hover hover:shadow-xl/20',
-            'max-md:w-full'
+            'max-md:w-full',
+            'focus:border-none'
           )}
         >
           <Rocket strokeWidth={1.25} />

@@ -20,7 +20,7 @@ class Main extends Component {
           'shadow-3xl/20',
           'flex h-auto flex-col items-center justify-center gap-8',
           'rounded-[10px]',
-          'm-10 mx-auto p-6',
+          'm-6 p-6 max-sm:m-3 max-sm:p-4',
           'backdrop-invert backdrop-opacity-5',
           'max-w-[1550px]'
           // 'max-sm:w-sm sm:w-xl md:w-2xl lg:w-4xl xl:w-6xl'

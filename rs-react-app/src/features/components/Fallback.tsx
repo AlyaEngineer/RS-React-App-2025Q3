@@ -6,9 +6,9 @@ function Fallback() {
       className={cn(
         'bg-dark/4',
         'shadow-3xl/20',
-        'flex h-auto flex-col items-center justify-center gap-8',
+        'flex h-auto max-w-[700px] flex-col items-center justify-center gap-8',
         'rounded-[30px]',
-        'm-auto p-6',
+        'm-auto p-6 max-sm:mx-6',
         'backdrop-invert backdrop-opacity-5',
         'max-sm:w-sm sm:w-xl md:w-2xl lg:w-4xl xl:w-6xl'
       )}
