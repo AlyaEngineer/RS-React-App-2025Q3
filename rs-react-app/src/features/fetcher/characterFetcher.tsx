@@ -1,19 +1,19 @@
 import { Component } from 'react';
-import { Character } from '@/features/types';
+import { ApiError, Character } from '@/features/types';
 import { fetchCharactersByName } from '@/features/api/characterApi';
 
 type Props = {
   query: string;
   children: (data: {
     loading: boolean;
-    error: string | null;
+    error: ApiError | null;
     characters: Character[];
   }) => React.ReactNode;
 };
 
 type State = {
   loading: boolean;
-  error: string | null;
+  error: ApiError | null;
   characters: Character[];
 };
 
@@ -43,8 +43,15 @@ class CharacterFetcher extends Component<Props, State> {
     try {
       const characters = await fetchCharactersByName(this.props.query);
       this.setState({ characters, loading: false });
-    } catch {
-      this.setState({ error: 'Failed to load data', loading: false });
+    } catch (error) {
+      if (typeof error === 'object' && error !== null && 'status' in error && 'message' in error) {
+        this.setState({ error: error as ApiError, loading: false });
+      } else {
+        this.setState({
+          error: { status: 0, message: 'Unexpected error' },
+          loading: false,
+        });
+      }
     }
   }
 

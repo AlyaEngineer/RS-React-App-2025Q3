@@ -33,7 +33,9 @@ class Results extends Component<ResultsProps> {
             if (data.loading) return <CharacterListSkeleton />;
             if (data.error)
               return (
-                <p className="mb-4 text-center text-3xl font-bold text-red-400">{data.error}</p>
+                <p className="mb-4 text-center text-3xl font-bold text-red-400">
+                  Error {data.error.status}: {data.error.message}
+                </p>
               );
             if (data.characters.length === 0)
               return (

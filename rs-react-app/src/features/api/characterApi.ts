@@ -1,14 +1,23 @@
-export async function fetchCharactersByName(query: string) {
+import { ApiError, Character } from '../types';
+
+export async function fetchCharactersByName(query: string): Promise<Character[]> {
   const baseUrl = 'https://rickandmortyapi.com/api/character';
   const trimmedQuery = query.trim();
   const url = trimmedQuery ? `${baseUrl}?name=${trimmedQuery}` : baseUrl;
 
   const response = await fetch(url);
+  const body = await response.json().catch(() => null);
 
   if (!response.ok) {
-    throw new Error(`Error ${response.status}`);
+    throw {
+      status: response.status,
+      message: body.error || response.statusText || 'Unknown error',
+    } satisfies ApiError;
   }
 
-  const result = await response.json();
-  return result.results;
+  if (body && body.results) {
+    return body.results;
+  } else {
+    return [];
+  }
 }
