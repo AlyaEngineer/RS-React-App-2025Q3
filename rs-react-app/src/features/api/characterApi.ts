@@ -1,9 +1,10 @@
+import { API_BASE_URL } from '@/config/api';
+
 import { ApiError, Character } from '../types/apiTypes';
 
 export async function fetchCharactersByName(query: string): Promise<Character[]> {
-  const baseUrl = 'https://rickandmortyapi.com/api/character';
   const trimmedQuery = query.trim();
-  const url = trimmedQuery ? `${baseUrl}?name=${trimmedQuery}` : baseUrl;
+  const url = trimmedQuery ? `${API_BASE_URL}?name=${trimmedQuery}` : API_BASE_URL;
 
   const response = await fetch(url);
   const body = await response.json().catch(() => null);
