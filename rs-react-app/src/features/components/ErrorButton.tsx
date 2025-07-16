@@ -16,7 +16,7 @@ class ErrorButton extends Component<object, ErrorButtonState> {
 
   render() {
     if (this.state.shouldThrow) {
-      throw new Error('ErrorBoundary check: not real error');
+      throw new Error('ErrorBoundary caught an error');
     }
 
     return (
