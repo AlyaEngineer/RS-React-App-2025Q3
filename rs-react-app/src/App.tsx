@@ -1,4 +1,5 @@
 import { Component } from 'react';
+
 import Main from './features/components/Main';
 
 class App extends Component {

@@ -11,7 +11,12 @@ import importPlugin from 'eslint-plugin-import';
 export default tseslint.config(
   { ignores: ['dist'] },
   {
-    extends: [js.configs.recommended, ...tseslint.configs.strict, eslintPluginPrettier, importPlugin.flatConfigs.recommended,],
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.strict,
+      eslintPluginPrettier,
+      importPlugin.flatConfigs.recommended,
+    ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -29,7 +34,7 @@ export default tseslint.config(
       'react-compiler/react-compiler': 'error',
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
-            'import/order': [
+      'import/order': [
         'error',
         {
           groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
