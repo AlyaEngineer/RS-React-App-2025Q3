@@ -13,7 +13,7 @@ class SearchButton extends Component<SearchButtonProps> {
         className={cn(
           'bg-button-background flex w-1/4 items-center justify-center gap-2.5 p-2 max-md:w-full',
           'cursor-pointer',
-          'rounded-2xl shadow-xl inset-shadow-sm',
+          'rounded-xl shadow-xl inset-shadow-sm',
           'transition delay-150 duration-300 ease-in-out',
           'text-gray-600 text-shadow-2xs',
           'hover:bg-button-background-hover hover:shadow-xl/20',

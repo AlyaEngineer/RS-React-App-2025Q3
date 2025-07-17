@@ -14,7 +14,7 @@ class SearchInput extends Component<SearchInputProps> {
         placeholder="Search the Rick and Morty Multiverse"
         className={cn(
           'bg-input-background border-input-background w-3/4 border-1 p-2 pl-3 max-md:w-full',
-          'rounded-2xl shadow-xl inset-shadow-sm outline-none',
+          'rounded-xl shadow-xl inset-shadow-sm outline-none',
           'text-gray-600 text-shadow-2xs',
           'transition delay-150 duration-300 ease-in-out',
           'hover:shadow-xl/20 hover:outline-none',

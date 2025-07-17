@@ -29,7 +29,7 @@ class Search extends Component<SearchProps, SearchState> {
           e.preventDefault();
           this.handleSearch();
         }}
-        className="flex w-full items-center justify-center gap-3 rounded-[80px] max-md:flex-col"
+        className="flex w-full items-center justify-center gap-3 max-md:flex-col"
       >
         <SearchInput value={this.state.query} onChange={this.handleInputChange} />
         <SearchButton onClick={this.handleSearch} />
