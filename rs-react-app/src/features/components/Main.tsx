@@ -22,9 +22,9 @@ class Main extends Component {
           'shadow-3xl/20',
           'flex h-auto flex-col items-center justify-center gap-8',
           'rounded-xl',
-          'm-6 p-6 max-sm:m-3 max-sm:p-4',
+          '@9xl:m-auto p-6',
           'backdrop-invert backdrop-opacity-5',
-          'max-w-[1550px]'
+          'max-w-(--my-max-width)'
         )}
       >
         <Search onSearch={this.handleSearch} />

@@ -11,6 +11,8 @@
   --color-button-reload-hover: #7bcdc4;
   --color-button-error: #f58311;
   --color-button-error-hover: #e66c10;
+  --container-9xl: 96rem;
+  --my-max-width: 1550px;
 }
 
 :root {
