@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { ApiError, Character } from './apiTypes';
 
 export type CharacterFetcherProps = {
@@ -6,7 +8,7 @@ export type CharacterFetcherProps = {
     loading: boolean;
     error: ApiError | null;
     characters: Character[];
-  }) => React.ReactNode;
+  }) => ReactNode;
 };
 
 export type CharacterFetcherState = {

@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 export interface ResultsProps {
   searchQuery: string;
 }
@@ -16,5 +18,5 @@ export interface SearchButtonProps {
 
 export interface SearchInputProps {
   value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }

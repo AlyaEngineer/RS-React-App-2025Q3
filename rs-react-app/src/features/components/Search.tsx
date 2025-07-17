@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { ChangeEvent, Component } from 'react';
 
 import { SearchProps, SearchState } from '../types/searchTypes';
 
@@ -12,7 +12,7 @@ class Search extends Component<SearchProps, SearchState> {
     this.state = { query: savedQuery };
   }
 
-  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     this.setState({ query: event.target.value });
   };
 

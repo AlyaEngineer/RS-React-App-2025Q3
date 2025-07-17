@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, ErrorInfo } from 'react';
 
 import { ErrorBoundaryProps, ErrorBoundaryState } from '../types/errorTypes';
 
@@ -25,7 +25,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, info: React.ErrorInfo) {
+  componentDidCatch(error: Error, info: ErrorInfo) {
     logErrorToMyService(error, info.componentStack ?? '');
   }
 
