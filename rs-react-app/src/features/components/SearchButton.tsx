@@ -12,20 +12,12 @@ class SearchButton extends Component<SearchButtonProps> {
         type="submit"
         onClick={this.props.onClick}
         className={cn(
-          'flex',
-          'w-1/4',
+          'bg-button-background flex w-1/4 items-center justify-center gap-2.5 p-2 max-md:w-full',
           'cursor-pointer',
-          'items-center justify-center',
-          'gap-2.5',
-          'rounded-[15px]',
-          'bg-button-background',
-          'p-2',
-          'text-gray-600',
-          'shadow-xl inset-shadow-sm',
+          'rounded-2xl shadow-xl inset-shadow-sm',
           'transition delay-150 duration-300 ease-in-out',
-          'text-shadow-2xs',
+          'text-gray-600 text-shadow-2xs',
           'hover:bg-button-background-hover hover:shadow-xl/20',
-          'max-md:w-full',
           'focus:border-none'
         )}
       >

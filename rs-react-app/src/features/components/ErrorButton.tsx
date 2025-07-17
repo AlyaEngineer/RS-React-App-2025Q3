@@ -23,20 +23,12 @@ class ErrorButton extends Component<object, ErrorButtonState> {
       <button
         onClick={this.handleClick}
         className={cn(
-          'flex',
-          'w-1/4',
+          'bg-button-error flex w-1/4 items-center justify-center gap-2.5 p-2 max-md:w-full',
           'cursor-pointer',
-          'items-center justify-center',
-          'gap-2.5',
-          'rounded-[15px]',
-          'bg-button-error',
-          'p-2',
-          'text-gray-600',
-          'shadow-xl inset-shadow-sm',
+          'rounded-2xl shadow-xl inset-shadow-sm',
+          'text-gray-600 text-shadow-2xs',
           'transition delay-150 duration-300 ease-in-out',
-          'text-shadow-2xs',
-          'hover:bg-button-error-hover hover:shadow-xl/20',
-          'max-md:w-full'
+          'hover:bg-button-error-hover hover:shadow-xl/20'
         )}
       >
         Click me to trigger the error

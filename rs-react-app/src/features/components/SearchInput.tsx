@@ -14,20 +14,12 @@ class SearchInput extends Component<SearchInputProps> {
         onChange={this.props.onChange}
         placeholder="Search the Rick and Morty Multiverse"
         className={cn(
-          'w-3/4',
-          'rounded-[15px]',
-          'border-input-background border-1',
-          'bg-input-background',
-          'p-2 pl-3',
-          'text-gray-600',
-          'shadow-xl',
-          'inset-shadow-sm',
+          'bg-input-background border-input-background w-3/4 border-1 p-2 pl-3 max-md:w-full',
+          'rounded-2xl shadow-xl inset-shadow-sm outline-none',
+          'text-gray-600 text-shadow-2xs',
           'transition delay-150 duration-300 ease-in-out',
-          'outline-none',
-          'text-shadow-2xs',
           'hover:shadow-xl/20 hover:outline-none',
-          'focus:border-lime-300 focus:placeholder-transparent',
-          'max-md:w-full'
+          'focus:border-lime-300 focus:placeholder-transparent'
         )}
       />
     );

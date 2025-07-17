@@ -16,12 +16,10 @@ class Results extends Component<ResultsProps> {
       <div
         className={cn(
           'bg-dark/4',
-          'shadow-3xl/20',
-          'flex h-auto flex-col items-center justify-center gap-8',
-          'rounded-[10px]',
+          'shadow-3xl/20 rounded-xl',
+          'flex h-auto w-full flex-col items-center justify-center gap-8',
           'p-6 max-sm:p-4',
-          'backdrop-invert backdrop-opacity-5',
-          'w-full'
+          'backdrop-invert backdrop-opacity-5'
         )}
       >
         <h2 className="text-center text-2xl font-bold text-white">
