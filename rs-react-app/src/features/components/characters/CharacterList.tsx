@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
-import { Character } from '../types/apiTypes';
-import { CharacterItemsProps } from '../types/viewTypes';
+import { Character } from '@/features/types/apiTypes';
+import { CharacterItemsProps } from '@/features/types/viewTypes';
 
 import CharacterItem from './CharacterItem';
 

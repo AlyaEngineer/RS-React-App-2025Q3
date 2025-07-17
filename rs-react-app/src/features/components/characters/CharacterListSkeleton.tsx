@@ -1,10 +1,9 @@
 import { Component } from 'react';
 
 import { BREAKPOINTS, SKELETON_COUNT } from '@/config/constants';
+import { CharacterListSkeletonState } from '@/features/types/viewTypes';
 
-import { CharacterListSkeletonState } from '../types/viewTypes';
-
-import CharacterSkeleton from './CharacterSkeleton';
+import CharacterSkeleton from './CharacterItemSkeleton';
 
 class CharacterListSkeleton extends Component<object, CharacterListSkeletonState> {
   constructor(props: object) {

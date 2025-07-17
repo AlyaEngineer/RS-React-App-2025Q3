@@ -3,8 +3,8 @@ import { createRoot } from 'react-dom/client';
 
 import './style/style.css';
 import App from './App.tsx';
-import ErrorBoundary from './features/components/ErrorBoundary.tsx';
-import Fallback from './features/components/Fallback.tsx';
+import ErrorBoundary from './features/components/errorHandling/ErrorBoundary.tsx';
+import Fallback from './features/components/errorHandling/Fallback.tsx';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {

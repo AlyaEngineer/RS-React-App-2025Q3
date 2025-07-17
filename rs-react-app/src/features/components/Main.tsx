@@ -2,9 +2,9 @@ import { Component } from 'react';
 
 import { cn } from '@/libs/utils';
 
-import ErrorButton from './ErrorButton';
 import Results from './Results';
-import Search from './Search';
+import ErrorButton from './errorHandling/ErrorButton';
+import Search from './search/Search';
 class Main extends Component {
   state = {
     searchQuery: localStorage.getItem('searchQuery') || '',

@@ -1,8 +1,7 @@
 import { Component } from 'react';
 
+import { ErrorButtonState } from '@/features/types/errorTypes';
 import { cn } from '@/libs/utils';
-
-import { ErrorButtonState } from '../types/errorTypes';
 
 class ErrorButton extends Component<object, ErrorButtonState> {
   constructor(props: object) {

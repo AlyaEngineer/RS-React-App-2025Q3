@@ -1,6 +1,5 @@
 import { API_BASE_URL } from '@/config/api';
-
-import { ApiError, Character } from '../types/apiTypes';
+import { ApiError, Character } from '@/features/types/apiTypes';
 
 export async function fetchCharactersByName(query: string): Promise<Character[]> {
   const trimmedQuery = query.trim();

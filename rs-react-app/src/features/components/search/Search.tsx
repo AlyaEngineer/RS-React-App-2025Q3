@@ -1,6 +1,6 @@
 import { ChangeEvent, Component } from 'react';
 
-import { SearchProps, SearchState } from '../types/searchTypes';
+import { SearchProps, SearchState } from '@/features/types/searchTypes';
 
 import SearchButton from './SearchButton';
 import SearchInput from './SearchInput';
