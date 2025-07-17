@@ -1,5 +1,7 @@
 import { Component } from 'react';
 
+import { BREAKPOINTS, SKELETON_COUNT } from '@/config/constants';
+
 import { CharacterListSkeletonState } from '../types/viewTypes';
 
 import CharacterSkeleton from './CharacterSkeleton';
@@ -13,7 +15,7 @@ class CharacterListSkeleton extends Component<object, CharacterListSkeletonState
   }
 
   getSkeletonCount = () => {
-    return window.innerWidth >= 768 ? 6 : 4;
+    return window.innerWidth >= BREAKPOINTS.md ? SKELETON_COUNT.lg : SKELETON_COUNT.sm;
   };
 
   handleResize = () => {
