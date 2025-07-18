@@ -15,12 +15,12 @@ class CharacterFetcher extends Component<CharacterFetcherProps, CharacterFetcher
   }
 
   componentDidMount() {
-    this.load();
+    void this.load();
   }
 
   componentDidUpdate(prevProps: CharacterFetcherProps) {
     if (prevProps.query !== this.props.query) {
-      this.load();
+      void this.load();
     }
   }
 

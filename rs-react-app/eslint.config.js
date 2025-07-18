@@ -76,5 +76,5 @@ export default tseslint.config(
         typescript: true,
       },
     },
-  },
+  }
 );

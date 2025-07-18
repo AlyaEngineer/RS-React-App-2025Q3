@@ -1,18 +1,17 @@
 import { API_BASE_URL } from '@/config/api';
-import { ApiError, Character } from '@/features/types/apiTypes';
+import { Character, CharacterResponse } from '@/features/types/apiTypes';
+
+import { throwApiError } from './apiError';
 
 export async function fetchCharactersByName(query: string): Promise<Character[]> {
   const trimmedQuery = query.trim();
   const url = trimmedQuery ? `${API_BASE_URL}?name=${trimmedQuery}` : API_BASE_URL;
 
   const response = await fetch(url);
-  const body = await response.json().catch(() => null);
+  const body = (await response.json().catch(() => null)) as CharacterResponse | null;
 
   if (!response.ok) {
-    throw {
-      status: response.status,
-      message: body.error || response.statusText || 'Unknown error',
-    } satisfies ApiError;
+    throwApiError(response.status, body?.error || response.statusText || 'Unknown error');
   }
 
   if (body && body.results) {

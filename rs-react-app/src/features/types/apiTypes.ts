@@ -27,3 +27,8 @@ export interface ApiError {
   status: number;
   message: string;
 }
+
+export type CharacterResponse = {
+  results: Character[];
+  error?: string;
+};
