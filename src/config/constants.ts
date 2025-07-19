@@ -6,6 +6,6 @@ export const BREAKPOINTS = {
 
 export const SKELETON_COUNT = {
   lg: 6,
-  md: 5,
-  sm: 4,
+  md: 4,
+  sm: 2,
 };

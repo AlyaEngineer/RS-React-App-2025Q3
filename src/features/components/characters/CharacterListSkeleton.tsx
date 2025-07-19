@@ -14,7 +14,7 @@ class CharacterListSkeleton extends Component<object, CharacterListSkeletonState
   }
 
   getSkeletonCount = () => {
-    return window.innerWidth >= BREAKPOINTS.md ? SKELETON_COUNT.lg : SKELETON_COUNT.sm;
+    return window.innerWidth > BREAKPOINTS.md ? SKELETON_COUNT.lg : SKELETON_COUNT.md;
   };
 
   handleResize = () => {
@@ -38,7 +38,7 @@ class CharacterListSkeleton extends Component<object, CharacterListSkeletonState
 
     for (let i = 0; i < count; i++) {
       skeletons.push(
-        <li key={i}>
+        <li key={i} aria-label="character-skeleton">
           <CharacterSkeleton />
         </li>
       );

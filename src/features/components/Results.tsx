@@ -1,11 +1,11 @@
 import { Component } from 'react';
 
-import CharacterFetcher from '@/features/components/fetcher/characterFetcher';
 import { ResultsProps } from '@/features/types/searchTypes';
 import { cn } from '@/libs/utils';
 
 import CharacterItems from './characters/CharacterList';
 import CharacterListSkeleton from './characters/CharacterListSkeleton';
+import CharacterFetcher from './fetcher/characterFetcher';
 
 class Results extends Component<ResultsProps> {
   render() {
