@@ -1,10 +1,12 @@
+import path from 'path';
+
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    setupFiles: 'vitest-setup.js',
+    setupFiles: 'vitest-setup.ts',
     coverage: {
       provider: 'istanbul',
       include: ['src/**/*.{js,jsx,ts,tsx}'],
@@ -21,6 +23,11 @@ export default defineConfig({
         functions: 50,
         lines: 50,
       },
+    },
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
     },
   },
 });
