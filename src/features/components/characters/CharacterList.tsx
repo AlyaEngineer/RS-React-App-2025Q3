@@ -11,7 +11,7 @@ class CharacterItems extends Component<CharacterItemsProps> {
     return (
       <ul className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {characters.map((char: Character) => (
-          <li key={char.id}>
+          <li key={char.id} aria-label="character-item">
             <CharacterItem character={char} />
           </li>
         ))}
