@@ -31,7 +31,7 @@ class Results extends Component<ResultsProps> {
             if (data.error)
               return (
                 <p className="mb-4 text-center text-3xl font-bold text-red-400">
-                  Error {data.error.status}: {data.error.message}
+                  Error {data.error.status}: {data.error.message ?? 'Something went wrong'}
                 </p>
               );
             if (data.characters.length === 0)
