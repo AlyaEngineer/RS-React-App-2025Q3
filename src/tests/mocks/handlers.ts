@@ -16,6 +16,7 @@ export const handlers = [
     return HttpResponse.json({
       results: [
         {
+          id: 1,
           name: 'Rick Sanchez',
           species: 'Human',
           gender: 'Male',

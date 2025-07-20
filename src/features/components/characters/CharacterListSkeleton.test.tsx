@@ -19,6 +19,7 @@ describe('CharacterListSkeleton', () => {
         return HttpResponse.json({
           results: [
             {
+              id: 1,
               name: 'Morty Smith',
               species: 'Human',
               gender: 'Male',
