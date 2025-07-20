@@ -3,9 +3,10 @@ import { Component } from 'react';
 import { ResultsProps } from '@/features/types/searchTypes';
 import { cn } from '@/libs/utils';
 
-import CharacterItems from './characters/CharacterList';
-import CharacterListSkeleton from './characters/CharacterListSkeleton';
-import CharacterFetcher from './fetcher/characterFetcher';
+import CharacterItems from '../characters/CharacterList';
+import CharacterListSkeleton from '../characters/CharacterListSkeleton';
+
+import CharacterFetcher from './characterFetcher';
 
 class Results extends Component<ResultsProps> {
   render() {

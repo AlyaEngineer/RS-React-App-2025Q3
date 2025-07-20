@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { API_BASE_URL } from '@/config/api';
 import { server } from '@/tests/mocks/server';
 
-import Results from '../Results';
+import Results from '../fetcher/Results';
 describe('CharacterListSkeleton', () => {
   it('renders skeletons during loading and shows characters after data is fetched', async () => {
     server.use(
