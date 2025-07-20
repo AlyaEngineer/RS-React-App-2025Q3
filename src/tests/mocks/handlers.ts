@@ -17,7 +17,6 @@ export const handlers = [
       results: [
         {
           name: 'Rick Sanchez',
-          status: 'Alive',
           species: 'Human',
           gender: 'Male',
           image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
