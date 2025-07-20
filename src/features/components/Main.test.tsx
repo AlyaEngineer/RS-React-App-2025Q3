@@ -2,8 +2,9 @@ import { render, screen } from '@testing-library/react';
 import { ReactNode } from 'react';
 import { describe, expect, test, vi } from 'vitest';
 
-import App from './App';
-import { ApiError, Character } from './features/types/apiTypes';
+import { ApiError, Character } from '../types/apiTypes';
+
+import Main from './Main';
 
 interface Data {
   loading: boolean;
@@ -11,7 +12,7 @@ interface Data {
   characters: Character[];
 }
 
-vi.mock('./features/components/fetcher/characterFetcher', () => ({
+vi.mock('./fetcher/characterFetcher', () => ({
   default: ({ children }: { children: (data: Data) => ReactNode }) => {
     const characters = Array.from({ length: 20 }, (_, i) => ({
       id: i + 1,
@@ -44,9 +45,9 @@ vi.mock('./features/components/fetcher/characterFetcher', () => ({
   },
 }));
 
-describe('App', () => {
-  test('App renders 20 characters on initial load', async () => {
-    render(<App />);
+describe('Main', () => {
+  test('Main renders 20 characters on initial load', async () => {
+    render(<Main />);
     const items = await screen.findAllByLabelText('character-item');
     expect(items).toHaveLength(20);
   });
