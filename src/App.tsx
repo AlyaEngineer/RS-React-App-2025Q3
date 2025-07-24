@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-import Main from './features/components/Main';
+import Main from './features/pages/Main';
 import { cn } from './libs/utils';
 
 class App extends Component {

@@ -12,7 +12,7 @@ interface Data {
   characters: Character[];
 }
 
-vi.mock('./fetcher/characterFetcher', () => ({
+vi.mock('../components/fetcher/characterFetcher', () => ({
   default: ({ children }: { children: (data: Data) => ReactNode }) => {
     const characters = Array.from({ length: 20 }, (_, i) => ({
       id: i + 1,

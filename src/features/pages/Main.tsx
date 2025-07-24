@@ -2,9 +2,9 @@ import { Component } from 'react';
 
 import { cn } from '@/libs/utils';
 
-import ErrorButton from './errorHandling/ErrorButton';
-import Results from './fetcher/Results';
-import Search from './search/Search';
+import ErrorButton from '../components/errorHandling/ErrorButton';
+import Results from '../components/fetcher/Results';
+import Search from '../components/search/Search';
 
 class Main extends Component {
   state = {
