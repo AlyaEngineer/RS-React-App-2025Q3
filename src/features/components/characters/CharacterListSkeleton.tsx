@@ -1,53 +1,36 @@
-import { Component } from 'react';
+import { useState , useEffect } from 'react';
 
 import { BREAKPOINTS, SKELETON_COUNT } from '@/config/constants';
-import { CharacterListSkeletonState } from '@/features/types/viewTypes';
 
 import CharacterSkeleton from './CharacterItemSkeleton';
 
-class CharacterListSkeleton extends Component<object, CharacterListSkeletonState> {
-  constructor(props: object) {
-    super(props);
-    this.state = {
-      skeletonCount: this.getSkeletonCount(),
-    };
-  }
-
-  getSkeletonCount = () => {
+export default function CharacterListSkeleton() {
+  const getSkeletonCount = () => {
     return window.innerWidth > BREAKPOINTS.md ? SKELETON_COUNT.lg : SKELETON_COUNT.md;
   };
 
-  handleResize = () => {
-    const newCount = this.getSkeletonCount();
-    if (newCount !== this.state.skeletonCount) {
-      this.setState({ skeletonCount: newCount });
-    }
-  };
+  const [skeletonCount, setSkeletonCount] = useState<number>(getSkeletonCount());
 
-  componentDidMount() {
-    window.addEventListener('resize', this.handleResize);
-  }
+  useEffect(() => {
+    const handleResize = () => {
+      const newCount = getSkeletonCount();
+      setSkeletonCount(newCount);
+    };
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize);
-  }
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-  render() {
-    const count = this.state.skeletonCount;
-    const skeletons = [];
-
-    for (let i = 0; i < count; i++) {
-      skeletons.push(
-        <li key={i} aria-label="character-skeleton">
-          <CharacterSkeleton />
-        </li>
-      );
-    }
-
-    return (
-      <ul className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">{skeletons}</ul>
+  const skeletons = [];
+  for (let i = 0; i < skeletonCount; i++) {
+    skeletons.push(
+      <li key={i} aria-label="character-skeleton">
+        <CharacterSkeleton />
+      </li>
     );
   }
-}
 
-export default CharacterListSkeleton;
+  return (
+    <ul className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">{skeletons}</ul>
+  );
+}

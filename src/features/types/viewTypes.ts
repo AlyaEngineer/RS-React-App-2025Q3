@@ -7,7 +7,3 @@ export interface CharacterItemProps {
 export interface CharacterListProps {
   characters: Character[];
 }
-
-export interface CharacterListSkeletonState {
-  skeletonCount: number;
-}
