@@ -1,10 +1,7 @@
-import { Component } from 'react';
-
 import Main from './features/pages/Main';
 import { cn } from './libs/utils';
 
-class App extends Component {
-  render() {
+export default function App() {
     return (
       <div
         className={cn(
@@ -16,6 +13,3 @@ class App extends Component {
       </div>
     );
   }
-}
-
-export default App;
