@@ -4,7 +4,7 @@ export interface CharacterItemProps {
   character: Character;
 }
 
-export interface CharacterItemsProps {
+export interface CharacterListProps {
   characters: Character[];
 }
 
