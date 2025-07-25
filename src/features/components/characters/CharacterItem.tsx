@@ -1,10 +1,7 @@
-import { Component } from 'react';
-
 import { CharacterItemProps } from '@/features/types/viewTypes';
 
-class CharacterItem extends Component<CharacterItemProps> {
-  render() {
-    const { name, species, gender, location, image } = this.props.character;
+export default function CharacterItem({ character }: CharacterItemProps) {
+    const { name, species, gender, location, image } = character;
 
     return (
       <div className="flex h-full items-center rounded-md bg-slate-700/80 p-4 max-md:p-2.5">
@@ -18,6 +15,3 @@ class CharacterItem extends Component<CharacterItemProps> {
       </div>
     );
   }
-}
-
-export default CharacterItem;
