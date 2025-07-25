@@ -10,9 +10,3 @@ export type CharacterFetcherProps = {
     characters: Character[];
   }) => ReactNode;
 };
-
-export type CharacterFetcherState = {
-  loading: boolean;
-  error: ApiError | null;
-  characters: Character[];
-};
