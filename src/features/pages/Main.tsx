@@ -1,19 +1,26 @@
 import { useState } from 'react';
+import { useSearchParams } from 'react-router';
 
 import { cn } from '@/libs/utils';
 
 import ErrorButton from '../components/errorHandling/ErrorButton';
 import Results from '../components/fetcher/Results';
+import Pagination from '../components/pagination/Pagination';
 import Search from '../components/search/Search';
 
 export default function Main() {
-  const [searchQuery, setSearchQuery] = useState(() => {
-    return localStorage.getItem('searchQuery') || '';
-  });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [totalPages, setTotalPages] = useState(1);
 
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    localStorage.setItem('searchQuery', query);
+  const query = searchParams.get("name") ?? '';
+  const currentPage = Number(searchParams.get("page") || 1);
+
+  const handleSearch = (newQuery: string) => {
+    setSearchParams({ name: newQuery, page: '1' });
+  };
+
+  const handlePageChange = (page: number) => {
+    setSearchParams({ name: query, page: page.toString() });
   };
 
   return (
@@ -29,8 +36,17 @@ export default function Main() {
       )}
     >
       <Search onSearch={handleSearch} />
-      <Results searchQuery={searchQuery} />
+      <Results
+        searchQuery={query}
+        currentPage={currentPage}
+        onInfo={(info) => setTotalPages(info?.pages ?? 1)}
+      />
       <ErrorButton />
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 }

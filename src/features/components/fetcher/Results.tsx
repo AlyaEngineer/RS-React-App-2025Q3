@@ -1,12 +1,10 @@
 import { ResultsProps } from '@/features/types/searchTypes';
 import { cn } from '@/libs/utils';
 
-import CharacterItems from '../characters/CharacterList';
-import CharacterListSkeleton from '../characters/CharacterListSkeleton';
-
+import CharacterContent from './CharacterContent';
 import CharacterFetcher from './characterFetcher';
 
-export default function Results({ searchQuery }: ResultsProps) {
+export default function Results({ searchQuery, currentPage, onInfo }: ResultsProps) {
   return (
     <div
       className={cn(
@@ -21,22 +19,8 @@ export default function Results({ searchQuery }: ResultsProps) {
         Search results for the query &quot;{searchQuery}&quot;
       </h2>
 
-      <CharacterFetcher query={searchQuery}>
-        {(data) => {
-          if (data.loading) return <CharacterListSkeleton />;
-          if (data.error)
-            return (
-              <p className="mb-4 text-center text-3xl font-bold text-red-400">
-                Error {data.error.status}: {data.error.message ?? 'Something went wrong'}
-              </p>
-            );
-          if (data.characters.length === 0)
-            return (
-              <p className="mb-4 text-center text-3xl font-bold text-white">Nothing found</p>
-            );
-
-          return <CharacterItems characters={data.characters} />;
-        }}
+      <CharacterFetcher query={searchQuery} page={currentPage}>
+        {(data) => <CharacterContent data={data} onInfo={onInfo} />}
       </CharacterFetcher>
     </div>
   );

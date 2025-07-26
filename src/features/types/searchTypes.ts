@@ -1,7 +1,11 @@
 import { ChangeEvent } from 'react';
 
+import { Info } from './apiTypes';
+
 export interface ResultsProps {
   searchQuery: string;
+  currentPage: number;
+  onInfo: (info: Info | null) => void;
 }
 
 export interface SearchProps {
