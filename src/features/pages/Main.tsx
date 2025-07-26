@@ -12,8 +12,8 @@ export default function Main() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [totalPages, setTotalPages] = useState(1);
 
-  const query = searchParams.get("name") ?? '';
-  const currentPage = Number(searchParams.get("page") || 1);
+  const query = searchParams.get('name') ?? '';
+  const currentPage = Number(searchParams.get('page') || 1);
 
   const handleSearch = (newQuery: string) => {
     setSearchParams({ name: newQuery, page: '1' });

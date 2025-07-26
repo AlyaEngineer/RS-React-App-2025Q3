@@ -1,7 +1,7 @@
 import { SearchInputProps } from '@/features/types/searchTypes';
 import { cn } from '@/libs/utils';
 
-export default function SearchInput ({ value, onChange }: SearchInputProps) {
+export default function SearchInput({ value, onChange }: SearchInputProps) {
   return (
     <input
       type="search"

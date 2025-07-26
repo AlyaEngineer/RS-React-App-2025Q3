@@ -3,7 +3,7 @@ import { Rocket } from 'lucide-react';
 import { SearchButtonProps } from '@/features/types/searchTypes';
 import { cn } from '@/libs/utils';
 
-export default function SearchButton ({ onClick }: SearchButtonProps) {
+export default function SearchButton({ onClick }: SearchButtonProps) {
   return (
     <button
       type="submit"

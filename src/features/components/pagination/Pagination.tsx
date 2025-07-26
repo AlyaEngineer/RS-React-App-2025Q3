@@ -1,30 +1,21 @@
-import { CircleArrowLeft, CircleArrowRight } from "lucide-react";
+import { CircleArrowLeft, CircleArrowRight } from 'lucide-react';
 
-import { PaginationProps } from "@/features/types/paginationTypes";
+import { PaginationProps } from '@/features/types/paginationTypes';
 
-import { createPageArray } from "./paginationUtils";
+import { createPageArray } from './paginationUtils';
 
-export default function Pagination({
-  currentPage,
-  totalPages,
-  onPageChange,
-}: PaginationProps) {
+export default function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
   const pages = createPageArray(currentPage, totalPages);
 
   return (
     <div className="pagination">
-      <button
-        disabled={currentPage <= 1}
-        onClick={() => onPageChange(currentPage - 1)}
-      >
+      <button disabled={currentPage <= 1} onClick={() => onPageChange(currentPage - 1)}>
         <CircleArrowLeft strokeWidth={1.25} />
       </button>
 
       {pages.map((page, index) =>
         typeof page === 'string' ? (
-          <span key={`ellipsis-${index}`}>
-            ...
-          </span>
+          <span key={`ellipsis-${index}`}>...</span>
         ) : (
           <button
             key={`page-${page}`}
@@ -36,10 +27,7 @@ export default function Pagination({
         )
       )}
 
-      <button
-        disabled={currentPage >= totalPages}
-        onClick={() => onPageChange(currentPage + 1)}
-      >
+      <button disabled={currentPage >= totalPages} onClick={() => onPageChange(currentPage + 1)}>
         <CircleArrowRight strokeWidth={1.25} />
       </button>
     </div>

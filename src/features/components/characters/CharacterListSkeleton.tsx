@@ -1,4 +1,4 @@
-import { useState , useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import { BREAKPOINTS, SKELETON_COUNT } from '@/config/constants';
 

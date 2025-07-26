@@ -20,7 +20,12 @@ export default function CharacterFetcher({ query, page, children }: CharacterFet
         setCharacters(characters.results);
         setInfo(characters.info);
       } catch (error) {
-        if (typeof error === 'object' && error !== null && 'status' in error && 'message' in error) {
+        if (
+          typeof error === 'object' &&
+          error !== null &&
+          'status' in error &&
+          'message' in error
+        ) {
           setError(error as ApiError);
         } else {
           setError({ status: 0, message: 'Unexpected error' });
