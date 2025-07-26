@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
 
+import Footer from './features/components/footer/Footer';
 import Main from './features/pages/Main';
 import NotFound from './features/pages/NotFound';
 import { cn } from './libs/utils';
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/" element={<Main />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <Footer />
       </div>
     </BrowserRouter>
   );
