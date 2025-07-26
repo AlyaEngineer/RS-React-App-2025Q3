@@ -1,6 +1,6 @@
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { API_BASE_URL } from '@/config/api';
 import { server } from '@/tests/mocks/server';
@@ -9,6 +9,7 @@ import Results from './Results';
 
 describe('Results', () => {
   it('renders correct number of character items when data is provided', async () => {
+    const mockOnInfo = vi.fn();
     server.use(
       http.get(API_BASE_URL, ({ request }) => {
         const url = new URL(request.url);
@@ -39,14 +40,15 @@ describe('Results', () => {
       })
     );
 
-    render(<Results searchQuery="rick" />);
+    render(<Results searchQuery="rick" currentPage={1} onInfo={mockOnInfo} />);
     await waitForElementToBeRemoved(() => screen.queryAllByLabelText('character-skeleton'));
     const characters = await screen.findAllByLabelText('character-item');
     expect(characters.length).toBe(2);
   });
 
   it('correctly displays item names and descriptions (renders Rick Sanchez data from default handler)', async () => {
-    render(<Results searchQuery="rick" />);
+    const mockOnInfo = vi.fn();
+    render(<Results searchQuery="rick" currentPage={1} onInfo={mockOnInfo} />);
     await waitForElementToBeRemoved(() => screen.queryAllByLabelText('character-skeleton'));
 
     expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();
@@ -60,6 +62,7 @@ describe('Results', () => {
   });
 
   it('displays "Nothing found" message when data array is empty', async () => {
+    const mockOnInfo = vi.fn();
     server.use(
       http.get(API_BASE_URL, ({ request }) => {
         const url = new URL(request.url);
@@ -71,7 +74,7 @@ describe('Results', () => {
       })
     );
 
-    render(<Results searchQuery="unknown" />);
+    render(<Results searchQuery="unknown" currentPage={1} onInfo={mockOnInfo} />);
     await waitForElementToBeRemoved(() => screen.queryAllByLabelText('character-skeleton'));
     const message = await screen.findByText(/nothing found/i);
     expect(message).toBeInTheDocument();
@@ -87,10 +90,11 @@ describe('Results', () => {
   ];
 
   errorCases.forEach(({ status, message }) => {
+    const mockOnInfo = vi.fn();
     it(`displays error message for status ${status}: ${message}`, async () => {
       server.use(http.get(API_BASE_URL, () => HttpResponse.json({ error: message }, { status })));
 
-      render(<Results searchQuery="rick" />);
+      render(<Results searchQuery="rick" currentPage={1} onInfo={mockOnInfo} />);
 
       const error = await screen.findByText(new RegExp(`Error ${status}: ${message}`, 'i'));
       expect(error).toBeInTheDocument();

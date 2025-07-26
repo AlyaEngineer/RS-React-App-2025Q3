@@ -1,6 +1,6 @@
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { http, HttpResponse, delay } from 'msw';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { API_BASE_URL } from '@/config/api';
 import { server } from '@/tests/mocks/server';
@@ -8,6 +8,7 @@ import { server } from '@/tests/mocks/server';
 import Results from '../fetcher/Results';
 describe('CharacterListSkeleton', () => {
   it('renders skeletons during loading and shows characters after data is fetched', async () => {
+    const mockOnInfo = vi.fn();
     server.use(
       http.get(API_BASE_URL, async ({ request }) => {
         const url = new URL(request.url);
@@ -30,7 +31,7 @@ describe('CharacterListSkeleton', () => {
         });
       })
     );
-    render(<Results searchQuery="morty" />);
+    render(<Results searchQuery="morty" currentPage={1} onInfo={mockOnInfo} />);
     const skeletons = await screen.findAllByLabelText('character-skeleton');
     expect(skeletons.length).toBeGreaterThan(0);
     await waitForElementToBeRemoved(() => screen.queryAllByLabelText('character-skeleton'));

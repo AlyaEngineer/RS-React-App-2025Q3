@@ -1,12 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router';
 import { describe, it, expect, vi } from 'vitest';
 
 import Search from './Search';
 
 describe('Search', () => {
   it('renders input and button', () => {
-    render(<Search onSearch={() => {}} />);
+    render(
+      <MemoryRouter>
+        <Search onSearch={() => {}} />
+      </MemoryRouter>
+    );
 
     const input = screen.getByPlaceholderText(/search the rick and morty multiverse/i);
     const button = screen.getByRole('button', { name: /let's search/i });
@@ -18,7 +23,11 @@ describe('Search', () => {
   it('shows empty input if nothing saved in localStorage', () => {
     localStorage.removeItem('searchQuery');
 
-    render(<Search onSearch={() => {}} />);
+    render(
+      <MemoryRouter>
+        <Search onSearch={() => {}} />
+      </MemoryRouter>
+    );
     const input = screen.getByPlaceholderText(/search the rick and morty multiverse/i);
 
     expect(input).toHaveValue('');
@@ -27,7 +36,11 @@ describe('Search', () => {
   it('shows saved searchQuery from localStorage if it exists', () => {
     localStorage.setItem('searchQuery', 'rick');
 
-    render(<Search onSearch={() => {}} />);
+    render(
+      <MemoryRouter>
+        <Search onSearch={() => {}} />
+      </MemoryRouter>
+    );
     const input = screen.getByPlaceholderText(/search the rick and morty multiverse/i);
 
     expect(input).toHaveValue('rick');
@@ -36,8 +49,11 @@ describe('Search', () => {
   it('saves trimmed searchQuery to localStorage on click', async () => {
     const user = userEvent.setup();
     const mockSearch = vi.fn();
-
-    render(<Search onSearch={mockSearch} />);
+    render(
+      <MemoryRouter>
+        <Search onSearch={mockSearch} />
+      </MemoryRouter>
+    );
 
     const input = screen.getByPlaceholderText(/search the rick and morty multiverse/i);
     const button = screen.getByRole('button', { name: /let's search/i });
@@ -53,7 +69,11 @@ describe('Search', () => {
   it('displays saved searchQuery from localStorage on mount', () => {
     localStorage.setItem('searchQuery', 'rick');
 
-    render(<Search onSearch={vi.fn()} />);
+    render(
+      <MemoryRouter>
+        <Search onSearch={vi.fn()} />
+      </MemoryRouter>
+    );
 
     const input = screen.getByPlaceholderText(/search the rick and morty multiverse/i);
     expect(input).toHaveValue('rick');

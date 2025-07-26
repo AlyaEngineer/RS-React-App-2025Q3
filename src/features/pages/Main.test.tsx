@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { ReactNode } from 'react';
+import { MemoryRouter } from 'react-router';
 import { describe, expect, test, vi } from 'vitest';
 
 import { ApiError, Character } from '../types/apiTypes';
@@ -47,7 +48,11 @@ vi.mock('../components/fetcher/characterFetcher', () => ({
 
 describe('Main', () => {
   test('Main renders 20 characters on initial load', async () => {
-    render(<Main />);
+    render(
+      <MemoryRouter>
+        <Main />
+      </MemoryRouter>
+    );
     const items = await screen.findAllByLabelText('character-item');
     expect(items).toHaveLength(20);
   });
