@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Footer from './features/components/footer/Footer';
 import AboutUs from './features/pages/AboutUs/AboutUs';
