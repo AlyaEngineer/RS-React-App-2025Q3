@@ -5,18 +5,18 @@ import { cn } from '@/libs/utils';
 
 export default function NotFound() {
   return (
-    <div className="flex h-full flex-col items-center justify-between py-8">
+    <div className="flex flex-1 flex-col items-center justify-between">
       <div className="flex">
         <img
           src="/404.svg"
           alt="Sorry, page not found! We can not find page you are looking for"
-          className="w-xl"
+          className="w-sm"
         />
       </div>
-      <div className="mb-15 flex w-fit">
+      <div className="flex">
         <Link
           className={cn(
-            'flex w-full items-center px-4 py-2',
+            'mb-10 flex w-full items-center px-4 py-2',
             'cursor-pointer',
             'rounded-xl shadow-xl inset-shadow-sm',
             'bg-button-error',
