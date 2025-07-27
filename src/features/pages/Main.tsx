@@ -28,7 +28,7 @@ export default function Main() {
       className={cn(
         'bg-dark/4',
         'shadow-3xl/20',
-        'flex h-auto flex-col items-center justify-center gap-8',
+        'flex h-auto flex-1 flex-col items-center justify-start gap-8',
         'rounded-xl',
         '@9xl:m-auto p-6',
         'backdrop-invert backdrop-opacity-5',

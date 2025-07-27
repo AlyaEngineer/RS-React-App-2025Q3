@@ -8,9 +8,9 @@ export default function Footer() {
       className={cn(
         'bg-dark/4',
         'shadow-3xl/20',
-        'flex max-md:flex-col max-md:items-start max-md:gap-10 h-auto items-center justify-between mt-4 gap-8 text-white text-shadow-lg/20',
+        'mt-4 flex h-auto items-center justify-between gap-8 text-white text-shadow-lg/20 max-md:flex-col max-md:items-start max-md:gap-10',
         'rounded-xl',
-        '@9xl:m-auto @9xl:mt-4 px-10 max-md:px-5 py-6',
+        '@9xl:m-auto @9xl:mt-4 px-10 py-6 max-md:px-5',
         'backdrop-invert backdrop-opacity-5',
         'max-w-(--my-max-width)'
       )}
@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className='max-md:px-2'>
+      <div className="max-md:px-2">
         <p>&copy; {new Date().getFullYear()} Rick & Morty API Search</p>
         <p>All rights reserved</p>
       </div>
