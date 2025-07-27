@@ -29,9 +29,15 @@ export default function CharacterItem({ character }: CharacterItemProps) {
       <img src={image} alt={name} loading="lazy" className="h-24 w-24 rounded-md object-cover" />
       <div className="ml-4 flex flex-col">
         <h4 className="text-lg font-semibold text-white max-md:text-base">{name}</h4>
-        <p className="text-left text-sm font-medium text-gray-400">race: <strong>{species}</strong></p>
-        <p className="text-left text-sm font-medium text-gray-400">gender: <strong>{gender}</strong></p>
-        <p className="text-left text-sm font-medium text-gray-400">location: <strong>{location.name}</strong></p>
+        <p className="text-left text-sm font-medium text-gray-400">
+          race: <strong>{species}</strong>
+        </p>
+        <p className="text-left text-sm font-medium text-gray-400">
+          gender: <strong>{gender}</strong>
+        </p>
+        <p className="text-left text-sm font-medium text-gray-400">
+          location: <strong>{location.name}</strong>
+        </p>
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ export default function CharacterDetails({ character, onClose }: CharacterDetail
 
       <div className="flex flex-col">
         <img src={image} alt={name} className="mb-4 h-60 w-60 rounded-xl object-cover" />
-        <h2 className="mb-2 text-center text-2xl text-white font-bold">{name}</h2>
+        <h2 className="mb-2 text-center text-2xl font-bold text-white">{name}</h2>
         <p className="mb-1 text-gray-400">
           race: <strong>{species}</strong>
         </p>
@@ -45,12 +45,16 @@ export default function CharacterDetails({ character, onClose }: CharacterDetail
         </p>
 
         <div className="w-full">
-          <h3 className="my-2 text-center text-lg text-white font-semibold">Episodes</h3>
+          <h3 className="my-2 text-center text-lg font-semibold text-white">Episodes</h3>
           <div className="mt-4 max-h-96 w-full overflow-y-auto">
             <ul className="max-h-52 list-disc pl-5 text-lg text-gray-400">
               {episode.map((episodeUrl) => {
                 const episodeId = episodeUrl.split('/').pop();
-                return <li key={episodeUrl}>Episode <strong>#{episodeId}</strong></li>;
+                return (
+                  <li key={episodeUrl}>
+                    Episode <strong>#{episodeId}</strong>
+                  </li>
+                );
               })}
             </ul>
           </div>
