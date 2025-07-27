@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { ReactNode } from 'react';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, test, vi } from 'vitest';
 
 import { ApiError, Character } from '../types/apiTypes';

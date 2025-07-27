@@ -1,5 +1,6 @@
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { http, HttpResponse, delay } from 'msw';
+import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 
 import { API_BASE_URL } from '@/config/api';
@@ -31,7 +32,12 @@ describe('CharacterListSkeleton', () => {
         });
       })
     );
-    render(<Results searchQuery="morty" currentPage={1} onInfo={mockOnInfo} />);
+
+    render(
+      <MemoryRouter>
+        <Results searchQuery="morty" currentPage={1} onInfo={mockOnInfo} />
+      </MemoryRouter>
+    );
     const skeletons = await screen.findAllByLabelText('character-skeleton');
     expect(skeletons.length).toBeGreaterThan(0);
     await waitForElementToBeRemoved(() => screen.queryAllByLabelText('character-skeleton'));

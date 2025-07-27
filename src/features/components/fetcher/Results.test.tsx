@@ -1,5 +1,6 @@
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
+import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 
 import { API_BASE_URL } from '@/config/api';
@@ -40,7 +41,11 @@ describe('Results', () => {
       })
     );
 
-    render(<Results searchQuery="rick" currentPage={1} onInfo={mockOnInfo} />);
+    render(
+      <MemoryRouter>
+        <Results searchQuery="rick" currentPage={1} onInfo={mockOnInfo} />
+      </MemoryRouter>
+    );
     await waitForElementToBeRemoved(() => screen.queryAllByLabelText('character-skeleton'));
     const characters = await screen.findAllByLabelText('character-item');
     expect(characters.length).toBe(2);
@@ -48,7 +53,11 @@ describe('Results', () => {
 
   it('correctly displays item names and descriptions (renders Rick Sanchez data from default handler)', async () => {
     const mockOnInfo = vi.fn();
-    render(<Results searchQuery="rick" currentPage={1} onInfo={mockOnInfo} />);
+    render(
+      <MemoryRouter>
+        <Results searchQuery="rick" currentPage={1} onInfo={mockOnInfo} />
+      </MemoryRouter>
+    );
     await waitForElementToBeRemoved(() => screen.queryAllByLabelText('character-skeleton'));
 
     expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();
