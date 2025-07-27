@@ -1,5 +1,5 @@
 import { Github } from 'lucide-react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import { AuthorInfo } from './types';
 
@@ -25,7 +25,19 @@ export default function AboutUs({ author }: { author: AuthorInfo }) {
           <ul className="mb-3 list-inside list-disc text-left">
             {author.education?.map(({ instituteName, certificate }, index) => (
               <li key={index}>
-                {instituteName}
+                {instituteName.includes('JS / Front-end Course 2024Q4') ? (
+                  <a
+                    href="https://rs.school/courses/reactjs"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-button-reload"
+                  >
+                    {instituteName}
+                  </a>
+                ) : (
+                  instituteName
+                )}
+
                 {certificate && (
                   <>
                     {' — '}
@@ -33,7 +45,7 @@ export default function AboutUs({ author }: { author: AuthorInfo }) {
                       href={certificate}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-chart-3 hover:text-chart-3/80 underline"
+                      className="hover:text-button-reload"
                     >
                       certificate
                     </a>
