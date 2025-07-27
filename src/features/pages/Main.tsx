@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router';
 
 import { cn } from '@/libs/utils';
@@ -22,6 +22,15 @@ export default function Main() {
   const handlePageChange = (page: number) => {
     setSearchParams({ name: query, page: page.toString() });
   };
+
+  useEffect(() => {
+    const savedQuery = localStorage.getItem('searchQuery');
+    const hasNameParam = searchParams.get('name');
+
+    if (savedQuery && !hasNameParam) {
+      setSearchParams({ name: savedQuery, page: '1' });
+    }
+  }, []);
 
   return (
     <div
