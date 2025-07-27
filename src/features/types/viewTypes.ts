@@ -7,3 +7,8 @@ export interface CharacterItemProps {
 export interface CharacterListProps {
   characters: Character[];
 }
+
+export interface CharacterDetailsProps {
+  character: Character;
+  onClose?: () => void;
+}

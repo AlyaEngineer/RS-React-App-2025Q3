@@ -4,7 +4,12 @@ import { fetchCharactersByName } from '@/features/api/characterApi';
 import { ApiError, Character, Info } from '@/features/types/apiTypes';
 import { CharacterFetcherProps } from '@/features/types/fetcherTypes';
 
-export default function CharacterFetcher({ query, page, children }: CharacterFetcherProps) {
+export default function CharacterFetcher({
+  query,
+  page,
+  children,
+  onCharacters,
+}: CharacterFetcherProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<ApiError | null>(null);
   const [characters, setCharacters] = useState<Character[]>([]);
@@ -19,6 +24,8 @@ export default function CharacterFetcher({ query, page, children }: CharacterFet
         const characters = await fetchCharactersByName(query, page);
         setCharacters(characters.results);
         setInfo(characters.info);
+
+        onCharacters?.(characters.results);
       } catch (error) {
         if (
           typeof error === 'object' &&
@@ -36,7 +43,7 @@ export default function CharacterFetcher({ query, page, children }: CharacterFet
     };
 
     void load();
-  }, [query, page]);
+  }, [query, page, onCharacters]);
 
   return children({ loading, error, characters, info });
 }
