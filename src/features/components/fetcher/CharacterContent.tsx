@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { ApiError, Character, Info } from '@/features/types/apiTypes';
 
-import CharacterItems from '../characters/CharacterList';
+import CharacterList from '../characters/CharacterList';
 import CharacterListSkeleton from '../characters/CharacterListSkeleton';
 
 export default function CharacterContent({
@@ -31,5 +31,5 @@ export default function CharacterContent({
   if (data.characters.length === 0)
     return <p className="mb-4 text-center text-3xl font-bold text-white">Nothing found</p>;
 
-  return <CharacterItems characters={data.characters} />;
+  return <CharacterList characters={data.characters} />;
 }
