@@ -25,7 +25,7 @@ export default function AboutUs({ author }: { author: AuthorInfo }) {
           <ul className="mb-3 list-inside list-disc text-left">
             {author.education?.map(({ instituteName, certificate }, index) => (
               <li key={index}>
-                {instituteName.includes('JS / Front-end Course 2024Q4') ? (
+                {instituteName.includes('RS School, React Course 2025Q3') ? (
                   <a
                     href="https://rs.school/courses/reactjs"
                     target="_blank"
