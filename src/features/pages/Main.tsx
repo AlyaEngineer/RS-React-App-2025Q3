@@ -58,6 +58,11 @@ export default function Main() {
         )}
       >
         <Search onSearch={handleSearch} />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
         <Results
           searchQuery={query}
           currentPage={currentPage}
@@ -67,11 +72,6 @@ export default function Main() {
           onCloseDetails={handleCloseDetails}
         />
         <ErrorButton />
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
       </div>
     </div>
   );
