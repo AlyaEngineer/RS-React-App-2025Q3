@@ -4,10 +4,11 @@ export interface CharacterItemProps {
   character: Character;
 }
 
-export interface CharacterItemsProps {
+export interface CharacterListProps {
   characters: Character[];
 }
 
-export interface CharacterListSkeletonState {
-  skeletonCount: number;
+export interface CharacterDetailsProps {
+  character: Character;
+  onClose?: () => void;
 }

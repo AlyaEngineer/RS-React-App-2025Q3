@@ -1,51 +1,51 @@
-import { Component } from 'react';
-
 import { ResultsProps } from '@/features/types/searchTypes';
 import { cn } from '@/libs/utils';
 
-import CharacterItems from '../characters/CharacterList';
-import CharacterListSkeleton from '../characters/CharacterListSkeleton';
+import CharacterDetails from '../characters/CharacterDetails';
 
+import CharacterContent from './CharacterContent';
 import CharacterFetcher from './characterFetcher';
 
-class Results extends Component<ResultsProps> {
-  render() {
-    const { searchQuery } = this.props;
+export default function Results({
+  searchQuery,
+  currentPage,
+  onInfo,
+  onCharacters,
+  detailsId,
+  onCloseDetails,
+}: ResultsProps) {
+  return (
+    <CharacterFetcher query={searchQuery} page={currentPage} onCharacters={onCharacters}>
+      {({ loading, error, characters, info }) => {
+        onInfo?.(info);
 
-    return (
-      <div
-        className={cn(
-          'bg-dark/4',
-          'shadow-3xl/20 rounded-xl',
-          'flex h-auto w-full flex-col items-center justify-center gap-8',
-          'p-6 max-sm:p-4',
-          'backdrop-invert backdrop-opacity-5'
-        )}
-      >
-        <h2 className="text-center text-2xl font-bold text-white">
-          Search results for the query &quot;{searchQuery}&quot;
-        </h2>
+        const selectedCharacter = characters.find((char) => String(char.id) === detailsId);
 
-        <CharacterFetcher query={searchQuery}>
-          {(data) => {
-            if (data.loading) return <CharacterListSkeleton />;
-            if (data.error)
-              return (
-                <p className="mb-4 text-center text-3xl font-bold text-red-400">
-                  Error {data.error.status}: {data.error.message ?? 'Something went wrong'}
-                </p>
-              );
-            if (data.characters.length === 0)
-              return (
-                <p className="mb-4 text-center text-3xl font-bold text-white">Nothing found</p>
-              );
+        return (
+          <div
+            className={cn(
+              'bg-dark/4',
+              'shadow-3xl/20 rounded-xl',
+              'flex h-auto w-full items-start justify-start gap-6',
+              'p-6 max-sm:p-4',
+              'backdrop-invert backdrop-opacity-5'
+            )}
+          >
+            <div className="flex w-full flex-col items-center gap-6">
+              <h2 className="text-center text-2xl font-bold text-white">
+                Search results for the query &quot;{searchQuery}&quot;
+              </h2>
+              <CharacterContent data={{ loading, error, characters, info }} onInfo={onInfo} />
+            </div>
 
-            return <CharacterItems characters={data.characters} />;
-          }}
-        </CharacterFetcher>
-      </div>
-    );
-  }
+            {selectedCharacter && (
+              <div className="sticky top-1 h-auto w-80 rounded-md border border-none bg-slate-700/80 p-4">
+                <CharacterDetails character={selectedCharacter} onClose={onCloseDetails} />
+              </div>
+            )}
+          </div>
+        );
+      }}
+    </CharacterFetcher>
+  );
 }
-
-export default Results;

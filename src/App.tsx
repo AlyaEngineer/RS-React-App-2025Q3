@@ -1,21 +1,28 @@
-import { Component } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Main from './features/components/Main';
+import Footer from './features/components/footer/Footer';
+import AboutUs from './features/pages/AboutUs/AboutUs';
+import authorData from './features/pages/AboutUs/authorData';
+import Main from './features/pages/Main';
+import NotFound from './features/pages/NotFound';
 import { cn } from './libs/utils';
 
-class App extends Component {
-  render() {
-    return (
+export default function App() {
+  return (
+    <BrowserRouter>
       <div
         className={cn(
-          'min-h-screen w-full overflow-x-hidden overflow-y-auto p-10 max-md:p-5',
+          'flex min-h-screen w-full flex-col justify-between overflow-x-hidden overflow-y-auto p-10 max-md:p-5',
           '@container'
         )}
       >
-        <Main />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/about" element={<AboutUs author={authorData[0]} />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
       </div>
-    );
-  }
+    </BrowserRouter>
+  );
 }
-
-export default App;

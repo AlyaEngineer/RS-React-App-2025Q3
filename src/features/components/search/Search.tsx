@@ -1,41 +1,46 @@
-import { ChangeEvent, Component } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-import { SearchProps, SearchState } from '@/features/types/searchTypes';
+import { SearchProps } from '@/features/types/searchTypes';
 
 import SearchButton from './SearchButton';
 import SearchInput from './SearchInput';
 
-class Search extends Component<SearchProps, SearchState> {
-  constructor(props: SearchProps) {
-    super(props);
+export default function Search({ onSearch }: SearchProps) {
+  const [query, setQuery] = useState<string>('');
+  const [, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
     const savedQuery = localStorage.getItem('searchQuery') ?? '';
-    this.state = { query: savedQuery };
-  }
+    setQuery(savedQuery);
+  }, []);
 
-  handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ query: event.target.value });
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuery(event.target.value);
   };
 
-  handleSearch = () => {
-    const trimmed = this.state.query.trim();
+  const handleSearch = () => {
+    const trimmed = query.trim();
     localStorage.setItem('searchQuery', trimmed);
-    this.props.onSearch(trimmed);
+
+    setSearchParams({
+      name: trimmed,
+      page: '1',
+    });
+
+    onSearch(trimmed);
   };
 
-  render() {
-    return (
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          this.handleSearch();
-        }}
-        className="flex w-full items-center justify-center gap-3 max-md:flex-col"
-      >
-        <SearchInput value={this.state.query} onChange={this.handleInputChange} />
-        <SearchButton onClick={this.handleSearch} />
-      </form>
-    );
-  }
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSearch();
+      }}
+      className="flex w-full items-center justify-center gap-3 max-md:flex-col"
+    >
+      <SearchInput value={query} onChange={handleInputChange} />
+      <SearchButton onClick={handleSearch} />
+    </form>
+  );
 }
-
-export default Search;
