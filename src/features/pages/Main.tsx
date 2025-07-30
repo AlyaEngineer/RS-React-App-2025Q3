@@ -52,7 +52,7 @@ export default function Main() {
           'shadow-3xl/20',
           'flex h-auto flex-1 flex-col items-center justify-start gap-8',
           'rounded-xl',
-          '@9xl:m-auto p-6',
+          '@9xl:m-auto p-6 max-sm:px-2',
           'backdrop-invert backdrop-opacity-5',
           'max-w-(--my-max-width)'
         )}

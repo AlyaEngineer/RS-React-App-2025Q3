@@ -19,7 +19,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         <CircleArrowLeft strokeWidth={1.25} />
       </button>
 
-      <div className='flex w-72 justify-center gap-1'>
+      <div className='flex w-80 justify-center gap-1'>
         {pages.map((page, index) =>
         typeof page === 'string' ? (
           <span className='text-white self-center' key={`ellipsis-${index}`}>...</span>
@@ -30,7 +30,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
             key={`page-${page}`}
             disabled={currentPage === page}
             onClick={() => onPageChange(page)}
-            className={`border-transparent border-2 px-3 py-1 text-white rounded-full transition hover:cursor-pointer
+            className={`border-transparent border-2 px-3 py-1 m-2 text-white rounded-full transition hover:cursor-pointer
               ${currentPage === page ? 'bg-button-error-hover border-white border-2' : 'hover:border-2 hover:border-white'}
                disabled:cursor-default`}
           >

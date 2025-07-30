@@ -12,7 +12,7 @@ export default function App() {
     <BrowserRouter>
       <div
         className={cn(
-          'flex min-h-screen w-full flex-col justify-between overflow-x-hidden overflow-y-auto p-10 max-md:p-5',
+          'flex min-h-screen w-full flex-col justify-between overflow-x-hidden overflow-y-auto p-10 max-md:p-5 max-sm:px-2',
           '@container'
         )}
       >
