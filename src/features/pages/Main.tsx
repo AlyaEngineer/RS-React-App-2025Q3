@@ -12,7 +12,7 @@ import { Character } from '../types/apiTypes';
 export default function Main() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [totalPages, setTotalPages] = useState(1);
-  const [, setCharacters] = useState<Character[]>([]);
+  const [characters, setCharacters] = useState<Character[]>([]);
 
   const navigate = useNavigate();
 
@@ -58,15 +58,19 @@ export default function Main() {
         )}
       >
         <Search onSearch={handleSearch} />
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
+
+        {characters.length > 0 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        )}
+
         <Results
           searchQuery={query}
           currentPage={currentPage}
-          onInfo={(info) => setTotalPages(info?.pages ?? 1)}
+          onInfo={(info) => setTotalPages(info?.pages || 0)}
           onCharacters={handleCharacters}
           detailsId={detailsId}
           onCloseDetails={handleCloseDetails}

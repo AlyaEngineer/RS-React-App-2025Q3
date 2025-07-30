@@ -24,9 +24,12 @@ export default function CharacterFetcher({
         const characters = await fetchCharactersByName(query, page);
         setCharacters(characters.results);
         setInfo(characters.info);
-
         onCharacters?.(characters.results);
       } catch (error) {
+        onCharacters?.([]);
+        setCharacters([]);
+        setInfo(null);
+
         if (
           typeof error === 'object' &&
           error !== null &&
