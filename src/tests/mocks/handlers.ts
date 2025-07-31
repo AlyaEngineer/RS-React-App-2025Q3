@@ -14,6 +14,7 @@ export const handlers = [
     }
 
     return HttpResponse.json({
+      info: { pages: 5 },
       results: [
         {
           id: 1,
