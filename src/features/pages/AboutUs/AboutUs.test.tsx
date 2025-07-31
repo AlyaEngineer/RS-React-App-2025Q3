@@ -47,10 +47,22 @@ describe('AboutUs page', () => {
     );
 
     const link = screen.getByRole('link', {
-      name: 'RS School, JS / Front-end Course 2024Q4',
+      name: 'RS School, React Course 2025Q3',
     });
 
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute('href', 'https://rs.school/courses/reactjs');
+  });
+
+  it('renders author image with correct src and alt', () => {
+    render(
+      <MemoryRouter>
+        <AboutUs author={mockAuthor} />
+      </MemoryRouter>
+    );
+    const img = screen.getByAltText(mockAuthor.name);
+    expect(img).toHaveAttribute('src', mockAuthor.url.image);
+    expect(img).toHaveAttribute('loading', 'lazy');
+    expect(img).toHaveAttribute('decoding', 'async');
   });
 });
