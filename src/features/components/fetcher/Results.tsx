@@ -17,7 +17,6 @@ export default function Results({
   return (
     <CharacterFetcher query={searchQuery} page={currentPage} onCharacters={onCharacters}>
       {({ loading, error, characters, info }) => {
-
         const selectedCharacter = characters.find((char) => String(char.id) === detailsId);
 
         return (
