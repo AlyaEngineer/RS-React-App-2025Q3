@@ -1,15 +1,19 @@
 import { ChangeEvent } from 'react';
 
+import { Character, Info } from './apiTypes';
+
 export interface ResultsProps {
   searchQuery: string;
+  currentPage: number;
+  onInfo: (info: Info | null) => void;
+  onCharacters?: (list: Character[]) => void;
+  detailsId?: string;
+  onCloseDetails?: () => void;
+  onSelectCharacter: (character: Character) => void;
 }
 
 export interface SearchProps {
   onSearch: (query: string) => void;
-}
-
-export interface SearchState {
-  query: string;
 }
 
 export interface SearchButtonProps {

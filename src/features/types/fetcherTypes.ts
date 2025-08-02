@@ -1,18 +1,15 @@
 import { ReactNode } from 'react';
 
-import { ApiError, Character } from './apiTypes';
+import { ApiError, Character, Info } from './apiTypes';
 
 export type CharacterFetcherProps = {
   query: string;
+  page: number;
+  onCharacters?: (list: Character[]) => void;
   children: (data: {
     loading: boolean;
     error: ApiError | null;
     characters: Character[];
+    info: Info | null;
   }) => ReactNode;
-};
-
-export type CharacterFetcherState = {
-  loading: boolean;
-  error: ApiError | null;
-  characters: Character[];
 };
