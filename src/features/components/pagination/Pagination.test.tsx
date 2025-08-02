@@ -9,7 +9,12 @@ import Pagination from './Pagination';
 
 function LocationDisplay() {
   const location = useLocation();
-  return <div data-testid="location-display">{location.search}</div>;
+  return (
+    <div data-testid="location-display">
+      {location.pathname}
+      {location.search}
+    </div>
+  );
 }
 
 describe('Pagination', () => {
@@ -17,18 +22,11 @@ describe('Pagination', () => {
     const user = userEvent.setup();
 
     render(
-      <MemoryRouter initialEntries={['/?page=1']}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Main />
-                <LocationDisplay />
-              </>
-            }
-          />
-        </Routes>
+      <MemoryRouter initialEntries={['/1']}>
+          <Routes>
+            <Route path="/:page" element={<Main />} />
+          </Routes>
+          <LocationDisplay />
       </MemoryRouter>
     );
 
@@ -43,7 +41,7 @@ describe('Pagination', () => {
     expect(page2).toBeDisabled();
 
     const locationDisplay = screen.getByTestId('location-display');
-    expect(locationDisplay.textContent).toContain('page=2');
+    expect(locationDisplay.textContent).toContain('/2');
   });
 
   it('disables previous and next buttons and renders only page 1 when totalPages is 1', () => {

@@ -9,13 +9,13 @@ import CharacterItem from './CharacterItem';
 const mockNavigate = vi.fn();
 
 vi.mock('react-router-dom', async () => {
-    const actual = await vi.importActual('react-router-dom');
-    return {
-      ...actual,
-      useNavigate: () => mockNavigate,
-      useSearchParams: () => [new URLSearchParams('name=rick&page=1')],
-    };
-  });
+  const actual = await vi.importActual('react-router-dom');
+  return {
+    ...actual,
+    useNavigate: () => mockNavigate,
+    useSearchParams: () => [new URLSearchParams('name=rick&page=1')],
+  };
+});
 
 const mockCharacter: Character = {
   id: 1,
@@ -34,13 +34,18 @@ const mockCharacter: Character = {
 
 describe('CharacterItem', () => {
   beforeEach(() => {
-      mockNavigate.mockClear();
-    });
+    mockNavigate.mockClear();
+  });
 
   it('renders character info correctly', () => {
     render(
       <MemoryRouter>
-        <CharacterItem character={mockCharacter} />
+        <CharacterItem
+          character={mockCharacter}
+          currentPage={1}
+          query="rick"
+          onSelect={() => {}}
+        />
       </MemoryRouter>
     );
 
@@ -57,40 +62,61 @@ describe('CharacterItem', () => {
   it('calls navigate on mouse click', () => {
     render(
       <MemoryRouter>
-        <CharacterItem character={mockCharacter} />
+        <CharacterItem
+          character={mockCharacter}
+          currentPage={1}
+          query="rick"
+          onSelect={() => {}}
+        />
       </MemoryRouter>
     );
 
     fireEvent.click(screen.getByRole('button'));
-    expect(mockNavigate).toHaveBeenCalledWith('/?name=rick&page=1&details=1');
+    expect(mockNavigate).toHaveBeenCalledWith('/1/1?name=rick');
   });
 
   it('calls navigate on Enter key press', () => {
     render(
       <MemoryRouter>
-        <CharacterItem character={mockCharacter} />
+        <CharacterItem
+          character={mockCharacter}
+          currentPage={1}
+          query="rick"
+          onSelect={() => {}}
+        />
       </MemoryRouter>
     );
 
     fireEvent.keyDown(screen.getByRole('button'), { key: 'Enter' });
-    expect(mockNavigate).toHaveBeenCalledWith("/?name=rick&page=1&details=1");
+    console.log(mockNavigate.mock.calls);
+    expect(mockNavigate).toHaveBeenCalledWith('/1/1?name=rick');
   });
 
   it('calls navigate on Space key press', () => {
     render(
       <MemoryRouter>
-        <CharacterItem character={mockCharacter} />
+        <CharacterItem
+          character={mockCharacter}
+          currentPage={1}
+          query="rick"
+          onSelect={() => {}}
+        />
       </MemoryRouter>
     );
 
     fireEvent.keyDown(screen.getByRole('button'), { key: ' ' });
-    expect(mockNavigate).toHaveBeenCalledWith("/?name=rick&page=1&details=1");
+    expect(mockNavigate).toHaveBeenCalledWith('/1/1?name=rick');
   });
 
   it('does not navigate on other key press', () => {
     render(
       <MemoryRouter>
-        <CharacterItem character={mockCharacter} />
+        <CharacterItem
+          character={mockCharacter}
+          currentPage={1}
+          query="rick"
+          onSelect={() => {}}
+        />
       </MemoryRouter>
     );
 
