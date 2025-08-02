@@ -8,6 +8,9 @@ import CharacterListSkeleton from '../characters/CharacterListSkeleton';
 export default function CharacterContent({
   data,
   onInfo,
+  onSelect,
+  currentPage,
+  query,
 }: {
   data: {
     loading: boolean;
@@ -16,6 +19,9 @@ export default function CharacterContent({
     info: Info | null;
   };
   onInfo: (info: Info | null) => void;
+  onSelect: (character: Character, currentPage: number, query: string) => void;
+  currentPage: number;
+  query: string;
 }) {
   useEffect(() => {
     onInfo(data.info);
@@ -31,5 +37,12 @@ export default function CharacterContent({
   if (data.characters.length === 0)
     return <p className="mb-4 text-center text-3xl font-bold text-white">Nothing found</p>;
 
-  return <CharacterList characters={data.characters} />;
+  return (
+    <CharacterList
+      characters={data.characters}
+      onSelect={onSelect}
+      currentPage={currentPage}
+      query={query}
+    />
+  );
 }

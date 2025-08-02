@@ -9,6 +9,7 @@ export interface ResultsProps {
   onCharacters?: (list: Character[]) => void;
   detailsId?: string;
   onCloseDetails?: () => void;
+  onSelectCharacter: (character: Character) => void;
 }
 
 export interface SearchProps {

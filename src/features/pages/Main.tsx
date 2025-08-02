@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import { cn } from '@/libs/utils';
 
@@ -10,42 +10,53 @@ import Search from '../components/search/Search';
 import { Character } from '../types/apiTypes';
 
 export default function Main() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { page = '1', detailsId } = useParams();
+  const [searchParams] = useSearchParams();
   const [totalPages, setTotalPages] = useState(1);
   const [characters, setCharacters] = useState<Character[]>([]);
 
   const navigate = useNavigate();
 
-  const query = searchParams.get('name') ?? '';
-  const currentPage = Number(searchParams.get('page') || 1);
-  const detailsId = searchParams.get('details') ?? undefined;
+  const [query, setQuery] = useState(searchParams.get('name') ?? '');
+  const currentPage = Number(page) || 1;
+
+  useEffect(() => {
+    const name = searchParams.get('name') ?? '';
+    setQuery(name);
+  }, [searchParams]);
 
   const handleSearch = (newQuery: string) => {
-    setSearchParams({ name: newQuery, page: '1' });
+    localStorage.setItem('searchQuery', newQuery);
+
+    if (detailsId) {
+      void navigate(`/${1}/${detailsId}?name=${newQuery}`);
+    } else {
+      void navigate(`/${1}?name=${newQuery}`);
+    }
   };
 
   const handlePageChange = (page: number) => {
-    setSearchParams({ name: query, page: page.toString() });
+    if (detailsId) {
+      void navigate(`/${page}/${detailsId}?name=${query}`);
+    } else {
+      void navigate(`/${page}?name=${query}`);
+    }
   };
 
   const handleCloseDetails = () => {
-    searchParams.delete('details');
-    void navigate(`/?${searchParams.toString()}`);
+    void navigate(`/${currentPage}?name=${query}`);
   };
 
   const handleCharacters = useCallback((list: Character[]) => {
     setCharacters(list);
   }, []);
 
-  useEffect(() => {
-    const savedQuery = localStorage.getItem('searchQuery');
-    if (savedQuery && !searchParams.get('name')) {
-      setSearchParams({ name: savedQuery, page: '1' });
-    }
-  }, [setSearchParams, searchParams]);
+  const handleSelect = (character: Character) => {
+    void navigate(`/${currentPage}/${character.id}?name=${query}`);
+  };
 
   return (
-    <div className="flex gap-5">
+    <div className="flex justify-between">
       <div
         className={cn(
           'bg-dark/4',
@@ -67,14 +78,31 @@ export default function Main() {
           />
         )}
 
-        <Results
-          searchQuery={query}
-          currentPage={currentPage}
-          onInfo={(info) => setTotalPages(info?.pages || 0)}
-          onCharacters={handleCharacters}
-          detailsId={detailsId}
-          onCloseDetails={handleCloseDetails}
-        />
+        <div className="flex w-full gap-5">
+          <Results
+            searchQuery={query}
+            currentPage={currentPage}
+            onInfo={(info) => setTotalPages(info?.pages || 0)}
+            onCharacters={handleCharacters}
+            detailsId={detailsId}
+            onCloseDetails={handleCloseDetails}
+            onSelectCharacter={handleSelect}
+          />
+          {detailsId && (
+            <div
+              className={cn(
+                'bg-dark/4',
+                'shadow-3xl/20',
+                'flex min-w-72 flex-col items-center justify-start gap-8',
+                'rounded-xl',
+                'p-6 max-sm:px-2',
+                'backdrop-invert backdrop-opacity-5',
+              )}
+            >
+              <Outlet context={{ onCloseDetails: handleCloseDetails }} />
+            </div>
+          )}
+        </div>
         <ErrorButton />
       </div>
     </div>

@@ -1,16 +1,19 @@
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import { CharacterItemProps } from '@/features/types/viewTypes';
 
 export default function CharacterItem({ character }: CharacterItemProps) {
-  const { id, name, species, gender, location, image } = character;
+  const { name, species, gender, location, image } = character;
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { page } = useParams();
+
+  const query = searchParams.get('name') || '';
+
+  const currentPage = page || '1';
 
   const handleClick = () => {
-    const updatedParams = new URLSearchParams(searchParams);
-    updatedParams.set('details', String(id));
-    void navigate(`/?${updatedParams.toString()}`);
+    void navigate(`/${currentPage}/${character.id}?name=${encodeURIComponent(query)}`);
   };
 
   return (
