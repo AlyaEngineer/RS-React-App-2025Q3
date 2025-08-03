@@ -40,12 +40,7 @@ describe('CharacterItem', () => {
   it('renders character info correctly', () => {
     render(
       <MemoryRouter>
-        <CharacterItem
-          character={mockCharacter}
-          currentPage={1}
-          query="rick"
-          onSelect={() => {}}
-        />
+        <CharacterItem character={mockCharacter} currentPage={1} query="rick" onSelect={() => {}} />
       </MemoryRouter>
     );
 
@@ -62,12 +57,7 @@ describe('CharacterItem', () => {
   it('calls navigate on mouse click', () => {
     render(
       <MemoryRouter>
-        <CharacterItem
-          character={mockCharacter}
-          currentPage={1}
-          query="rick"
-          onSelect={() => {}}
-        />
+        <CharacterItem character={mockCharacter} currentPage={1} query="rick" onSelect={() => {}} />
       </MemoryRouter>
     );
 
@@ -78,12 +68,7 @@ describe('CharacterItem', () => {
   it('calls navigate on Enter key press', () => {
     render(
       <MemoryRouter>
-        <CharacterItem
-          character={mockCharacter}
-          currentPage={1}
-          query="rick"
-          onSelect={() => {}}
-        />
+        <CharacterItem character={mockCharacter} currentPage={1} query="rick" onSelect={() => {}} />
       </MemoryRouter>
     );
 
@@ -95,12 +80,7 @@ describe('CharacterItem', () => {
   it('calls navigate on Space key press', () => {
     render(
       <MemoryRouter>
-        <CharacterItem
-          character={mockCharacter}
-          currentPage={1}
-          query="rick"
-          onSelect={() => {}}
-        />
+        <CharacterItem character={mockCharacter} currentPage={1} query="rick" onSelect={() => {}} />
       </MemoryRouter>
     );
 
@@ -111,12 +91,7 @@ describe('CharacterItem', () => {
   it('does not navigate on other key press', () => {
     render(
       <MemoryRouter>
-        <CharacterItem
-          character={mockCharacter}
-          currentPage={1}
-          query="rick"
-          onSelect={() => {}}
-        />
+        <CharacterItem character={mockCharacter} currentPage={1} query="rick" onSelect={() => {}} />
       </MemoryRouter>
     );
 
