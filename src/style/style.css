@@ -19,6 +19,7 @@
   --color-item-card-hover: var(--item-card-hover);
   --color-text-content: var(--text-content);
   --color-text-content-2: var(--text-content-2);
+  --color-flyout-background: var(--flyout-background);
   --container-9xl: 96rem;
   --my-max-width: 1550px;
 }
@@ -45,6 +46,7 @@
   --item-card: oklch(0.4774 0.0701 219.72);
   --text-content: oklch(0.2854 0.0385 227.09);
   --text-content-2: oklch(0.7883 0.0924 206.99);
+  --flyout-background: oklch(0.7883 0.0924 206.99);
   --container-9xl: 96rem;
   --my-max-width: 1550px;
 
@@ -71,6 +73,7 @@
   --item-card: oklch(0.3717 0.0449 257.42);
   --text-content: oklch(1 0 0);
   --text-content-2: oklch(0.7071 0.0224 261.75);
+  --flyout-background: oklch(0.4808 0.0495 285.85);
   --container-9xl: 96rem;
   --my-max-width: 1550px;
 }

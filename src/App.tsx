@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import { Flyout } from './features/components/flyout/Flyout';
 import Footer from './features/components/footer/Footer';
 import { ThemeProvider } from './features/components/toggleTheme/ThemeProvider';
 import AboutUs from './features/pages/AboutUs/AboutUs';
@@ -26,6 +27,7 @@ export default function App() {
             <Route path="/about" element={<AboutUs author={authorData[0]} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <Flyout />
           <Footer />
         </div>
       </BrowserRouter>
