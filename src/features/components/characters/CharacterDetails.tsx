@@ -18,36 +18,44 @@ export default function CharacterDetails({ character, onClose }: CharacterDetail
       </div>
 
       <div className="flex flex-col">
-        <img src={image} alt={name} className="mb-4 h-60 w-60 rounded-xl object-cover" />
-        <h2 className="mb-2 text-center text-2xl font-bold text-white">{name}</h2>
-        <p className="mb-1 text-white">
+        <img
+          src={image}
+          alt={name}
+          className="shadow-3xl/20 mb-4 h-60 w-60 self-center rounded-xl object-cover"
+        />
+        <h2 className="dark:text-white mb-2 text-center text-2xl font-bold text-text-content">
+          {name}
+        </h2>
+        <p className="dark:text-white mb-1 text-text-content">
           race: <strong>{species}</strong>
         </p>
-        <p className="mb-1 text-white">
+        <p className="dark:text-white mb-1 text-text-content">
           gender: <strong>{gender}</strong>
         </p>
-        <p className="mb-1 text-white">
+        <p className="dark:text-white mb-1 text-text-content">
           status: <strong>{status}</strong>
         </p>
         {type && (
-          <p className="mb-1 text-white">
+          <p className="dark:text-white mb-1 text-text-content">
             type: <strong>{type}</strong>
           </p>
         )}
-        <p className="mb-1 text-white">
+        <p className="dark:text-white mb-1 text-text-content">
           origin: <strong>{origin.name}</strong>
         </p>
-        <p className="mb-1 text-white">
+        <p className="dark:text-white mb-1 text-text-content">
           location: <strong>{location.name}</strong>
         </p>
-        <p className="mb-1 text-white">
+        <p className="dark:text-white mb-1 text-text-content">
           created: <strong>{new Date(created).toLocaleDateString()}</strong>
         </p>
 
         <div className="flex w-full flex-col">
-          <h3 className="mt-3 text-center text-xl font-semibold text-white">Episodes</h3>
+          <h3 className="dark:text-white mt-3 text-center text-xl font-semibold text-text-content">
+            Episodes
+          </h3>
           <div className="mt-4 w-full">
-            <ul className="max-h-screen list-disc overflow-y-auto pl-5 text-lg text-white">
+            <ul className="dark:text-white max-h-screen list-disc overflow-y-auto pl-5 text-lg text-text-content">
               {episode.map((episodeUrl) => {
                 const episodeId = episodeUrl.split('/').pop();
                 return (

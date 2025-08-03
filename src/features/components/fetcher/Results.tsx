@@ -19,13 +19,13 @@ export default function Results({
             className={cn(
               'bg-dark/4',
               'shadow-3xl/20 rounded-xl',
-              'flex h-auto w-full items-start justify-start gap-6',
+              'flex h-auto w-full min-w-[345px] items-start justify-start gap-6',
               'p-6 max-sm:p-4',
               'backdrop-invert backdrop-opacity-5'
             )}
           >
             <div className="flex w-full flex-col items-center gap-6">
-              <h2 className="text-center text-2xl font-bold text-white">
+              <h2 className="text-text-content text-center text-2xl font-bold">
                 Search results for the query &quot;{searchQuery}&quot;
               </h2>
               <CharacterContent

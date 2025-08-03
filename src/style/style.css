@@ -1,32 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import 'tailwindcss';
+@import 'tw-animate-css';
 
-@theme {
-  --shadow-3xl: 0 0 35px 5px rgba(0, 0, 0, 0.25);
-  --color-dark: #372535;
-  --color-input-background: #7c9bb5;
-  --color-button-background: #93d744;
-  --color-button-background-hover: #7ac527;
-  --color-button-reload: #9fded5;
-  --color-button-reload-hover: #7bcdc4;
-  --color-button-error: #f58311;
-  --color-button-error-hover: #e66c10;
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --shadow-3xl: 0 0 35px 5px oklch(0 0 0 / 25%);
+  --color-main-gradient: var(--main-gradient);
+  --color-dark: var(--dark);
+  --color-input-background: var(--input-background);
+  --color-button-background: var(--button-background);
+  --color-button-background-hover: var(--button-background-hover);
+  --color-button-reload: var(--button-reload);
+  --color-button-reload-hover: var(--button-reload-hover);
+  --color-button-error: var(--button-error);
+  --color-button-error-hover: var(--button-error-hover);
+  --color-item-card: var(--item-card);
+  --color-item-card-hover: var(--item-card-hover);
+  --color-text-content: var(--text-content);
+  --color-text-content-2: var(--text-content-2);
   --container-9xl: 96rem;
   --my-max-width: 1550px;
 }
 
 :root {
   --font-manrope: 'Manrope', sans-serif;
-  --main-gradient: linear-gradient(to right top, #4b374c, #5b5a79, #6381a2, #69aac4, #7ed3da);
+  --shadow-3xl: 0 0 35px 5px oklch(0 0 0 / 25%);
+  --main-gradient: linear-gradient(
+    to right top,
+    oklch(0.7631 0.0821 230.97),
+    oklch(0.7883 0.0924 206.99),
+    oklch(0.8134 0.0931 181.64),
+    oklch(0.8437 0.0936 153.09),
+    oklch(0.8759 0.0949 123.13)
+  );
+  --dark: #372535;
+  --input-background: oklch(0.8834 0.0683 179.79);
+  --button-background: oklch(0.532 0.1411 296.88);
+  --button-background-hover: oklch(0.4539 0.1285 296.93);
+  --button-reload: oklch(0.6372 0.0993 211.73);
+  --button-reload-hover: oklch(0.5516 0.0859 217.47);
+  --button-error: oklch(0.7232 0.1736 55.83);
+  --button-error-hover: oklch(0.6671 0.1747 48.91);
+  --item-card: oklch(0.4774 0.0701 219.72);
+  --text-content: oklch(0.2854 0.0385 227.09);
+  --text-content-2: oklch(0.7883 0.0924 206.99);
+  --container-9xl: 96rem;
+  --my-max-width: 1550px;
+
 }
 
 .dark {
+  --shadow-3xl: 0 0 35px 5px oklch(0 0 0 / 25%);
   --main-gradient: linear-gradient(
-    to right bottom,
-    oklch(35% 0.21 350),
-    oklch(40% 0.22 320),
-    oklch(45% 0.24 280)
+    to right top,
+    oklch(0.3673 0.0441 324.87),
+    oklch(0.4808 0.0495 285.85),
+    oklch(0.593 0.0614 251.25),
+    oklch(0.7041 0.0765 225.53),
+    oklch(0.8156 0.083 202.45)
   );
+  --dark: #372535;
+  --input-background: oklch(0.6754 0.0519 243.95);
+  --button-background: oklch(0.8056 0.1886 131.07);
+  --button-background-hover: oklch(0.7462 0.1955 132.6);
+  --button-reload: oklch(0.8555 0.0651 185.04);
+  --button-reload-hover: oklch(0.7933 0.0816 186.72);
+  --button-error: oklch(0.7232 0.1736 55.83);
+  --button-error-hover: oklch(0.6671 0.1747 48.91);
+  --item-card: oklch(0.3717 0.0449 257.42);
+  --text-content: oklch(1 0 0);
+  --text-content-2: oklch(0.7071 0.0224 261.75);
+  --container-9xl: 96rem;
+  --my-max-width: 1550px;
 }
 
 @layer base {
