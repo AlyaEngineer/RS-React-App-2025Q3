@@ -10,6 +10,7 @@ export default function Results({
   onInfo,
   onCharacters,
   onSelectCharacter,
+  hasOutlet,
 }: ResultsProps) {
   return (
     <CharacterFetcher query={searchQuery} page={currentPage} onCharacters={onCharacters}>
@@ -34,6 +35,7 @@ export default function Results({
                 onSelect={onSelectCharacter}
                 currentPage={currentPage}
                 query={searchQuery}
+                hasOutlet={hasOutlet}
               />
             </div>
           </div>

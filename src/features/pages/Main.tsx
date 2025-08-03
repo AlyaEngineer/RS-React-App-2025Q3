@@ -87,6 +87,7 @@ export default function Main() {
             detailsId={detailsId}
             onCloseDetails={handleCloseDetails}
             onSelectCharacter={handleSelect}
+            hasOutlet={!!detailsId}
           />
           {detailsId && (
             <div

@@ -11,6 +11,7 @@ export default function CharacterContent({
   onSelect,
   currentPage,
   query,
+  hasOutlet,
 }: {
   data: {
     loading: boolean;
@@ -22,6 +23,7 @@ export default function CharacterContent({
   onSelect: (character: Character, currentPage: number, query: string) => void;
   currentPage: number;
   query: string;
+  hasOutlet: boolean;
 }) {
   useEffect(() => {
     onInfo(data.info);
@@ -43,6 +45,7 @@ export default function CharacterContent({
       onSelect={onSelect}
       currentPage={currentPage}
       query={query}
+      hasOutlet={hasOutlet}
     />
   );
 }

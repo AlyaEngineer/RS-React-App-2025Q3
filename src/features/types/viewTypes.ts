@@ -12,6 +12,7 @@ export interface CharacterListProps {
   onSelect: (character: Character, currentPage: number, query: string) => void;
   currentPage: number;
   query: string;
+  hasOutlet: boolean;
 }
 
 export interface CharacterDetailsProps {
