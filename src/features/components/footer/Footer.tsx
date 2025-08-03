@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 
 import { cn } from '@/libs/utils';
 
+import { ThemeToggle } from '../toggleTheme/ThemeToggle';
+
 export default function Footer() {
   return (
     <footer
@@ -40,6 +42,9 @@ export default function Footer() {
           >
             <span className="p-2">Rolling Scopes School / React Course</span>
           </Link>
+        </div>
+        <div>
+          <ThemeToggle />
         </div>
       </div>
 
