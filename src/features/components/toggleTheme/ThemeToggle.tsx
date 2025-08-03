@@ -15,7 +15,7 @@ export function ThemeToggle() {
       aria-label="toggle-button"
       className="hover:text-button-reload cursor-pointer p-2 transition-colors duration-300"
     >
-      {theme === 'light' ? <Sun strokeWidth={1.5} /> : <Moon strokeWidth={1.5} />}
+      {theme === 'dark' ? <Sun strokeWidth={1.5} /> : <Moon strokeWidth={1.5} />}
     </button>
   );
 }
