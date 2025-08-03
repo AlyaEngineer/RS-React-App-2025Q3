@@ -24,7 +24,6 @@ export const ThemeProvider = ({
     applyTheme(newTheme);
   };
 
-
   return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>;
 };
 

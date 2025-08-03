@@ -19,7 +19,7 @@ export const Checkbox = ({ character }: CheckboxProps) => {
   return (
     <input
       type="checkbox"
-      className="h-5 w-5 accent-button-background"
+      className="accent-button-background h-5 w-5"
       checked={selected}
       onChange={handleCheckboxClick}
       onClick={handleCheckboxClick}

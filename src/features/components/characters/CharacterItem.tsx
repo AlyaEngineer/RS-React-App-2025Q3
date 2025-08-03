@@ -20,7 +20,7 @@ export default function CharacterItem({ character }: CharacterItemProps) {
 
   return (
     <div
-      className="relative bg-item-card/80 hover:bg-item-card flex h-full items-center rounded-md p-4 transition-colors duration-300 hover:cursor-pointer max-md:p-2.5"
+      className="bg-item-card/80 hover:bg-item-card relative flex h-full items-center rounded-md p-4 transition-colors duration-300 hover:cursor-pointer max-md:p-2.5"
       onClick={handleClick}
       role="button"
       tabIndex={0}
@@ -31,7 +31,7 @@ export default function CharacterItem({ character }: CharacterItemProps) {
         }
       }}
     >
-      <div className='absolute top-0 right-0'>
+      <div className="absolute top-0 right-0">
         <Checkbox character={character} />
       </div>
       <img
