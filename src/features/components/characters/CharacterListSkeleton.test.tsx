@@ -8,8 +8,24 @@ import { server } from '@/tests/mocks/server';
 
 import Results from '../fetcher/Results';
 describe('CharacterListSkeleton', () => {
+  const mockOnInfo = vi.fn();
+  const mockOnSelectCharacter = vi.fn();
+
+  const renderResults = (searchQuery: string) => {
+    render(
+      <MemoryRouter>
+        <Results
+          searchQuery={searchQuery}
+          currentPage={1}
+          onInfo={mockOnInfo}
+          onSelectCharacter={mockOnSelectCharacter}
+          hasOutlet={false}
+        />
+      </MemoryRouter>
+    );
+  };
+
   it('renders skeletons during loading and shows characters after data is fetched', async () => {
-    const mockOnInfo = vi.fn();
     server.use(
       http.get(API_BASE_URL, async ({ request }) => {
         const url = new URL(request.url);
@@ -33,11 +49,7 @@ describe('CharacterListSkeleton', () => {
       })
     );
 
-    render(
-      <MemoryRouter>
-        <Results searchQuery="morty" currentPage={1} onInfo={mockOnInfo} />
-      </MemoryRouter>
-    );
+    renderResults('morty');
     const skeletons = await screen.findAllByLabelText('character-skeleton');
     expect(skeletons.length).toBeGreaterThan(0);
     await waitForElementToBeRemoved(() => screen.queryAllByLabelText('character-skeleton'));
