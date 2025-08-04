@@ -10,6 +10,7 @@ export interface ResultsProps {
   detailsId?: string;
   onCloseDetails?: () => void;
   onSelectCharacter: (character: Character) => void;
+  hasOutlet: boolean;
 }
 
 export interface SearchProps {

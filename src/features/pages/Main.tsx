@@ -87,16 +87,17 @@ export default function Main() {
             detailsId={detailsId}
             onCloseDetails={handleCloseDetails}
             onSelectCharacter={handleSelect}
+            hasOutlet={!!detailsId}
           />
           {detailsId && (
             <div
               className={cn(
                 'bg-dark/4',
                 'shadow-3xl/20',
-                'flex min-w-72 flex-col items-center justify-start gap-8',
+                'flex min-w-56 flex-col items-center justify-start gap-8',
                 'rounded-xl',
                 'p-6 max-sm:px-2',
-                'backdrop-invert backdrop-opacity-5',
+                'backdrop-invert backdrop-opacity-5'
               )}
             >
               <Outlet context={{ onCloseDetails: handleCloseDetails }} />

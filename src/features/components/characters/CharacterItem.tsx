@@ -2,6 +2,8 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import { CharacterItemProps } from '@/features/types/viewTypes';
 
+import { Checkbox } from '../checkbox/Checkbox';
+
 export default function CharacterItem({ character }: CharacterItemProps) {
   const { name, species, gender, location, image } = character;
   const [searchParams] = useSearchParams();
@@ -18,7 +20,7 @@ export default function CharacterItem({ character }: CharacterItemProps) {
 
   return (
     <div
-      className="flex h-full items-center rounded-md bg-slate-700/80 p-4 hover:cursor-pointer hover:bg-slate-700 max-md:p-2.5"
+      className="bg-item-card/80 hover:bg-item-card relative flex h-full items-center rounded-md p-4 transition-colors duration-300 hover:cursor-pointer max-md:p-2.5"
       onClick={handleClick}
       role="button"
       tabIndex={0}
@@ -29,16 +31,24 @@ export default function CharacterItem({ character }: CharacterItemProps) {
         }
       }}
     >
-      <img src={image} alt={name} loading="lazy" className="h-24 w-24 rounded-md object-cover" />
+      <div className="absolute top-0 right-0">
+        <Checkbox character={character} />
+      </div>
+      <img
+        src={image}
+        alt={name}
+        loading="lazy"
+        className="shadow-3xl/20 h-24 w-24 rounded-md object-cover"
+      />
       <div className="ml-4 flex flex-col">
-        <h4 className="text-lg font-semibold text-white max-md:text-base">{name}</h4>
-        <p className="text-left text-sm font-medium text-gray-400">
+        <h4 className="text-text-content text-lg font-semibold max-md:text-base">{name}</h4>
+        <p className="text-left text-sm font-medium text-white dark:text-gray-400">
           race: <strong>{species}</strong>
         </p>
-        <p className="text-left text-sm font-medium text-gray-400">
+        <p className="text-left text-sm font-medium text-white dark:text-gray-400">
           gender: <strong>{gender}</strong>
         </p>
-        <p className="text-left text-sm font-medium text-gray-400">
+        <p className="text-left text-sm font-medium text-white dark:text-gray-400">
           location: <strong>{location.name}</strong>
         </p>
       </div>

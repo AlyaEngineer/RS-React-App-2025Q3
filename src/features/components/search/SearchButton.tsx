@@ -13,7 +13,7 @@ export default function SearchButton({ onClick }: SearchButtonProps) {
         'cursor-pointer',
         'rounded-xl shadow-xl inset-shadow-sm',
         'transition delay-150 duration-300 ease-in-out',
-        'text-gray-600 text-shadow-2xs',
+        'text-white text-shadow-2xs dark:text-gray-600',
         'hover:bg-button-background-hover hover:shadow-xl/20',
         'focus:border-none'
       )}

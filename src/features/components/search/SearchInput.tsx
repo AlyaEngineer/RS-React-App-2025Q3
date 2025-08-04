@@ -15,7 +15,7 @@ export default function SearchInput({ value, onChange }: SearchInputProps) {
         'text-gray-600 text-shadow-2xs',
         'transition delay-150 duration-300 ease-in-out',
         'hover:shadow-xl/20 hover:outline-none',
-        'focus:border-lime-300 focus:placeholder-transparent'
+        'focus:border-button-background focus:placeholder-transparent'
       )}
     />
   );

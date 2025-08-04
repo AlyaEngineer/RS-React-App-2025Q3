@@ -23,10 +23,10 @@ describe('Pagination', () => {
 
     render(
       <MemoryRouter initialEntries={['/1']}>
-          <Routes>
-            <Route path="/:page" element={<Main />} />
-          </Routes>
-          <LocationDisplay />
+        <Routes>
+          <Route path="/:page" element={<Main />} />
+        </Routes>
+        <LocationDisplay />
       </MemoryRouter>
     );
 

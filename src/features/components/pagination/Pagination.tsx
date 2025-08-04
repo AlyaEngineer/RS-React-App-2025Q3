@@ -14,7 +14,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         disabled={currentPage <= 1}
         onClick={() => onPageChange(currentPage - 1)}
         aria-label="previous page"
-        className="hover:text-button-reload m-2 text-white hover:cursor-pointer disabled:cursor-default disabled:text-gray-400"
+        className="hover:text-button-reload m-2 text-white hover:cursor-pointer disabled:cursor-default disabled:text-gray-400 dark:disabled:text-gray-300"
       >
         <CircleArrowLeft strokeWidth={1.25} />
       </button>
@@ -32,7 +32,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
               key={`page-${page}`}
               disabled={currentPage === page}
               onClick={() => onPageChange(page)}
-              className={`m-2 rounded-full border-2 border-transparent px-3 py-1 text-white transition hover:cursor-pointer ${currentPage === page ? 'bg-button-error-hover border-2 border-white' : 'hover:border-2 hover:border-white'} disabled:cursor-default`}
+              className={`m-2 rounded-full border-2 border-transparent px-3 py-1 text-white transition hover:cursor-pointer ${currentPage === page ? 'dark:bg-button-error-hover bg-button-reload border-2 border-white' : 'hover:border-2 hover:border-white'} disabled:cursor-default`}
             >
               {page}
             </button>
@@ -45,7 +45,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         disabled={currentPage >= totalPages}
         onClick={() => onPageChange(currentPage + 1)}
         aria-label="next page"
-        className="hover:text-button-reload m-2 text-white hover:cursor-pointer disabled:cursor-default disabled:text-gray-400"
+        className="hover:text-button-reload m-2 text-white hover:cursor-pointer disabled:cursor-default disabled:text-gray-400 dark:disabled:text-gray-300"
       >
         <CircleArrowRight strokeWidth={1.25} />
       </button>

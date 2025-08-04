@@ -22,7 +22,7 @@ function Fallback() {
           'cursor-pointer',
           'rounded-2xl shadow-xl inset-shadow-sm',
           'bg-button-reload',
-          'text-xl text-gray-600 text-shadow-2xs',
+          'text-xl text-white text-shadow-2xs dark:text-gray-600',
           'transition delay-150 duration-300 ease-in-out',
           'hover:bg-button-reload-hover hover:shadow-xl/20'
         )}
