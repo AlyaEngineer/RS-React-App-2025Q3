@@ -9,6 +9,7 @@ import testingLibrary from 'eslint-plugin-testing-library';
 import vitest from '@vitest/eslint-plugin';
 import importPlugin from 'eslint-plugin-import';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import pluginQuery from '@tanstack/eslint-plugin-query';
 
 export default tseslint.config(
   { ignores: ['dist', 'coverage'] },
@@ -36,8 +37,10 @@ export default tseslint.config(
       'react-refresh': reactRefresh,
       'testing-library': testingLibrary,
       vitest: vitest,
+      '@tanstack/query': pluginQuery,
     },
     rules: {
+      '@tanstack/query/exhaustive-deps': 'error',
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       '@typescript-eslint/consistent-type-exports': 'off',
       '@typescript-eslint/consistent-type-imports': 'off',
