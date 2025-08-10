@@ -1,3 +1,4 @@
+import { RefreshCw } from 'lucide-react';
 import { useEffect } from 'react';
 
 import { ApiErrorClass } from '@/features/api/apiError';
@@ -12,6 +13,7 @@ type CharacterContentProps = {
     results: Character[];
   };
   isFetching: boolean;
+  isLoading: boolean;
   isError: boolean;
   error: unknown;
   onInfo: (info: Info | null) => void;
@@ -25,6 +27,7 @@ type CharacterContentProps = {
 export default function CharacterContent({
   data,
   isFetching,
+  isLoading,
   isError,
   error,
   onInfo,
@@ -43,13 +46,18 @@ export default function CharacterContent({
     onCharacters?.(data?.results ?? []);
   }, [data?.info, onInfo, onCharacters]);
 
-  if (isFetching) return <CharacterListSkeleton />;
-  if (isError && error instanceof ApiErrorClass)
+  if (isLoading) return <CharacterListSkeleton />;
+  if (isFetching)
+    return <RefreshCw className="m-2.5 animate-spin text-white" size={28} strokeWidth={1.25} />;
+
+  if (isError) {
+    const apiError = error as ApiErrorClass | undefined;
     return (
       <p className="mb-4 text-center text-3xl font-bold text-red-400">
-        Error {error.status}: {error.message ?? 'Something went wrong'}
+        Error {apiError?.status ?? ''}: {apiError?.message ?? 'Something went wrong'}
       </p>
     );
+  }
   if (data?.results.length === 0)
     return <p className="mb-4 text-center text-3xl font-bold text-white">Nothing found</p>;
 

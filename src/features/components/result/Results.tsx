@@ -13,7 +13,10 @@ export default function Results({
   onSelectCharacter,
   hasOutlet,
 }: ResultsProps) {
-  const { data, isFetching, isError, error, refetch } = useCharacters(searchQuery, currentPage);
+  const { data, isFetching, isLoading, isError, error, refetch } = useCharacters(
+    searchQuery,
+    currentPage
+  );
 
   return (
     <div
@@ -34,12 +37,13 @@ export default function Results({
           onRefresh={() => {
             void refetch();
           }}
-          isFetching={isFetching}
+          isFetching={isFetching && !isLoading}
         />
 
         <CharacterContent
           data={data}
           isFetching={isFetching}
+          isLoading={isLoading}
           isError={isError}
           error={error}
           onInfo={onInfo}
