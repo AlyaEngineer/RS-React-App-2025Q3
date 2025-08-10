@@ -1,47 +1,51 @@
 import { useEffect } from 'react';
 
-import { ApiError, Character, Info } from '@/features/types/apiTypes';
+import { ApiErrorClass } from '@/features/api/apiError';
+import { Character, Info } from '@/features/types/apiTypes';
+import { useCharacters } from '@/hooks/useCharacters';
 
 import CharacterList from '../characters/CharacterList';
 import CharacterListSkeleton from '../characters/CharacterListSkeleton';
 
 export default function CharacterContent({
-  data,
   onInfo,
   onSelect,
   currentPage,
   query,
   hasOutlet,
+  onCharacters,
 }: {
-  data: {
-    loading: boolean;
-    error: ApiError | null;
-    characters: Character[];
-    info: Info | null;
-  };
   onInfo: (info: Info | null) => void;
   onSelect: (character: Character, currentPage: number, query: string) => void;
   currentPage: number;
   query: string;
   hasOutlet: boolean;
+  onCharacters?: (characters: Character[]) => void;
 }) {
-  useEffect(() => {
-    onInfo(data.info);
-  }, [data.info, onInfo]);
+  const { data, isFetching, isError, error } = useCharacters(query, currentPage);
 
-  if (data.loading) return <CharacterListSkeleton />;
-  if (data.error)
+  useEffect(() => {
+    if (data?.info) {
+      onInfo(data.info);
+    } else {
+      onInfo(null);
+    }
+    onCharacters?.(data?.results ?? []);
+  }, [data?.info, onInfo, onCharacters]);
+
+  if (isFetching) return <CharacterListSkeleton />;
+  if (isError && error instanceof ApiErrorClass)
     return (
       <p className="mb-4 text-center text-3xl font-bold text-red-400">
-        Error {data.error.status}: {data.error.message ?? 'Something went wrong'}
+        Error {error.status}: {error.message ?? 'Something went wrong'}
       </p>
     );
-  if (data.characters.length === 0)
+  if (data?.results.length === 0)
     return <p className="mb-4 text-center text-3xl font-bold text-white">Nothing found</p>;
 
   return (
     <CharacterList
-      characters={data.characters}
+      characters={data?.results ?? []}
       onSelect={onSelect}
       currentPage={currentPage}
       query={query}
