@@ -1,27 +1,35 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { http, HttpResponse, delay } from 'msw';
 import { MemoryRouter } from 'react-router-dom';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { API_BASE_URL } from '@/config/api';
 import { server } from '@/tests/mocks/server';
 
-import Results from '../fetcher/Results';
+import Results from '../result/Results';
 describe('CharacterListSkeleton', () => {
+  let queryClient: QueryClient;
   const mockOnInfo = vi.fn();
   const mockOnSelectCharacter = vi.fn();
 
+  beforeEach(() => {
+    queryClient = new QueryClient();
+  });
+
   const renderResults = (searchQuery: string) => {
     render(
-      <MemoryRouter>
-        <Results
-          searchQuery={searchQuery}
-          currentPage={1}
-          onInfo={mockOnInfo}
-          onSelectCharacter={mockOnSelectCharacter}
-          hasOutlet={false}
-        />
-      </MemoryRouter>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <Results
+            searchQuery={searchQuery}
+            currentPage={1}
+            onInfo={mockOnInfo}
+            onSelectCharacter={mockOnSelectCharacter}
+            hasOutlet={false}
+          />
+        </MemoryRouter>
+      </QueryClientProvider>
     );
   };
 

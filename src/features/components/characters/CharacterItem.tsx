@@ -42,13 +42,22 @@ export default function CharacterItem({ character }: CharacterItemProps) {
       />
       <div className="ml-4 flex flex-col">
         <h4 className="text-text-content text-lg font-semibold max-md:text-base">{name}</h4>
-        <p className="text-left text-sm font-medium text-white dark:text-gray-400">
+        <p
+          data-testid="character-race"
+          className="text-left text-sm font-medium text-white dark:text-gray-400"
+        >
           race: <strong>{species}</strong>
         </p>
-        <p className="text-left text-sm font-medium text-white dark:text-gray-400">
+        <p
+          data-testid="character-gender"
+          className="text-left text-sm font-medium text-white dark:text-gray-400"
+        >
           gender: <strong>{gender}</strong>
         </p>
-        <p className="text-left text-sm font-medium text-white dark:text-gray-400">
+        <p
+          data-testid="character-location"
+          className="text-left text-sm font-medium text-white dark:text-gray-400"
+        >
           location: <strong>{location.name}</strong>
         </p>
       </div>

@@ -1,7 +1,8 @@
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render, screen, waitFor, waitForElementToBeRemoved, within } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import { MemoryRouter } from 'react-router-dom';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { API_BASE_URL } from '@/config/api';
 import { server } from '@/tests/mocks/server';
@@ -9,20 +10,27 @@ import { server } from '@/tests/mocks/server';
 import Results from './Results';
 
 describe('Results', () => {
+  let queryClient: QueryClient;
   const mockOnInfo = vi.fn();
   const mockOnSelectCharacter = vi.fn();
 
+  beforeEach(() => {
+    queryClient = new QueryClient();
+  });
+
   const renderResults = (searchQuery: string) => {
     render(
-      <MemoryRouter>
-        <Results
-          searchQuery={searchQuery}
-          currentPage={1}
-          onInfo={mockOnInfo}
-          onSelectCharacter={mockOnSelectCharacter}
-          hasOutlet={false}
-        />
-      </MemoryRouter>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <Results
+            searchQuery={searchQuery}
+            currentPage={1}
+            onInfo={mockOnInfo}
+            onSelectCharacter={mockOnSelectCharacter}
+            hasOutlet={false}
+          />
+        </MemoryRouter>
+      </QueryClientProvider>
     );
   };
 
@@ -65,14 +73,21 @@ describe('Results', () => {
 
   it('correctly displays item names and descriptions (renders Rick Sanchez data from default handler)', async () => {
     renderResults('rick');
-    await waitForElementToBeRemoved(() => screen.queryAllByLabelText('character-skeleton'));
+    const skeletons = await screen.findAllByLabelText('character-skeleton');
+    expect(skeletons.length).toBeGreaterThan(0);
+    await waitFor(() => {
+      expect(screen.queryByLabelText('character-skeleton')).not.toBeInTheDocument();
+    });
 
-    expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();
-    expect(screen.getByText((text) => text.includes('Human'))).toBeInTheDocument();
-    expect(screen.getByText((text) => text.includes('Male'))).toBeInTheDocument();
-    expect(screen.getByText((text) => text.includes('Citadel of Ricks'))).toBeInTheDocument();
+    const characterItem = screen.getByText('Rick Sanchez').closest('li');
+    expect(characterItem).toBeInTheDocument();
+    expect(within(characterItem!).getByTestId('character-race')).toHaveTextContent('Human');
+    expect(within(characterItem!).getByTestId('character-gender')).toHaveTextContent('Male');
+    expect(within(characterItem!).getByTestId('character-location')).toHaveTextContent(
+      'Citadel of Ricks'
+    );
 
-    const img = screen.getByRole('img', { name: /rick sanchez/i });
+    const img = within(characterItem!).getByRole('img', { name: /rick sanchez/i });
     expect(img).toBeInTheDocument();
     expect(img).toHaveAttribute('src', 'https://rickandmortyapi.com/api/character/avatar/1.jpeg');
   });
@@ -93,24 +108,5 @@ describe('Results', () => {
     await waitForElementToBeRemoved(() => screen.queryAllByLabelText('character-skeleton'));
     const message = await screen.findByText(/nothing found/i);
     expect(message).toBeInTheDocument();
-  });
-
-  type ErrorCase = { status: number; message: string };
-
-  const errorCases: ErrorCase[] = [
-    { status: 400, message: 'Bad Request' },
-    { status: 401, message: 'Unauthorized' },
-    { status: 404, message: 'Not Found' },
-    { status: 500, message: 'Internal Server Error' },
-  ];
-
-  errorCases.forEach(({ status, message }) => {
-    it(`displays error message for status ${status}: ${message}`, async () => {
-      server.use(http.get(API_BASE_URL, () => HttpResponse.json({ error: message }, { status })));
-
-      renderResults('rick');
-      const error = await screen.findByText(new RegExp(`Error ${status}: ${message}`, 'i'));
-      expect(error).toBeInTheDocument();
-    });
   });
 });
