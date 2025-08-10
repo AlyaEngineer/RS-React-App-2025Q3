@@ -17,5 +17,5 @@ export interface CharacterListProps {
 
 export interface CharacterDetailsProps {
   character: Character;
-  onClose?: () => void;
+  onClose: () => void;
 }

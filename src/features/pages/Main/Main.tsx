@@ -1,13 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Outlet, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
+import ErrorButton from '@/features/components/errorHandling/ErrorButton';
+import Pagination from '@/features/components/pagination/Pagination';
+import Results from '@/features/components/result/Results';
+import Search from '@/features/components/search/Search';
+import { Character } from '@/features/types/apiTypes';
 import { cn } from '@/libs/utils';
-
-import ErrorButton from '../components/errorHandling/ErrorButton';
-import Pagination from '../components/pagination/Pagination';
-import Results from '../components/result/Results';
-import Search from '../components/search/Search';
-import { Character } from '../types/apiTypes';
 
 export default function Main() {
   const { page = '1', detailsId } = useParams();

@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { useParams, useOutletContext } from 'react-router-dom';
 import { describe, it, expect, vi } from 'vitest';
 
-import { fetchCharacterById } from '../api/characterApi';
+import { fetchCharacterById } from '@/features/api/characterApi';
 
 import CharacterDetailsPage from './CharacterDetailsPage';
 
@@ -16,7 +16,7 @@ vi.mock('react-router-dom', async () => {
   };
 });
 
-vi.mock('../api/characterApi', () => ({
+vi.mock('@/features/api/characterApi', () => ({
   fetchCharacterById: vi.fn(),
 }));
 
@@ -84,7 +84,12 @@ describe('CharacterDetailsPage', () => {
     renderWithClient(<CharacterDetailsPage />);
 
     await waitFor(() => {
-      expect(onCloseMock).toHaveBeenCalled();
+      expect(screen.getByText(/error loading character/i)).toBeInTheDocument();
     });
+
+    const closeButton = screen.getByRole('button');
+    closeButton.click();
+
+    expect(onCloseMock).toHaveBeenCalled();
   });
 });

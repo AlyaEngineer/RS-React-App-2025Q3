@@ -7,9 +7,9 @@ import Footer from './features/components/footer/Footer';
 import { ThemeProvider } from './features/components/toggleTheme/ThemeProvider';
 import AboutUs from './features/pages/AboutUs/AboutUs';
 import authorData from './features/pages/AboutUs/authorData';
-import CharacterDetailsPage from './features/pages/CharacterDetailsPage';
-import Main from './features/pages/Main';
-import NotFound from './features/pages/NotFound';
+import CharacterDetailsPage from './features/pages/CharacterDetailPage/CharacterDetailsPage';
+import Main from './features/pages/Main/Main';
+import NotFound from './features/pages/NotFound/NotFound';
 import { cn } from './libs/utils';
 
 const queryClient = new QueryClient();

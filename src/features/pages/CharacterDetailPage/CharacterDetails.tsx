@@ -1,8 +1,6 @@
-import { CircleX } from 'lucide-react';
-
+import { Checkbox } from '@/features/components/checkbox/Checkbox';
+import { CloseButton } from '@/features/pages/CharacterDetailPage/CloseButton';
 import { CharacterDetailsProps } from '@/features/types/viewTypes';
-
-import { Checkbox } from '../checkbox/Checkbox';
 
 export default function CharacterDetails({ character, onClose }: CharacterDetailsProps) {
   const { name, status, species, gender, type, origin, location, image, episode, created } =
@@ -11,12 +9,7 @@ export default function CharacterDetails({ character, onClose }: CharacterDetail
   return (
     <div className="flex flex-col gap-6">
       <div className="flex justify-end">
-        <button
-          className="hover:text-button-error text-white hover:cursor-pointer"
-          onClick={onClose}
-        >
-          <CircleX strokeWidth={1.25} size={32} />
-        </button>
+        <CloseButton onClose={onClose} />
       </div>
       <div className="flex flex-col">
         <img
