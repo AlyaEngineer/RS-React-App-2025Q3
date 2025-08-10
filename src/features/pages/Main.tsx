@@ -4,8 +4,8 @@ import { Outlet, useNavigate, useParams, useSearchParams } from 'react-router-do
 import { cn } from '@/libs/utils';
 
 import ErrorButton from '../components/errorHandling/ErrorButton';
-import Results from '../components/fetcher/Results';
 import Pagination from '../components/pagination/Pagination';
+import Results from '../components/result/Results';
 import Search from '../components/search/Search';
 import { Character } from '../types/apiTypes';
 
