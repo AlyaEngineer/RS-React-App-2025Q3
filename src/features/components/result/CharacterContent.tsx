@@ -2,28 +2,38 @@ import { useEffect } from 'react';
 
 import { ApiErrorClass } from '@/features/api/apiError';
 import { Character, Info } from '@/features/types/apiTypes';
-import { useCharacters } from '@/hooks/useCharacters';
 
 import CharacterList from '../characters/CharacterList';
 import CharacterListSkeleton from '../characters/CharacterListSkeleton';
 
-export default function CharacterContent({
-  onInfo,
-  onSelect,
-  currentPage,
-  query,
-  hasOutlet,
-  onCharacters,
-}: {
+type CharacterContentProps = {
+  data?: {
+    info: Info;
+    results: Character[];
+  };
+  isFetching: boolean;
+  isError: boolean;
+  error: unknown;
   onInfo: (info: Info | null) => void;
   onSelect: (character: Character, currentPage: number, query: string) => void;
   currentPage: number;
   query: string;
   hasOutlet: boolean;
   onCharacters?: (characters: Character[]) => void;
-}) {
-  const { data, isFetching, isError, error } = useCharacters(query, currentPage);
+};
 
+export default function CharacterContent({
+  data,
+  isFetching,
+  isError,
+  error,
+  onInfo,
+  onSelect,
+  currentPage,
+  query,
+  hasOutlet,
+  onCharacters,
+}: CharacterContentProps) {
   useEffect(() => {
     if (data?.info) {
       onInfo(data.info);

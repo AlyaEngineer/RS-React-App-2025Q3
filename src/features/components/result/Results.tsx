@@ -1,7 +1,9 @@
 import { ResultsProps } from '@/features/types/searchTypes';
+import { useCharacters } from '@/hooks/useCharacters';
 import { cn } from '@/libs/utils';
 
 import CharacterContent from './CharacterContent';
+import { RefreshButton } from './refreshButton/RefreshButton';
 
 export default function Results({
   searchQuery,
@@ -11,6 +13,8 @@ export default function Results({
   onSelectCharacter,
   hasOutlet,
 }: ResultsProps) {
+  const { data, isFetching, isError, error, refetch } = useCharacters(searchQuery, currentPage);
+
   return (
     <div
       className={cn(
@@ -25,7 +29,19 @@ export default function Results({
         <h2 className="text-text-content text-center text-2xl font-bold">
           Search results for the query &quot;{searchQuery}&quot;
         </h2>
+
+        <RefreshButton
+          onRefresh={() => {
+            void refetch();
+          }}
+          isFetching={isFetching}
+        />
+
         <CharacterContent
+          data={data}
+          isFetching={isFetching}
+          isError={isError}
+          error={error}
           onInfo={onInfo}
           onSelect={onSelectCharacter}
           currentPage={currentPage}
