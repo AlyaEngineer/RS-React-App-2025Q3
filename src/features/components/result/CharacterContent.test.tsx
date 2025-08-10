@@ -40,6 +40,7 @@ describe('CharacterContent', () => {
         <CharacterContent
           data={mockData}
           isFetching={false}
+          isLoading={false}
           isError={false}
           error={null}
           onInfo={mockOnInfo}
@@ -70,6 +71,7 @@ describe('CharacterContent', () => {
           <CharacterContent
             data={undefined}
             isFetching={false}
+            isLoading={false}
             isError={true}
             error={errorObj}
             onInfo={mockOnInfo}
