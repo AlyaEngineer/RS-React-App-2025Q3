@@ -1,10 +1,11 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
-import { MemoryRouter } from 'react-router';
-import { describe, it, expect, vi } from 'vitest';
+import { MemoryRouter } from 'react-router-dom';
+import { describe, expect, it, vi } from 'vitest';
 
 import { API_BASE_URL } from '@/config/api';
+import { ApiErrorClass } from '@/features/api/apiError';
+import { Character } from '@/features/types/apiTypes';
 import { server } from '@/tests/mocks/server';
 
 import CharacterContent from './CharacterContent';
@@ -12,35 +13,47 @@ import CharacterContent from './CharacterContent';
 const mockOnInfo = vi.fn();
 const mockOnSelectCharacter = vi.fn();
 
-function createQueryClient() {
-  return new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
-}
+describe('CharacterContent', () => {
+  it('renders CharacterList when data is present', () => {
+    const mockCharacter: Character = {
+      id: 1,
+      name: 'Rick',
+      status: 'Alive',
+      species: 'Human',
+      type: '',
+      gender: 'Male',
+      origin: { name: 'Earth', url: '' },
+      location: { name: 'Earth', url: '' },
+      image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+      episode: [],
+      url: '',
+      created: '',
+    };
 
-const renderCharacterContent = (query: string) => {
-  const queryClient = createQueryClient();
+    const mockData = {
+      info: { count: 1, pages: 1, next: null, prev: null },
+      results: [mockCharacter],
+    };
 
-  return render(
-    <QueryClientProvider client={queryClient}>
+    render(
       <MemoryRouter>
         <CharacterContent
-          query={query}
-          currentPage={1}
+          data={mockData}
+          isFetching={false}
+          isError={false}
+          error={null}
           onInfo={mockOnInfo}
           onSelect={mockOnSelectCharacter}
+          currentPage={1}
+          query="rick"
           hasOutlet={false}
         />
       </MemoryRouter>
-    </QueryClientProvider>
-  );
-};
+    );
 
-describe('CharacterContent', () => {
+    expect(screen.getByText(/Rick/)).toBeInTheDocument();
+  });
+
   const errorCases = [
     { status: 400, message: 'Bad Request' },
     { status: 401, message: 'Unauthorized' },
@@ -51,8 +64,22 @@ describe('CharacterContent', () => {
   errorCases.forEach(({ status, message }) => {
     it(`displays error message for status ${status}: ${message}`, async () => {
       server.use(http.get(API_BASE_URL, () => HttpResponse.json({ error: message }, { status })));
-
-      renderCharacterContent('rick');
+      const errorObj = new ApiErrorClass(status, message);
+      render(
+        <MemoryRouter>
+          <CharacterContent
+            data={undefined}
+            isFetching={false}
+            isError={true}
+            error={errorObj}
+            onInfo={mockOnInfo}
+            onSelect={mockOnSelectCharacter}
+            currentPage={1}
+            query="rick"
+            hasOutlet={false}
+          />
+        </MemoryRouter>
+      );
 
       const error = await screen.findByText(
         (content) => content.includes(`Error ${status}:`) && content.includes(message)
