@@ -1,28 +1,32 @@
-import { useState, useEffect } from 'react';
+import { Loader } from 'lucide-react';
 import { useOutletContext, useParams } from 'react-router-dom';
 
-import { fetchCharacterById } from '../api/characterApi';
+import { useCharacterById } from '@/hooks/useCharacterById';
+
 import CharacterDetails from '../components/characters/CharacterDetails';
-import { Character } from '../types/apiTypes';
 
 type OutletContextType = {
   onCloseDetails: () => void;
 };
 
 export default function CharacterDetailsPage() {
-  const { detailsId } = useParams();
+  const { detailsId } = useParams<{ detailsId: string }>();
   const { onCloseDetails } = useOutletContext<OutletContextType>();
 
-  const [character, setCharacter] = useState<Character | null>(null);
+  const { data: character, isLoading, isError } = useCharacterById(detailsId ?? '');
 
-  useEffect(() => {
-    if (!detailsId) return;
-    fetchCharacterById(detailsId)
-      .then(setCharacter)
-      .catch(() => onCloseDetails());
-  }, [detailsId, onCloseDetails]);
+  if (isLoading) {
+    return (
+      <div className="flex h-full items-start justify-center" aria-label="loader">
+        <Loader className="animate-spin text-white" size={32} />
+      </div>
+    );
+  }
 
-  if (!character) return <p>Loading...</p>;
+  if (isError || !character) {
+    onCloseDetails();
+    return null;
+  }
 
   return <CharacterDetails character={character} onClose={onCloseDetails} />;
 }
