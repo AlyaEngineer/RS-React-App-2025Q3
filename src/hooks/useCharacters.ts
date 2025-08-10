@@ -9,5 +9,6 @@ export function useCharacters(query: string, page = 1) {
     queryKey: ['characters', trimmedQuery, page],
     queryFn: () => fetchCharactersByName(trimmedQuery, page),
     staleTime: 2 * 60 * 1000,
+    gcTime: 4 * 60 * 1000,
   });
 }
