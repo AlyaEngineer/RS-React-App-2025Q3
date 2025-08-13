@@ -10,7 +10,6 @@ export default function CharacterSkeleton() {
         <div className="dark:bg-text-content-2 bg-text-content-2 h-5 w-1/2 rounded" />
         <div className="dark:bg-text-content-2 bg-text-content-2 h-4 w-1/3 rounded" />
         <div className="dark:bg-text-content-2 bg-text-content-2 h-4 w-1/4 rounded" />
-        <div className="dark:bg-text-content-2 bg-text-content-2 h-4 w-1/2 rounded" />
       </div>
     </div>
   );

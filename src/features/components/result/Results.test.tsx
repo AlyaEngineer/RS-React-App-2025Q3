@@ -83,9 +83,6 @@ describe('Results', () => {
     expect(characterItem).toBeInTheDocument();
     expect(within(characterItem!).getByTestId('character-race')).toHaveTextContent('Human');
     expect(within(characterItem!).getByTestId('character-gender')).toHaveTextContent('Male');
-    expect(within(characterItem!).getByTestId('character-location')).toHaveTextContent(
-      'Citadel of Ricks'
-    );
 
     const img = within(characterItem!).getByRole('img', { name: /rick sanchez/i });
     expect(img).toBeInTheDocument();

@@ -21,8 +21,8 @@ export const Checkbox = ({ character }: CheckboxProps) => {
     <input
       type="checkbox"
       className={cn(
-        'accent-checkbox-color border-checkbox-border h-7 w-7 appearance-none rounded-md border-1 bg-amber-50',
-        'hover:shadow-checkbox-shadow hover:shadow-3xl',
+        'accent-checkbox-color border-checkbox-border h-6 w-6 appearance-none rounded-md border-1 bg-amber-50',
+        'hover:shadow-checkbox-shadow hover:shadow-3xl opacity-85',
         'checked:bg-checkbox-color checked:bg-[url(/check.png)] checked:bg-cover checked:bg-no-repeat',
         'transition-shadow duration-300'
       )}

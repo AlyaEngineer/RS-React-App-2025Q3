@@ -24,7 +24,7 @@ export default function Results({
       className={cn(
         'bg-dark/4',
         'shadow-3xl/20 rounded-xl',
-        'flex h-auto w-full min-w-[345px] items-start justify-start gap-6',
+        'flex h-auto w-full items-start justify-start gap-6',
         'p-6 max-sm:p-4',
         'backdrop-invert backdrop-opacity-5'
       )}
