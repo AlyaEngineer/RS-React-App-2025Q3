@@ -1,6 +1,7 @@
 import { Loader, RefreshCw } from 'lucide-react';
 import { useOutletContext, useParams } from 'react-router-dom';
 
+import { RefreshButton } from '@/features/components/refreshButton/RefreshButton';
 import CharacterDetails from '@/features/pages/CharacterDetailPage/CharacterDetails';
 import { useCharacterById } from '@/hooks/useCharacterById';
 
@@ -20,6 +21,7 @@ export default function CharacterDetailsPage() {
     isFetching,
     isError,
     error,
+    refetch,
   } = useCharacterById(detailsId ?? '');
 
   if (isLoading) {
@@ -51,5 +53,15 @@ export default function CharacterDetailsPage() {
     );
   }
 
-  return <CharacterDetails character={character!} onClose={onCloseDetails} />;
+  return (
+    <>
+      <CharacterDetails character={character!} onClose={onCloseDetails} />
+      <RefreshButton
+        onRefresh={() => {
+          void refetch();
+        }}
+        isFetching={isFetching}
+      />
+    </>
+  );
 }
