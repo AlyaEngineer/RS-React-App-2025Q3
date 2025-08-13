@@ -2,8 +2,9 @@ import { ResultsProps } from '@/features/types/searchTypes';
 import { useCharacters } from '@/hooks/useCharacters';
 import { cn } from '@/libs/utils';
 
+import { RefreshButton } from '../refreshButton/RefreshButton';
+
 import CharacterContent from './CharacterContent';
-import { RefreshButton } from './refreshButton/RefreshButton';
 
 export default function Results({
   searchQuery,
