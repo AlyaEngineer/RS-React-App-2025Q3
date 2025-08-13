@@ -44,7 +44,7 @@ export default function CharacterContent({
       onInfo(null);
     }
     onCharacters?.(data?.results ?? []);
-  }, [data?.info, onInfo, onCharacters]);
+  }, [data?.info, onInfo, onCharacters, data?.results]);
 
   if (isLoading) return <CharacterListSkeleton />;
   if (isFetching)
