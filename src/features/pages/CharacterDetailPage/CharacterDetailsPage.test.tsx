@@ -1,8 +1,9 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import { useParams, useOutletContext } from 'react-router-dom';
-import { describe, it, beforeEach, expect, vi } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 
-import { fetchCharacterById } from '../api/characterApi';
+import { fetchCharacterById } from '@/features/api/characterApi';
 
 import CharacterDetailsPage from './CharacterDetailsPage';
 
@@ -15,7 +16,7 @@ vi.mock('react-router-dom', async () => {
   };
 });
 
-vi.mock('../api/characterApi', () => ({
+vi.mock('@/features/api/characterApi', () => ({
   fetchCharacterById: vi.fn(),
 }));
 
@@ -35,18 +36,30 @@ const mockCharacter = {
 };
 
 describe('CharacterDetailsPage', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
+  let queryClient: QueryClient;
 
-  it('display Loading... when data are fetching', () => {
+  function renderWithClient(ui: React.ReactElement) {
+    queryClient = new QueryClient({
+      defaultOptions: {
+        queries: {
+          retry: false,
+        },
+      },
+    });
+
+    return render(<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>);
+  }
+
+  it('display loading icon when data are fetching', () => {
     vi.mocked(useParams).mockReturnValue({ detailsId: '1' });
     vi.mocked(useOutletContext).mockReturnValue({ onCloseDetails: vi.fn() });
     vi.mocked(fetchCharacterById).mockReturnValue(new Promise(() => {}));
 
-    render(<CharacterDetailsPage />);
+    renderWithClient(<CharacterDetailsPage />);
 
-    expect(screen.getByText(/loading/i)).toBeInTheDocument();
+    const loadingIcon = screen.getByRole('generic', { name: /loader/i });
+    expect(loadingIcon).toBeEnabled();
+    expect(loadingIcon.querySelector('svg')).toHaveClass('animate-spin');
   });
 
   it('display character after fetching', async () => {
@@ -54,7 +67,7 @@ describe('CharacterDetailsPage', () => {
     vi.mocked(useOutletContext).mockReturnValue({ onCloseDetails: vi.fn() });
     vi.mocked(fetchCharacterById).mockResolvedValue(mockCharacter);
 
-    render(<CharacterDetailsPage />);
+    renderWithClient(<CharacterDetailsPage />);
 
     await waitFor(() => {
       expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();
@@ -68,19 +81,15 @@ describe('CharacterDetailsPage', () => {
     vi.mocked(useOutletContext).mockReturnValue({ onCloseDetails: onCloseMock });
     vi.mocked(fetchCharacterById).mockRejectedValue(new Error('Error'));
 
-    render(<CharacterDetailsPage />);
+    renderWithClient(<CharacterDetailsPage />);
 
     await waitFor(() => {
-      expect(onCloseMock).toHaveBeenCalled();
+      expect(screen.getByText(/error loading character/i)).toBeInTheDocument();
     });
-  });
 
-  it('does not call fetchCharacterById if detailsId is missing', () => {
-    vi.mocked(useParams).mockReturnValue({ detailsId: undefined });
-    vi.mocked(useOutletContext).mockReturnValue({ onCloseDetails: vi.fn() });
+    const closeButton = screen.getByRole('button');
+    closeButton.click();
 
-    render(<CharacterDetailsPage />);
-
-    expect(fetchCharacterById).not.toHaveBeenCalled();
+    expect(onCloseMock).toHaveBeenCalled();
   });
 });

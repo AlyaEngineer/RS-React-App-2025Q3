@@ -47,7 +47,6 @@ describe('CharacterItem', () => {
     expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();
     expect(screen.getByText(/race:/i)).toHaveTextContent('race: Human');
     expect(screen.getByText(/gender:/i)).toHaveTextContent('gender: Male');
-    expect(screen.getByText(/location:/i)).toHaveTextContent('location: Citadel of Ricks');
 
     const image = screen.getByRole('img');
     expect(image.getAttribute('src')).toContain(mockCharacter.image);

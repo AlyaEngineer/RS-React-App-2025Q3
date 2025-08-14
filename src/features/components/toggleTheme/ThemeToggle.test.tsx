@@ -9,7 +9,7 @@ const renderWithProvider = () => {
   render(
     <ThemeProvider defaultTheme="dark" storageKey="Current theme">
       <ThemeToggle />
-    </ThemeProvider>,
+    </ThemeProvider>
   );
 };
 

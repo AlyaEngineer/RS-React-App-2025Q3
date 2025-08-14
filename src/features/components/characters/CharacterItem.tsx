@@ -5,7 +5,7 @@ import { CharacterItemProps } from '@/features/types/viewTypes';
 import { Checkbox } from '../checkbox/Checkbox';
 
 export default function CharacterItem({ character }: CharacterItemProps) {
-  const { name, species, gender, location, image } = character;
+  const { name, species, gender, image } = character;
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { page } = useParams();
@@ -31,25 +31,28 @@ export default function CharacterItem({ character }: CharacterItemProps) {
         }
       }}
     >
-      <div className="absolute top-0 right-0">
+      <div className="absolute top-1 right-1">
         <Checkbox character={character} />
       </div>
       <img
         src={image}
         alt={name}
         loading="lazy"
-        className="shadow-3xl/20 h-24 w-24 rounded-md object-cover"
+        className="shadow-3xl/20 h-28 w-28 rounded-md object-cover"
       />
       <div className="ml-4 flex flex-col">
         <h4 className="text-text-content text-lg font-semibold max-md:text-base">{name}</h4>
-        <p className="text-left text-sm font-medium text-white dark:text-gray-400">
+        <p
+          data-testid="character-race"
+          className="text-left text-sm font-medium text-white dark:text-gray-400"
+        >
           race: <strong>{species}</strong>
         </p>
-        <p className="text-left text-sm font-medium text-white dark:text-gray-400">
+        <p
+          data-testid="character-gender"
+          className="text-left text-sm font-medium text-white dark:text-gray-400"
+        >
           gender: <strong>{gender}</strong>
-        </p>
-        <p className="text-left text-sm font-medium text-white dark:text-gray-400">
-          location: <strong>{location.name}</strong>
         </p>
       </div>
     </div>
