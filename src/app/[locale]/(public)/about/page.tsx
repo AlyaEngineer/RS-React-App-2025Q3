@@ -4,11 +4,13 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = { title: 'About us' };
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 import authorData from './authorData';
 
 export default function AboutUsPage() {
   const author = authorData[0];
+  const t = useTranslations('AboutPage');
 
   return (
     <div className="m-auto flex items-start gap-5">
@@ -25,11 +27,13 @@ export default function AboutUsPage() {
       </div>
       <div className="flex">
         <div className="flex w-full flex-col items-center justify-center text-justify">
-          <h3 className="text-2xl font-semibold uppercase">{author.name}</h3>
-          <p className="text-xl">{author.title}</p>
-          <p className="mt-3 uppercase">bio</p>
-          <p className="mb-3 text-justify">{author.bio}</p>
-          <p className="mt-3 uppercase">education</p>
+          <h3 className="text-2xl font-semibold uppercase">
+            {t('author-name', { name: author.name })}
+          </h3>
+          <p className="text-xl">{t('position', { name: author.title })}</p>
+          <p className="mt-3 uppercase">{t('bio')}</p>
+          <p className="mb-3 text-justify">{t('bio-text', { name: author.bio })}</p>
+          <p className="mt-3 uppercase">{t('education')}</p>
           <ul className="mb-3 list-inside list-disc text-left">
             {author.education?.map(({ instituteName, certificate }, index) => (
               <li key={index}>
@@ -55,14 +59,14 @@ export default function AboutUsPage() {
                       rel="noopener noreferrer"
                       className="hover:text-button-reload"
                     >
-                      certificate
+                      {t('diploma')}
                     </a>
                   </>
                 )}
               </li>
             ))}
           </ul>
-          <p className="mt-3 uppercase">skills</p>
+          <p className="mt-3 uppercase">{t('skills')}</p>
           <p className="text-center">{author.skills}</p>
           <ul className="mt-3 flex items-center gap-2.5">
             <li>

@@ -1,11 +1,15 @@
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 import { PAGES } from '@/config/pages.config';
 import { cn } from '@/libs/utils';
 
+import LanguageToggle from '../toggleLanguage/LanguageToggle';
 import { ThemeToggle } from '../toggleTheme/ThemeToggle';
 
 export default function Footer() {
+  const t = useTranslations('Footer');
+
   return (
     <footer
       className={cn(
@@ -24,7 +28,7 @@ export default function Footer() {
             href={PAGES.MAIN}
             className="hover:text-button-reload transition-colors duration-300 hover:text-shadow-lg/30"
           >
-            <span className="p-2">Home</span>
+            <span className="p-2">{t('home')}</span>
           </Link>
         </div>
         <div>
@@ -32,7 +36,7 @@ export default function Footer() {
             href={PAGES.ABOUT_US}
             className="hover:text-button-reload transition-colors duration-300 hover:text-shadow-lg/30"
           >
-            <span className="p-2">About us</span>
+            <span className="p-2">{t('about')}</span>
           </Link>
         </div>
         <div>
@@ -47,11 +51,14 @@ export default function Footer() {
         <div>
           <ThemeToggle />
         </div>
+        <div>
+          <LanguageToggle />
+        </div>
       </div>
 
       <div className="max-md:px-2">
         <p>&copy; 2025 Rick & Morty API Search</p>
-        <p>All rights reserved</p>
+        <p>{t('rights')}</p>
       </div>
     </footer>
   );

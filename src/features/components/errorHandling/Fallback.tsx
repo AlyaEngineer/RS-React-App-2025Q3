@@ -1,6 +1,10 @@
+import { useTranslations } from 'next-intl';
+
 import { cn } from '@/libs/utils';
 
 function Fallback() {
+  const t = useTranslations('ErrorMessage');
+
   return (
     <div
       className={cn(
@@ -12,10 +16,10 @@ function Fallback() {
         'max-sm:w-sm sm:w-xl md:w-2xl lg:w-4xl xl:w-6xl'
       )}
     >
-      <h1 className="mb-4 text-center text-3xl font-bold text-white">Something went wrong!</h1>
-      <p className="mb-6 text-center text-2xl text-white">
-        Try refreshing the page or coming back later.
-      </p>
+      <h1 className="mb-4 text-center text-3xl font-bold text-white">
+        {t('something-went-wrong')}
+      </h1>
+      <p className="mb-6 text-center text-2xl text-white">{t('try-refresh')}</p>
       <button
         className={cn(
           'flex w-full items-center justify-center gap-2.5 p-2',
@@ -28,7 +32,7 @@ function Fallback() {
         )}
         onClick={() => window.location.reload()}
       >
-        Reload page
+        {t('reload-page')}
       </button>
     </div>
   );

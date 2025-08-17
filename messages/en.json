@@ -1,0 +1,40 @@
+{
+  "Search": {
+    "button-name": "Let's search",
+    "placeholder-name": "Search the Rick and Morty Multiverse"
+  },
+
+  "MainPage": {
+    "results-text": "Search results for the query ",
+    "click-me-button": "Click me to trigger the error"
+  },
+
+  "Footer": {
+    "home": "Home",
+    "about": "About us",
+    "rights": "All rights reserved"
+  },
+
+  "ErrorMessage": {
+    "something-went-wrong": "Something went wrong!",
+    "try-refresh": "Try refreshing the page or coming back later.",
+    "reload-page": "Reload page"
+  },
+
+  "AboutPage": {
+    "author-name": "Alla Tsaiukova",
+    "position": "Junior Frontend Developer",
+    "bio": "bio",
+    "bio-text": "34 years old, currently living in Serbia. My background is in 3D modeling and production — I produced detailed construction documentation and created physical products based on it. I chose frontend development to gain the freedom of remote work, explore a new creative field, and finally say goodbye to the daily office routine.",
+    "education": "education",
+    "diploma": "certificate",
+    "skills": "skills"
+  },
+
+  "NotFoundPage": {
+    "non-found": "Sorry, page not found! We can not find the page you are looking for!",
+    "back": "Back to Search"
+  },
+
+  "Translate": {}
+}

@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { Manrope } from 'next/font/google';
-
 import './global.css';
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale } from 'next-intl/server';
+
 import { ThemeProvider } from '@/features/components/toggleTheme/ThemeProvider';
 import { cn } from '@/libs/utils';
 import ReactQueryProvider from '@/providers/ReactQueryProvider';
@@ -19,23 +21,27 @@ export const metadata: Metadata = {
     'My App is an app for searching characters from the Rick and Morty cartoon series, based on the Rick and Morty API as part of the React2025Q3 course of the RSSchool',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = await getLocale();
+
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang={locale} data-scroll-behavior="smooth">
       <body>
-        <ThemeProvider>
-          <ReactQueryProvider>
-            <div
-              className={cn(
-                manropeFont.className,
-                'flex min-h-screen w-full flex-col justify-between overflow-x-hidden overflow-y-auto p-10 max-md:p-5 max-sm:px-2',
-                '@container'
-              )}
-            >
-              {children}
-            </div>
-          </ReactQueryProvider>
-        </ThemeProvider>
+        <NextIntlClientProvider>
+          <ThemeProvider>
+            <ReactQueryProvider>
+              <div
+                className={cn(
+                  manropeFont.className,
+                  'flex min-h-screen w-full flex-col justify-between overflow-x-hidden overflow-y-auto p-10 max-md:p-5 max-sm:px-2',
+                  '@container'
+                )}
+              >
+                {children}
+              </div>
+            </ReactQueryProvider>
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
