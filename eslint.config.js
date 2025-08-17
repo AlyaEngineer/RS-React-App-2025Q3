@@ -5,16 +5,17 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
-import testingLibrary from 'eslint-plugin-testing-library';
-import vitest from '@vitest/eslint-plugin';
 import importPlugin from 'eslint-plugin-import';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 import pluginQuery from '@tanstack/eslint-plugin-query';
+import nextPlugin from '@next/eslint-plugin-next';
 
 export default tseslint.config(
   { ignores: ['dist', 'coverage'] },
   {
     extends: [
+      nextPlugin.configs.recommended,
+      nextPlugin.configs['core-web-vitals'],
       js.configs.recommended,
       importPlugin.flatConfigs.recommended,
       ...tseslint.configs.recommendedTypeChecked,
@@ -35,8 +36,6 @@ export default tseslint.config(
     },
     plugins: {
       'react-refresh': reactRefresh,
-      'testing-library': testingLibrary,
-      vitest: vitest,
       '@tanstack/query': pluginQuery,
     },
     rules: {
@@ -64,11 +63,6 @@ export default tseslint.config(
         },
       ],
     },
-  },
-  {
-    files: ['**/*.test.{ts,tsx}'],
-    ...testingLibrary.configs['flat/react'],
-    ...vitest.configs.recommended,
   },
   {
     settings: {
