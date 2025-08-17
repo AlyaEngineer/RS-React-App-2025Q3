@@ -1,22 +1,23 @@
-import { createContext, useContext, useState } from 'react';
+'use client';
 
-import { Theme, ThemeProviderProps } from './themeTypes';
+import { useState, useEffect } from 'react';
+
+import { ThemeContext } from './ThemeContext';
+import { ThemeProviderProps, Theme } from './themeTypes';
 import { applyTheme } from './themeUtils';
-
-const ThemeContext = createContext<{
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
-} | null>(null);
 
 export const ThemeProvider = ({
   children,
   defaultTheme = 'dark',
   storageKey = 'Current theme',
 }: ThemeProviderProps) => {
-  const initialTheme = (localStorage.getItem(storageKey) as Theme) || defaultTheme;
-  applyTheme(initialTheme);
+  const [theme, setThemeState] = useState<Theme>(defaultTheme);
 
-  const [theme, setThemeState] = useState<Theme>(initialTheme);
+  useEffect(() => {
+    const storedTheme = (localStorage.getItem(storageKey) as Theme) || defaultTheme;
+    setThemeState(storedTheme);
+    applyTheme(storedTheme);
+  }, [defaultTheme, storageKey]);
 
   const setTheme = (newTheme: Theme) => {
     localStorage.setItem(storageKey, newTheme);
@@ -25,10 +26,4 @@ export const ThemeProvider = ({
   };
 
   return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>;
-};
-
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (!context) throw new Error('useTheme must be used within a ThemeProvider');
-  return context;
 };

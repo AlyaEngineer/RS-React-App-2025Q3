@@ -9,9 +9,9 @@ import CharacterContent from './CharacterContent';
 export default function Results({
   searchQuery,
   currentPage,
-  onInfo,
-  onCharacters,
-  onSelectCharacter,
+  onInfoAction,
+  onCharactersAction,
+  onSelectCharacterAction,
   hasOutlet,
 }: ResultsProps) {
   const { data, isFetching, isLoading, isError, error, refetch } = useCharacters(
@@ -47,12 +47,12 @@ export default function Results({
           isLoading={isLoading}
           isError={isError}
           error={error}
-          onInfo={onInfo}
-          onSelect={onSelectCharacter}
+          onInfoAction={onInfoAction}
+          onSelectAction={onSelectCharacterAction}
           currentPage={currentPage}
           query={searchQuery}
           hasOutlet={hasOutlet}
-          onCharacters={onCharacters}
+          onCharactersAction={onCharactersAction}
         />
       </div>
     </div>

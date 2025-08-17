@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
+import { PAGES } from '@/config/pages.config';
 import { cn } from '@/libs/utils';
 
 import { ThemeToggle } from '../toggleTheme/ThemeToggle';
@@ -20,7 +21,7 @@ export default function Footer() {
       <div className="flex flex-col gap-2">
         <div>
           <Link
-            to={'/'}
+            href={PAGES.MAIN}
             className="hover:text-button-reload transition-colors duration-300 hover:text-shadow-lg/30"
           >
             <span className="p-2">Home</span>
@@ -28,7 +29,7 @@ export default function Footer() {
         </div>
         <div>
           <Link
-            to={'/about'}
+            href={PAGES.ABOUT_US}
             className="hover:text-button-reload transition-colors duration-300 hover:text-shadow-lg/30"
           >
             <span className="p-2">About us</span>
@@ -36,7 +37,7 @@ export default function Footer() {
         </div>
         <div>
           <Link
-            to="https://rs.school/courses/reactjs"
+            href="https://rs.school/courses/reactjs"
             target="_blank"
             className="hover:text-button-reload transition-colors duration-300 hover:text-shadow-lg/30"
           >
@@ -49,7 +50,7 @@ export default function Footer() {
       </div>
 
       <div className="max-md:px-2">
-        <p>&copy; {new Date().getFullYear()} Rick & Morty API Search</p>
+        <p>&copy; 2025 Rick & Morty API Search</p>
         <p>All rights reserved</p>
       </div>
     </footer>

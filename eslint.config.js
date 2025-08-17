@@ -14,8 +14,6 @@ export default tseslint.config(
   { ignores: ['dist', 'coverage'] },
   {
     extends: [
-      nextPlugin.configs.recommended,
-      nextPlugin.configs['core-web-vitals'],
       js.configs.recommended,
       importPlugin.flatConfigs.recommended,
       ...tseslint.configs.recommendedTypeChecked,
@@ -35,6 +33,7 @@ export default tseslint.config(
       },
     },
     plugins: {
+      '@next/next': nextPlugin,
       'react-refresh': reactRefresh,
       '@tanstack/query': pluginQuery,
     },

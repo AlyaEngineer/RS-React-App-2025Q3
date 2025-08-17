@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 
 import { cn } from '@/libs/utils';
@@ -8,7 +10,7 @@ import { RemoveAllButton } from './RemoveAllButton';
 
 export const Flyout = () => {
   const selectedCharacters = useCharactersStore((state) => state.selectedCharacters);
-  const [, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     if (selectedCharacters.length > 0) {
@@ -18,6 +20,8 @@ export const Flyout = () => {
       return () => clearTimeout(timeout);
     }
   }, [selectedCharacters.length]);
+
+  if (!isVisible) return null;
 
   return (
     <div

@@ -1,3 +1,5 @@
+'use client';
+
 import { RefreshCw } from 'lucide-react';
 import { useEffect } from 'react';
 
@@ -16,12 +18,12 @@ type CharacterContentProps = {
   isLoading: boolean;
   isError: boolean;
   error: unknown;
-  onInfo: (info: Info | null) => void;
-  onSelect: (character: Character, currentPage: number, query: string) => void;
+  onInfoAction: (info: Info | null) => void;
+  onSelectAction: (character: Character, currentPage: number, query: string) => void;
   currentPage: number;
   query: string;
   hasOutlet: boolean;
-  onCharacters?: (characters: Character[]) => void;
+  onCharactersAction?: (characters: Character[]) => void;
 };
 
 export default function CharacterContent({
@@ -30,21 +32,21 @@ export default function CharacterContent({
   isLoading,
   isError,
   error,
-  onInfo,
-  onSelect,
+  onInfoAction,
+  onSelectAction,
   currentPage,
   query,
   hasOutlet,
-  onCharacters,
+  onCharactersAction,
 }: CharacterContentProps) {
   useEffect(() => {
     if (data?.info) {
-      onInfo(data.info);
+      onInfoAction(data.info);
     } else {
-      onInfo(null);
+      onInfoAction(null);
     }
-    onCharacters?.(data?.results ?? []);
-  }, [data?.info, onInfo, onCharacters, data?.results]);
+    onCharactersAction?.(data?.results ?? []);
+  }, [data?.info, onInfoAction, onCharactersAction, data?.results]);
 
   if (isLoading) return <CharacterListSkeleton />;
   if (isFetching)
@@ -64,7 +66,7 @@ export default function CharacterContent({
   return (
     <CharacterList
       characters={data?.results ?? []}
-      onSelect={onSelect}
+      onSelect={onSelectAction}
       currentPage={currentPage}
       query={query}
       hasOutlet={hasOutlet}

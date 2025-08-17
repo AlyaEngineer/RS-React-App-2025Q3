@@ -1,5 +1,7 @@
+'use client';
+
+import { useParams, useSearchParams, useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
-import { Outlet, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import ErrorButton from '@/features/components/errorHandling/ErrorButton';
 import Pagination from '@/features/components/pagination/Pagination';
@@ -9,14 +11,17 @@ import { Character } from '@/features/types/apiTypes';
 import { cn } from '@/libs/utils';
 
 export default function Main() {
-  const { page = '1', detailsId } = useParams();
-  const [searchParams] = useSearchParams();
+  const params = useParams();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const page = typeof params?.page === 'string' ? params.page : '1';
+  const detailsId = typeof params?.detailsId === 'string' ? params.detailsId : undefined;
+
   const [totalPages, setTotalPages] = useState(1);
   const [characters, setCharacters] = useState<Character[]>([]);
-
-  const navigate = useNavigate();
-
   const [query, setQuery] = useState(searchParams.get('name') ?? '');
+
   const currentPage = Number(page) || 1;
 
   useEffect(() => {
@@ -28,22 +33,22 @@ export default function Main() {
     localStorage.setItem('searchQuery', newQuery);
 
     if (detailsId) {
-      void navigate(`/${1}/${detailsId}?name=${newQuery}`);
+      router.push(`/${1}/${detailsId}?name=${newQuery}`);
     } else {
-      void navigate(`/${1}?name=${newQuery}`);
+      router.push(`/${1}?name=${newQuery}`);
     }
   };
 
   const handlePageChange = (page: number) => {
     if (detailsId) {
-      void navigate(`/${page}/${detailsId}?name=${query}`);
+      router.push(`/${page}/${detailsId}?name=${query}`);
     } else {
-      void navigate(`/${page}?name=${query}`);
+      router.push(`/${page}?name=${query}`);
     }
   };
 
   const handleCloseDetails = () => {
-    void navigate(`/${currentPage}?name=${query}`);
+    router.push(`/${currentPage}?name=${query}`);
   };
 
   const handleCharacters = useCallback((list: Character[]) => {
@@ -51,7 +56,7 @@ export default function Main() {
   }, []);
 
   const handleSelect = (character: Character) => {
-    void navigate(`/${currentPage}/${character.id}?name=${query}`);
+    router.push(`/${currentPage}/${character.id}?name=${query}`);
   };
 
   return (
@@ -81,27 +86,13 @@ export default function Main() {
           <Results
             searchQuery={query}
             currentPage={currentPage}
-            onInfo={(info) => setTotalPages(info?.pages || 0)}
-            onCharacters={handleCharacters}
+            onInfoAction={(info) => setTotalPages(info?.pages || 0)}
+            onCharactersAction={handleCharacters}
             detailsId={detailsId}
             onCloseDetails={handleCloseDetails}
-            onSelectCharacter={handleSelect}
+            onSelectCharacterAction={handleSelect}
             hasOutlet={!!detailsId}
           />
-          {detailsId && (
-            <div
-              className={cn(
-                'bg-dark/4',
-                'shadow-3xl/20',
-                'flex min-w-56 flex-col items-center justify-start gap-8',
-                'rounded-xl',
-                'p-6 max-sm:px-2',
-                'backdrop-invert backdrop-opacity-5'
-              )}
-            >
-              <Outlet context={{ onCloseDetails: handleCloseDetails }} />
-            </div>
-          )}
         </div>
         <ErrorButton />
       </div>

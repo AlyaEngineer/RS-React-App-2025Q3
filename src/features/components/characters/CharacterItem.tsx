@@ -1,4 +1,7 @@
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+'use client';
+
+import Image from 'next/image';
+import { useParams, useSearchParams, useRouter } from 'next/navigation';
 
 import { CharacterItemProps } from '@/features/types/viewTypes';
 
@@ -6,16 +9,16 @@ import { Checkbox } from '../checkbox/Checkbox';
 
 export default function CharacterItem({ character }: CharacterItemProps) {
   const { name, species, gender, image } = character;
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const { page } = useParams();
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const params = useParams();
 
   const query = searchParams.get('name') || '';
-
-  const currentPage = page || '1';
+  const page = typeof params?.page === 'string' ? params.page : '1';
 
   const handleClick = () => {
-    void navigate(`/${currentPage}/${character.id}?name=${encodeURIComponent(query)}`);
+    router.push(`/${page}/${character.id}?name=${encodeURIComponent(query)}`);
   };
 
   return (
@@ -34,11 +37,13 @@ export default function CharacterItem({ character }: CharacterItemProps) {
       <div className="absolute top-1 right-1">
         <Checkbox character={character} />
       </div>
-      <img
+      <Image
+        width={115}
+        height={115}
         src={image}
         alt={name}
         loading="lazy"
-        className="shadow-3xl/20 h-28 w-28 rounded-md object-cover"
+        className="shadow-3xl/20 rounded-md object-cover"
       />
       <div className="ml-4 flex flex-col">
         <h4 className="text-text-content text-lg font-semibold max-md:text-base">{name}</h4>

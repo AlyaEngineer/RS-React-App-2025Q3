@@ -29,7 +29,7 @@ const authorData: AuthorInfo[] = [
       },
     ],
     url: {
-      image: './girl.svg',
+      image: '/girl.svg',
       gitHub: 'https://github.com/AlyaEngineer',
       linkedIn: 'https://www.linkedin.com/in/alla-tsaiukova-033ba92b8/',
     },

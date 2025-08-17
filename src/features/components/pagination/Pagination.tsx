@@ -1,3 +1,5 @@
+'use client';
+
 import { CircleArrowLeft, CircleArrowRight } from 'lucide-react';
 
 import { PaginationProps } from '@/features/types/paginationTypes';
@@ -8,7 +10,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
   const pages = createPageArray(currentPage, totalPages);
 
   return (
-    <div className="flex flex-wrap justify-baseline">
+    <div className="flex flex-wrap justify-baseline gap-2">
       <button
         data-testid="previous-page"
         disabled={currentPage <= 1}
@@ -19,10 +21,10 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         <CircleArrowLeft strokeWidth={1.25} />
       </button>
 
-      <div className="flex w-80 justify-center gap-1">
+      <div className="grid w-auto auto-cols-[40px] grid-flow-col justify-center gap-1">
         {pages.map((page, index) =>
           typeof page === 'string' ? (
-            <span className="self-center text-white" key={`ellipsis-${index}`}>
+            <span className="flex justify-center self-center text-white" key={`ellipsis-${index}`}>
               ...
             </span>
           ) : (
@@ -32,7 +34,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
               key={`page-${page}`}
               disabled={currentPage === page}
               onClick={() => onPageChange(page)}
-              className={`m-2 rounded-full border-2 border-transparent px-3 py-1 text-white transition hover:cursor-pointer ${currentPage === page ? 'dark:bg-button-error-hover bg-button-reload border-2 border-white' : 'hover:border-2 hover:border-white'} disabled:cursor-default`}
+              className={`rounded-full border-2 border-transparent text-white transition hover:cursor-pointer ${currentPage === page ? 'dark:bg-button-error-hover bg-button-reload border-2 border-white' : 'hover:border-2 hover:border-white'} disabled:cursor-default`}
             >
               {page}
             </button>

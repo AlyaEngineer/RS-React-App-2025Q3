@@ -1,13 +1,21 @@
 import { Github } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import type { Metadata } from 'next';
+// eslint-disable-next-line react-refresh/only-export-components
+export const metadata: Metadata = { title: 'About us' };
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { AuthorInfo } from './types';
+import authorData from './authorData';
 
-export default function AboutUs({ author }: { author: AuthorInfo }) {
+export default function AboutUsPage() {
+  const author = authorData[0];
+
   return (
     <div className="m-auto flex items-start gap-5">
       <div>
-        <img
+        <Image
+          width={86}
+          height={86}
           src={author.url.image}
           alt={author.name}
           loading="lazy"
@@ -56,20 +64,16 @@ export default function AboutUs({ author }: { author: AuthorInfo }) {
           </ul>
           <p className="mt-3 uppercase">skills</p>
           <p className="text-center">{author.skills}</p>
-          <ul className="text-muted-foreground mt-3 list-inside list-disc text-left text-sm">
-            <div className="mt-3 flex items-center gap-2.5">
-              <ul className="flex flex-row items-center">
-                <li className="flex">
-                  <Link
-                    to={author.url.gitHub}
-                    target="_blank"
-                    className="hover:text-button-reload p-3 transition-colors duration-300 lg:p-2"
-                  >
-                    <Github strokeWidth={1.25} size={28} className="max-sm:size-6" />
-                  </Link>
-                </li>
-              </ul>
-            </div>
+          <ul className="mt-3 flex items-center gap-2.5">
+            <li>
+              <Link
+                href={author.url.gitHub}
+                target="_blank"
+                className="hover:text-button-reload p-3 transition-colors duration-300 lg:p-2"
+              >
+                <Github strokeWidth={1.25} size={28} className="max-sm:size-6" />
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

@@ -5,11 +5,11 @@ import { Character, Info } from './apiTypes';
 export interface ResultsProps {
   searchQuery: string;
   currentPage: number;
-  onInfo: (info: Info | null) => void;
-  onCharacters?: (list: Character[]) => void;
+  onInfoAction: (info: Info | null) => void;
+  onCharactersAction?: (list: Character[]) => void;
   detailsId?: string;
   onCloseDetails?: () => void;
-  onSelectCharacter: (character: Character) => void;
+  onSelectCharacterAction: (character: Character) => void;
   hasOutlet: boolean;
 }
 

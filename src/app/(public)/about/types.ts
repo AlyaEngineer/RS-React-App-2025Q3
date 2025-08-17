@@ -9,8 +9,8 @@ export type AuthorInfo = {
     certificate?: string;
   }[];
   url: {
-    image?: string;
+    image: string;
     gitHub: string;
-    linkedIn?: string;
+    linkedIn: string;
   };
 };
