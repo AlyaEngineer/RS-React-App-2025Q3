@@ -21,7 +21,7 @@ export default function SearchButton({ onClick }: SearchButtonProps) {
       )}
     >
       <Rocket strokeWidth={1.25} />
-      {t('button-name')}
+      {t('search-button')}
     </button>
   );
 }

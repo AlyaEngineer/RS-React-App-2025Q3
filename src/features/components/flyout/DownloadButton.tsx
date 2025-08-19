@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import { Character } from '@/features/types/apiTypes';
 
 type Item = Pick<Character, 'id' | 'name' | 'gender' | 'species' | 'status' | 'created'>;
@@ -26,12 +28,14 @@ export const DownloadButton = ({ items }: { items: Item[] }) => {
     URL.revokeObjectURL(url);
   };
 
+  const t = useTranslations('Flyout');
+
   return (
     <button
       onClick={downloadCSV}
       className="bg-button-error/90 hover:bg-button-error-hover cursor-pointer rounded px-4 py-2 text-white transition-colors duration-300 max-sm:text-sm"
     >
-      Download
+      {t('download')}
     </button>
   );
 };

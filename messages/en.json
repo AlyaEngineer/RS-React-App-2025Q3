@@ -1,6 +1,6 @@
 {
   "Search": {
-    "button-name": "Let's search",
+    "search-button": "Let's search",
     "placeholder-name": "Search the Rick and Morty Multiverse"
   },
 
@@ -33,8 +33,12 @@
 
   "NotFoundPage": {
     "non-found": "Sorry, page not found! We can not find the page you are looking for!",
-    "back": "Back to Search"
+    "back-button": "Back to Search"
   },
 
-  "Translate": {}
+  "Flyout": {
+    "unselected": "Unselect all",
+    "download": "Download",
+    "count": "{count, plural, =0 {No items selected} one {# item is selected} other {# items are selected}}"
+  }
 }

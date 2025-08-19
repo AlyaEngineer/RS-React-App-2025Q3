@@ -1,10 +1,13 @@
 import { ArrowBigLeft } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/libs/utils';
 
 export default function NotFound() {
+  const t = useTranslations('NotFoundPage');
+
   return (
     <div className="flex flex-1 flex-col items-center justify-between">
       <Image
@@ -15,9 +18,7 @@ export default function NotFound() {
       />
 
       <div>
-        <p className="p-4 text-center text-2xl text-white">
-          Sorry, page not found! We can not find the page you are looking for!
-        </p>
+        <p className="p-4 text-center text-2xl text-white">{t('non-found')}</p>
       </div>
       <div className="flex">
         <Link
@@ -33,7 +34,7 @@ export default function NotFound() {
           )}
         >
           <ArrowBigLeft strokeWidth={1.25} className="mr-4" />
-          Back to Search
+          {t('back-button')}
         </Link>
       </div>
     </div>
