@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = { title: 'About us' };
 import Image from 'next/image';
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
 import authorData from './authorData';
@@ -70,13 +69,14 @@ export default function AboutUsPage() {
           <p className="text-center">{author.skills}</p>
           <ul className="mt-3 flex items-center gap-2.5">
             <li>
-              <Link
+              <a
                 href={author.url.gitHub}
                 target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-button-reload p-3 transition-colors duration-300 lg:p-2"
               >
                 <Github strokeWidth={1.25} size={28} className="max-sm:size-6" />
-              </Link>
+              </a>
             </li>
           </ul>
         </div>

@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
 import { PAGES } from '@/config/pages.config';
+import { Link } from '@/i18n/navigation';
 import { cn } from '@/libs/utils';
 
 import LanguageToggle from '../toggleLanguage/LanguageToggle';
@@ -40,13 +40,14 @@ export default function Footer() {
           </Link>
         </div>
         <div>
-          <Link
+          <a
             href="https://rs.school/courses/reactjs"
             target="_blank"
+            rel="noopener noreferrer"
             className="hover:text-button-reload transition-colors duration-300 hover:text-shadow-lg/30"
           >
             <span className="p-2">Rolling Scopes School / React Course</span>
-          </Link>
+          </a>
         </div>
         <div>
           <ThemeToggle />
