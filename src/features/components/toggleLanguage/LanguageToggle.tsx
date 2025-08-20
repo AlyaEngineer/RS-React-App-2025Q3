@@ -1,5 +1,6 @@
 'use client';
 
+import { Languages } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { cn } from '@/libs/utils';
@@ -22,15 +23,16 @@ export default function LanguageToggle() {
     <button
       onClick={toggleLocale}
       className={cn(
-        'bg-button-background flex items-center justify-center gap-2.5 border-2 border-dotted p-2',
+        'bg-button-background/80 mx-2 flex items-center justify-center gap-2.5 border-2 border-dotted p-2',
         'cursor-pointer',
         'rounded-xl shadow-xl inset-shadow-sm',
         'transition delay-150 duration-300 ease-in-out',
         'text-white text-shadow-2xs dark:text-gray-600',
-        'hover:bg-button-background-hover hover:shadow-xl/20',
+        'hover:bg-button-background hover:shadow-xl/20',
         'focus:border-none'
       )}
     >
+      <Languages strokeWidth={1.25} />
       {switchTo.toUpperCase()}
     </button>
   );
