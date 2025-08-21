@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/libs/utils';
 import { useCharactersStore } from '@/store/useCharactersStore';
 
-import { DownloadButton } from './DownloadButton';
+import { DownloadButton } from './DownloadButton/DownloadButton';
 import { RemoveAllButton } from './RemoveAllButton';
 
 export const Flyout = () => {
