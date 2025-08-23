@@ -1,9 +1,11 @@
 # Description
+
 "React Forms" is the task within the React RS School 2025Q3 course.
 
 [Task link](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/forms.md)
 
 ## Stack
+
 [![React](https://img.shields.io/badge/React-20232A?logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-953DD6?logo=vite&logoColor=white)](https://vite.dev/)
@@ -15,6 +17,7 @@
 [![Vitest](https://img.shields.io/badge/Vitest-white?logo=vitest)](https://vitest.dev/)
 
 ## Install and Run the Application
+
 - Using terminal to go to the directory in which you want to install the application
 
 - Clone the repository from GitHub:
