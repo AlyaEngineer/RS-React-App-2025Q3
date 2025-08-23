@@ -1,3 +1,5 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
 
 import { ResultsProps } from '@/features/types/searchTypes';
@@ -11,6 +13,7 @@ import CharacterContent from './CharacterContent';
 export default function Results({
   searchQuery,
   currentPage,
+  initialData,
   onInfoAction,
   onCharactersAction,
   onSelectCharacterAction,
@@ -18,10 +21,16 @@ export default function Results({
 }: ResultsProps) {
   const { data, isFetching, isLoading, isError, error, refetch } = useCharacters(
     searchQuery,
-    currentPage
+    currentPage,
+    initialData
   );
 
   const t = useTranslations('MainPage');
+
+  if (data) {
+    onInfoAction(data.info);
+    onCharactersAction(data.results);
+  }
 
   return (
     <div

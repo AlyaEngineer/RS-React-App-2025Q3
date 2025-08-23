@@ -1,16 +1,17 @@
 import { ChangeEvent } from 'react';
 
-import { Character, Info } from './apiTypes';
+import { Character, CharacterResponse, Info } from './apiTypes';
 
 export interface ResultsProps {
   searchQuery: string;
   currentPage: number;
   onInfoAction: (info: Info | null) => void;
-  onCharactersAction?: (list: Character[]) => void;
+  onCharactersAction: (list: Character[]) => void;
   detailsId?: string;
   onCloseDetails?: () => void;
   onSelectCharacterAction: (character: Character) => void;
   hasOutlet: boolean;
+  initialData: CharacterResponse;
 }
 
 export interface SearchProps {

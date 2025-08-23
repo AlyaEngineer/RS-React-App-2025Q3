@@ -1,36 +1,37 @@
 'use client';
 
-import { useParams, useSearchParams, useRouter } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useCallback, useState } from 'react';
 
 import ErrorButton from '@/features/components/errorHandling/ErrorButton';
 import Pagination from '@/features/components/pagination/Pagination';
 import Results from '@/features/components/result/Results';
 import Search from '@/features/components/search/Search';
-import { Character } from '@/features/types/apiTypes';
+import { Character, CharacterResponse, Info } from '@/features/types/apiTypes';
 import { cn } from '@/libs/utils';
 
-export default function Main() {
-  const params = useParams();
-  const searchParams = useSearchParams();
+interface MainProps {
+  initialData: CharacterResponse;
+  currentPage: number;
+  query: string;
+  detailsId?: string;
+}
+
+export default function MainClient({
+  initialData,
+  currentPage,
+  query: initialQuery,
+  detailsId,
+}: MainProps) {
   const router = useRouter();
 
-  const page = typeof params?.page === 'string' ? params.page : '1';
-  const detailsId = typeof params?.detailsId === 'string' ? params.detailsId : undefined;
-
-  const [totalPages, setTotalPages] = useState(1);
-  const [characters, setCharacters] = useState<Character[]>([]);
-  const [query, setQuery] = useState(searchParams.get('name') ?? '');
-
-  const currentPage = Number(page) || 1;
-
-  useEffect(() => {
-    const name = searchParams.get('name') ?? '';
-    setQuery(name);
-  }, [searchParams]);
+  const [characters, setCharacters] = useState<Character[]>(initialData.results);
+  const [totalPages, setTotalPages] = useState(initialData.info.pages);
+  const [query, setQuery] = useState(initialQuery);
 
   const handleSearch = (newQuery: string) => {
     localStorage.setItem('searchQuery', newQuery);
+    setQuery(newQuery);
 
     if (detailsId) {
       router.push(`/${1}/${detailsId}?name=${newQuery}`);
@@ -86,7 +87,8 @@ export default function Main() {
           <Results
             searchQuery={query}
             currentPage={currentPage}
-            onInfoAction={(info) => setTotalPages(info?.pages || 0)}
+            initialData={initialData}
+            onInfoAction={(info: Info | null) => setTotalPages(info?.pages || 0)}
             onCharactersAction={handleCharacters}
             detailsId={detailsId}
             onCloseDetails={handleCloseDetails}
