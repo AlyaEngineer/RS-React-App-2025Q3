@@ -19,7 +19,9 @@ export const FormCard = ({ data, highlighted, title }: Props) => {
       )}
     >
       <h2 className="text-lg font-semibold">{title}</h2>
-      <h3 className="font-semibold">Name: {data.name}</h3>
+      <h3 className="font-semibold" data-testid="form-name">
+        Name: {data.name}
+      </h3>
       <p>Age: {data.age}</p>
       <p>Gender: {data.gender}</p>
       <p>Country: {data.country}</p>
