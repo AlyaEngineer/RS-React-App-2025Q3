@@ -31,6 +31,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
       role="button"
+      data-testid="modal"
       tabIndex={0}
       onClick={handleOverlayClick}
       onKeyDown={handleKeyDown}
