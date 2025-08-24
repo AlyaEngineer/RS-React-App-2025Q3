@@ -1,5 +1,7 @@
 import { useState, useRef } from 'react';
 
+import { useFormStore } from '../store/useFormDataStore';
+
 import Modal from './Modal';
 
 type FormContentProps = {
@@ -59,22 +61,38 @@ export const FormContent = ({ onClose, uncontrolled }: FormContentProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (uncontrolled) {
-      console.log({
-        name: nameRef.current?.value,
-        age: ageRef.current?.value,
-        email: emailRef.current?.value,
-        password: passwordRef.current?.value,
-        confirmPassword: confirmPasswordRef.current?.value,
-        gender: genderRef.current?.value,
-        acceptTnC: termsRef.current?.checked,
-        country: countryRef.current?.value,
-        picture: pictureRef.current?.files?.[0],
-      });
+
+    const file = uncontrolled ? pictureRef.current?.files?.[0] : formData.picture;
+
+    const saveForm = (pictureBase64: string | null) => {
+      if (uncontrolled) {
+        useFormStore.getState().setUncontrolledForm({
+          name: nameRef.current?.value || '',
+          age: ageRef.current?.value || '',
+          email: emailRef.current?.value || '',
+          password: passwordRef.current?.value || '',
+          confirmPassword: confirmPasswordRef.current?.value || '',
+          gender: genderRef.current?.value || '',
+          acceptTnC: termsRef.current?.checked || false,
+          country: countryRef.current?.value || '',
+          picture: pictureBase64,
+        });
+      } else {
+        useFormStore.getState().setHookForm({
+          ...formData,
+          picture: pictureBase64,
+        });
+      }
+      onClose();
+    };
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => saveForm(reader.result as string);
+      reader.readAsDataURL(file);
     } else {
-      console.log(formData, preview);
+      saveForm(null);
     }
-    onClose();
   };
 
   const inputClass = `w-full border rounded p-1 focus:outline-none bg-input-background/50 border-input-background border-1 ${
