@@ -1,6 +1,10 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useState, useRef } from 'react';
+import { useForm } from 'react-hook-form';
+import type { z } from 'zod';
 
 import { useFormStore } from '../store/useFormDataStore';
+import { formSchema } from '../validation/formSchema';
 
 import Modal from './Modal';
 
@@ -9,9 +13,12 @@ type FormContentProps = {
   uncontrolled?: boolean;
 };
 
+type FormData = z.infer<typeof formSchema>;
+
 export const FormContent = ({ onClose, uncontrolled }: FormContentProps) => {
   const countries = ['USA', 'UK', 'Germany', 'France', 'Canada'];
   const [preview, setPreview] = useState<string | null>(null);
+  const [uncontrolledErrors, setUncontrolledErrors] = useState<Record<string, string>>({});
 
   const nameRef = useRef<HTMLInputElement>(null);
   const ageRef = useRef<HTMLInputElement>(null);
@@ -23,63 +30,34 @@ export const FormContent = ({ onClose, uncontrolled }: FormContentProps) => {
   const countryRef = useRef<HTMLSelectElement>(null);
   const pictureRef = useRef<HTMLInputElement>(null);
 
-  const [formData, setFormData] = useState({
-    name: '',
-    age: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    gender: '',
-    acceptTnC: false,
-    country: '',
-    picture: null as File | null,
+  const { register, handleSubmit, formState, setValue } = useForm({
+    resolver: zodResolver(formSchema),
+    mode: 'onChange',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const target = e.target as HTMLInputElement;
-    const { name, type, value, checked, files } = target;
-
-    let fieldValue: string | boolean | File | null = value;
-
-    if (type === 'checkbox') {
-      fieldValue = checked;
-    } else if (type === 'file') {
-      fieldValue = files?.[0] ?? null;
-
-      if (fieldValue) {
-        const reader = new FileReader();
-        reader.onloadend = () => setPreview(reader.result as string);
-        reader.readAsDataURL(fieldValue);
-      }
+  const handleFileChange = (file: File | null) => {
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => setPreview(reader.result as string);
+      reader.readAsDataURL(file);
+    } else {
+      setPreview(null);
     }
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: fieldValue,
-    }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const file = uncontrolled ? pictureRef.current?.files?.[0] : formData.picture;
-
+  const onSubmit = (data: FormData) => {
+    const file = data.picture;
     const saveForm = (pictureBase64: string | null) => {
       if (uncontrolled) {
         useFormStore.getState().setUncontrolledForm({
-          name: nameRef.current?.value || '',
-          age: ageRef.current?.value || '',
-          email: emailRef.current?.value || '',
-          password: passwordRef.current?.value || '',
-          confirmPassword: confirmPasswordRef.current?.value || '',
-          gender: genderRef.current?.value || '',
-          acceptTnC: termsRef.current?.checked || false,
-          country: countryRef.current?.value || '',
+          ...data,
+          age: String(data.age),
           picture: pictureBase64,
         });
       } else {
         useFormStore.getState().setHookForm({
-          ...formData,
+          ...data,
+          age: String(data.age),
           picture: pictureBase64,
         });
       }
@@ -95,9 +73,60 @@ export const FormContent = ({ onClose, uncontrolled }: FormContentProps) => {
     }
   };
 
-  const inputClass = `w-full border rounded p-1 focus:outline-none bg-input-background/50 border-input-background border-1 ${
-    uncontrolled ? 'focus:border-button-background' : 'focus:border-button-reload'
-  }`;
+  const handleUncontrolledSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const file = pictureRef.current?.files?.[0] ?? undefined;
+
+    const data: FormData = {
+      name: nameRef.current?.value || '',
+      age: Number(ageRef.current?.value) || -1,
+      email: emailRef.current?.value || '',
+      password: passwordRef.current?.value || '',
+      confirmPassword: confirmPasswordRef.current?.value || '',
+      gender: genderRef.current?.value || '',
+      acceptTnC: termsRef.current?.checked || false,
+      country: countryRef.current?.value || '',
+      picture: file,
+    };
+
+    const result = formSchema.safeParse(data);
+    if (!result.success) {
+      const typedErrors: Partial<Record<keyof typeof data, string>> = {};
+
+      result.error.issues.forEach((issue) => {
+        if (issue.path.length > 0) {
+          const key = issue.path[0] as keyof typeof data;
+          typedErrors[key] = issue.message;
+        } else {
+          if (issue.message.includes('Passwords must match')) {
+            typedErrors.confirmPassword = issue.message;
+          }
+        }
+      });
+
+      setUncontrolledErrors(typedErrors);
+      return;
+    }
+
+    const saveForm = (pictureBase64: string | null) => {
+      useFormStore.getState().setUncontrolledForm({
+        ...data,
+        age: String(data.age),
+        picture: pictureBase64,
+      });
+      onClose();
+    };
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => saveForm(reader.result as string);
+      reader.readAsDataURL(file);
+    } else {
+      saveForm(null);
+    }
+  };
+
+  const inputClass = `w-full border rounded p-1 focus:outline-none bg-input-background/50 border-input-background border-1 focus:border-button-reload`;
 
   return (
     <Modal isOpen={true} onClose={onClose}>
@@ -105,60 +134,25 @@ export const FormContent = ({ onClose, uncontrolled }: FormContentProps) => {
         {uncontrolled ? 'Uncontrolled Form' : 'Hook Form'}
       </h2>
 
-      <form className="space-y-4" onSubmit={handleSubmit}>
-        <label htmlFor="name" className="block font-medium">
-          <input
-            id="name"
-            name="name"
-            placeholder="Name"
-            autoComplete="name"
-            {...(uncontrolled
-              ? { ref: nameRef }
-              : { name: 'name', value: formData.name, onChange: handleChange })}
-            className={inputClass}
-          />
-        </label>
+      {uncontrolled ? (
+        <form className="space-y-4" onSubmit={handleUncontrolledSubmit}>
+          <input ref={nameRef} placeholder="Name" className={inputClass} />
+          {uncontrolledErrors.name && <p className="text-red-500">{uncontrolledErrors.name}</p>}
 
-        <label htmlFor="age" className="block font-medium">
-          <input
-            id="age"
-            name="age"
-            type="number"
-            placeholder="Age"
-            autoComplete="bday"
-            {...(uncontrolled
-              ? { ref: ageRef }
-              : { name: 'age', value: formData.age, onChange: handleChange })}
-            className={inputClass}
-          />
-        </label>
+          <input ref={ageRef} type="number" placeholder="Age" className={inputClass} />
+          {uncontrolledErrors.age && <p className="text-red-500">{uncontrolledErrors.age}</p>}
 
-        <label htmlFor="gender" className="block font-medium">
-          <select
-            id="gender"
-            name="gender"
-            autoComplete="sex"
-            {...(uncontrolled
-              ? { ref: genderRef, defaultValue: '' }
-              : { name: 'gender', value: formData.gender, onChange: handleChange })}
-            className={inputClass}
-          >
-            <option value="">Gender</option>
+          <label htmlFor="gender" className="sr-only">
+            Gender
+          </label>
+          <select id="gender" ref={genderRef} className={inputClass}>
+            <option value="">Select gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
-        </label>
+          {uncontrolledErrors.gender && <p className="text-red-500">{uncontrolledErrors.gender}</p>}
 
-        <label htmlFor="country" className="block font-medium">
-          <select
-            id="country"
-            name="country"
-            autoComplete="country-name"
-            {...(uncontrolled
-              ? { ref: countryRef, defaultValue: '' }
-              : { name: 'country', value: formData.country, onChange: handleChange })}
-            className={inputClass}
-          >
+          <select ref={countryRef} className={inputClass}>
             <option value="">Country</option>
             {countries.map((c) => (
               <option key={c} value={c}>
@@ -166,90 +160,148 @@ export const FormContent = ({ onClose, uncontrolled }: FormContentProps) => {
               </option>
             ))}
           </select>
-        </label>
+          {uncontrolledErrors.country && (
+            <p className="text-red-500">{uncontrolledErrors.country}</p>
+          )}
 
-        <label htmlFor="email" className="block font-medium">
-          <input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="Email"
-            autoComplete="email"
-            {...(uncontrolled
-              ? { ref: emailRef }
-              : { name: 'email', value: formData.email, onChange: handleChange })}
-            className={inputClass}
-          />
-        </label>
+          <input ref={emailRef} type="email" placeholder="Email" className={inputClass} />
+          {uncontrolledErrors.email && <p className="text-red-500">{uncontrolledErrors.email}</p>}
 
-        <label htmlFor="password" className="block font-medium">
-          <input
-            id="password"
-            name="password"
-            type="password"
-            placeholder="Password"
-            autoComplete="new-password"
-            {...(uncontrolled
-              ? { ref: passwordRef }
-              : { name: 'password', value: formData.password, onChange: handleChange })}
-            className={inputClass}
-          />
-        </label>
+          <input ref={passwordRef} type="password" placeholder="Password" className={inputClass} />
+          {uncontrolledErrors.password && (
+            <p className="text-red-500">{uncontrolledErrors.password}</p>
+          )}
 
-        <label htmlFor="confirmPassword" className="block font-medium">
           <input
-            id="confirmPassword"
-            name="confirmPassword"
+            ref={confirmPasswordRef}
             type="password"
             placeholder="Confirm Password"
-            autoComplete={uncontrolled ? undefined : 'new-password'}
-            {...(uncontrolled
-              ? { ref: confirmPasswordRef }
-              : {
-                  name: 'confirmPassword',
-                  value: formData.confirmPassword,
-                  onChange: handleChange,
-                })}
             className={inputClass}
           />
-        </label>
+          {uncontrolledErrors.confirmPassword && (
+            <p className="text-red-500">{uncontrolledErrors.confirmPassword}</p>
+          )}
 
-        <label htmlFor="picture" className="block font-medium">
           <input
-            id="picture"
-            name="picture"
+            ref={pictureRef}
             type="file"
             accept="image/png, image/jpeg"
-            {...(uncontrolled ? { ref: pictureRef } : { name: 'picture', onChange: handleChange })}
             className="block cursor-pointer"
+            onChange={(e) => handleFileChange(e.target.files?.[0] ?? null)}
           />
           {preview && <img src={preview} alt="preview" className="mt-2 h-20 w-20 rounded" />}
-        </label>
+          {uncontrolledErrors.picture && (
+            <p className="text-red-500">{uncontrolledErrors.picture}</p>
+          )}
 
-        <label htmlFor="terms" className="flex items-center gap-2">
-          <input
-            id="terms"
-            name="acceptTnC"
-            type="checkbox"
-            {...(uncontrolled
-              ? { ref: termsRef }
-              : { name: 'acceptTnC', checked: formData.acceptTnC, onChange: handleChange })}
-            className="cursor-pointer"
-          />
-          Accept Terms & Conditions
-        </label>
+          <label className="flex items-center gap-2" htmlFor="acceptTnC">
+            <input ref={termsRef} type="checkbox" className="cursor-pointer" id="acceptTnC" />
+            Accept Terms & Conditions
+          </label>
+          {uncontrolledErrors.acceptTnC && (
+            <p className="text-red-500">{uncontrolledErrors.acceptTnC}</p>
+          )}
 
-        <button
-          type="submit"
-          className={`flex cursor-pointer justify-self-end-safe rounded px-4 py-2 ${
-            uncontrolled
-              ? 'bg-button-background hover:bg-button-background-hover'
-              : 'bg-button-reload hover:bg-button-reload-hover'
-          } text-white`}
+          <button
+            type="submit"
+            data-testid="uncontrolled-submit"
+            className="bg-button-background hover:bg-button-background-hover flex cursor-pointer justify-self-end-safe rounded px-4 py-2 text-white"
+          >
+            Submit
+          </button>
+        </form>
+      ) : (
+        <form
+          className="space-y-4"
+          onSubmit={(e) => {
+            void handleSubmit(onSubmit)(e);
+          }}
         >
-          Submit
-        </button>
-      </form>
+          <input placeholder="Name" {...register('name')} className={inputClass} />
+          {formState.errors.name && <p className="text-red-500">{formState.errors.name.message}</p>}
+
+          <input type="number" placeholder="Age" {...register('age')} className={inputClass} />
+          {formState.errors.age && <p className="text-red-500">{formState.errors.age.message}</p>}
+
+          <select {...register('gender')} className={inputClass}>
+            <option value="">Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          {formState.errors.gender && (
+            <p className="text-red-500">{formState.errors.gender.message}</p>
+          )}
+
+          <select {...register('country')} className={inputClass}>
+            <option value="">Country</option>
+            {countries.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+          {formState.errors.country && (
+            <p className="text-red-500">{formState.errors.country.message}</p>
+          )}
+
+          <input type="email" placeholder="Email" {...register('email')} className={inputClass} />
+          {formState.errors.email && (
+            <p className="text-red-500">{formState.errors.email.message}</p>
+          )}
+
+          <input
+            type="password"
+            placeholder="Password"
+            {...register('password')}
+            className={inputClass}
+          />
+          {formState.errors.password && (
+            <p className="text-red-500">{formState.errors.password.message}</p>
+          )}
+
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            {...register('confirmPassword')}
+            className={inputClass}
+          />
+          {formState.errors.confirmPassword && (
+            <p className="text-red-500">{formState.errors.confirmPassword.message}</p>
+          )}
+
+          <input
+            type="file"
+            accept="image/png, image/jpeg"
+            className="block cursor-pointer"
+            onChange={(e) => {
+              const file = e.target.files?.[0] ?? undefined;
+              setValue('picture', file, { shouldValidate: true });
+              handleFileChange(file ?? null);
+            }}
+          />
+          {formState.errors.picture && (
+            <p className="text-red-500">{formState.errors.picture.message}</p>
+          )}
+          {preview && <img src={preview} alt="preview" className="mt-2 h-20 w-20 rounded" />}
+
+          <label className="flex items-center gap-2">
+            <input type="checkbox" {...register('acceptTnC')} className="cursor-pointer" />
+            Accept Terms & Conditions
+            {formState.errors.acceptTnC && (
+              <p className="text-red-500">{formState.errors.acceptTnC.message}</p>
+            )}
+          </label>
+
+          <button
+            type="submit"
+            data-testid="hookform-submit"
+            disabled={!formState.isValid}
+            className="bg-button-reload hover:bg-button-reload-hover flex cursor-pointer justify-self-end-safe rounded px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-gray-200"
+          >
+            Submit
+          </button>
+        </form>
+      )}
     </Modal>
   );
 };
