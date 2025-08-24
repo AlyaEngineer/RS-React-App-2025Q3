@@ -1,16 +1,15 @@
-import { useState } from 'react';
+import { Button } from './components/Button';
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export default function App() {
   return (
-    <>
-      <h1>Forms</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-      </div>
-    </>
+    <div className="flex min-h-screen items-center justify-center gap-10 p-10 max-md:flex-col">
+      <Button className="bg-button-background hover:bg-button-background-hover">
+        Uncontrolled Form
+      </Button>
+
+      <Button className="bg-button-reload hover:bg-button-reload-hover">
+        React Hook Form
+      </Button>
+    </div>
   );
 }
-
-export default App;
