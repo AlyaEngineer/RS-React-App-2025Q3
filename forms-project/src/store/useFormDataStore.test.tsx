@@ -1,7 +1,7 @@
-import { describe, beforeEach, it, expect } from "vitest";
+import { describe, beforeEach, it, expect } from 'vitest';
 
 import { useFormStore } from './useFormDataStore';
-import type { FormDataType } from "./useFormDataStore";
+import type { FormDataType } from './useFormDataStore';
 
 const emptyForm: FormDataType = {
   name: '',
@@ -12,14 +12,14 @@ const emptyForm: FormDataType = {
   password: '',
   confirmPassword: '',
   picture: null,
-  acceptTnC: false
+  acceptTnC: false,
 };
 
 describe('useFormStore', () => {
   beforeEach(() => {
     useFormStore.setState({
       uncontrolledForm: { ...emptyForm },
-      hookForm: { ...emptyForm }
+      hookForm: { ...emptyForm },
     });
   });
 
@@ -28,7 +28,7 @@ describe('useFormStore', () => {
       ...emptyForm,
       name: 'Alice',
       age: '25',
-      acceptTnC: true
+      acceptTnC: true,
     });
 
     const form = useFormStore.getState().uncontrolledForm!;
@@ -42,7 +42,7 @@ describe('useFormStore', () => {
       ...emptyForm,
       name: 'Bob',
       age: '30',
-      acceptTnC: true
+      acceptTnC: true,
     });
 
     const form = useFormStore.getState().hookForm!;
