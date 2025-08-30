@@ -1,0 +1,4 @@
+export const TABLE_CONFIG = {
+  DEFAULT_TABLE_COLUMNS: 7,
+  SKELETON_ROW_COUNT: 5,
+};
