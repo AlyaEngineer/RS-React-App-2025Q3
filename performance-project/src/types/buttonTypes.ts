@@ -1,6 +1,7 @@
 export type ButtonProps = {
-  onClick: () => void;
+  onClick?: () => void;
   children: React.ReactNode;
-  variant: 'add' | 'cancel' | 'ok';
+  variant: 'add' | 'cancel' | 'ok' | 'search';
   className?: string;
+  type?: 'submit' | 'reset' | 'button';
 };

@@ -6,12 +6,12 @@ import { TableBodyProps } from '@/types/tableTypes';
 import Button from '../ui/Button';
 
 export default function TableBody({
+  countries,
   selectedColumns,
   setSelectedColumns,
   selectedYear,
 }: TableBodyProps) {
   const data = useData();
-  const countries = Object.keys(data);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [activeYearData, setActiveYearData] = useState<YearData | null>(null);
@@ -28,27 +28,27 @@ export default function TableBody({
                 index % 2 === 0 ? 'bg-gray-300' : 'bg-white'
               }`}
             >
-              <td className="block p-2 text-left md:table-cell md:border md:border-gray-200">
+              <td className="block p-2 text-left break-words whitespace-normal md:table-cell md:border md:border-gray-200">
                 <span className="inline-block w-1/3 font-bold md:hidden">Name</span>
                 {name}
               </td>
-              <td className="block p-2 text-left md:table-cell md:border md:border-gray-200">
+              <td className="block p-2 text-left break-words whitespace-normal md:table-cell md:border md:border-gray-200">
                 <span className="inline-block w-1/3 font-bold md:hidden">ISO</span>
                 {data[name].iso_code ?? 'N/A'}
               </td>
-              <td className="block p-2 text-left md:table-cell md:border md:border-gray-200">
+              <td className="block p-2 text-left break-words whitespace-normal md:table-cell md:border md:border-gray-200">
                 <span className="inline-block w-1/3 font-bold md:hidden">Year</span>
                 {yearData?.year ?? 'N/A'}
               </td>
-              <td className="block p-2 text-left md:table-cell md:border md:border-gray-200">
+              <td className="block p-2 text-left break-words whitespace-normal md:table-cell md:border md:border-gray-200">
                 <span className="inline-block w-1/3 font-bold md:hidden">Population</span>
                 {yearData?.population ?? 'N/A'}
               </td>
-              <td className="block p-2 text-left md:table-cell md:border md:border-gray-200">
+              <td className="block p-2 text-left break-words whitespace-normal md:table-cell md:border md:border-gray-200">
                 <span className="inline-block w-1/3 font-bold md:hidden">CO₂</span>
                 {yearData?.co2 ?? 'N/A'}
               </td>
-              <td className="block p-2 text-left md:table-cell md:border md:border-gray-200">
+              <td className="block p-2 text-left break-words whitespace-normal md:table-cell md:border md:border-gray-200">
                 <span className="inline-block w-1/3 font-bold md:hidden">CO₂ per capita</span>
                 {yearData?.co2_per_capita ?? 'N/A'}
               </td>
@@ -56,14 +56,14 @@ export default function TableBody({
               {selectedColumns.map((column) => (
                 <td
                   key={column}
-                  className="block p-2 text-left md:table-cell md:border md:border-gray-200"
+                  className="block p-2 text-left break-words whitespace-normal md:table-cell md:border md:border-gray-200"
                 >
                   <span className="inline-block w-1/3 font-bold md:hidden">{column}</span>
                   {yearData?.[column as keyof YearData] ?? 'N/A'}
                 </td>
               ))}
 
-              <td className="block p-2 text-left md:table-cell md:border md:border-gray-200">
+              <td className="block p-2 text-left break-words whitespace-normal md:table-cell md:border md:border-gray-200">
                 <span className="inline-block w-1/3 font-bold md:hidden">Actions</span>
                 <Button
                   onClick={() => {

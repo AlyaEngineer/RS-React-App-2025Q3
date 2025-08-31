@@ -5,6 +5,7 @@ export default function Button({
   children,
   variant = 'add',
   className = '',
+  type = 'button',
 }: ButtonProps) {
   let baseStyles =
     'rounded px-2 py-1 border text-center hover:cursor-pointer transition-all duration-300 hover:shadow-2xl';
@@ -12,7 +13,7 @@ export default function Button({
   let variantStyles = '';
   switch (variant) {
     case 'add':
-      variantStyles = 'border-blue-500 bg-blue-500 font-bold text-white hover:bg-blue-700';
+      variantStyles = 'border-blue-700 bg-blue-700 font-bold text-white hover:bg-blue-600';
       break;
     case 'cancel':
       variantStyles =
@@ -22,10 +23,14 @@ export default function Button({
       variantStyles =
         'rounded-md ml-2 border-transparent bg-green-600 px-4 py-2 text-sm text-white shadow-md hover:bg-green-700 focus:bg-green-700 focus:shadow-none active:bg-green-700 active:shadow-none';
       break;
+    case 'search':
+      variantStyles =
+        'text-white absolute end-1 top-1 bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 hover:shadow-none';
+      break;
   }
 
   return (
-    <button onClick={onClick} className={`${baseStyles} ${variantStyles} ${className}`}>
+    <button onClick={onClick} type={type} className={`${baseStyles} ${variantStyles} ${className}`}>
       {children}
     </button>
   );
