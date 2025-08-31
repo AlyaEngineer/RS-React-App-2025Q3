@@ -12,7 +12,6 @@ export interface YearData {
   population?: number;
   co2?: number;
   co2_per_capita?: number;
-
   cement_co2?: number;
   cement_co2_per_capita?: number;
   co2_growth_abs?: number;

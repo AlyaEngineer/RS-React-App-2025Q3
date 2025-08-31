@@ -1,5 +1,5 @@
 import { use } from 'react';
-import type { CO2Data } from '../types/types';
+import type { CO2Data } from '../types/dataTypes';
 import { DATA_SOURCE_URL } from '../constants/dataSourceURL';
 
 let dataPromise: Promise<CO2Data> | null = null;
