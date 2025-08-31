@@ -8,6 +8,7 @@ export function formatColumnName(col: string) {
     .replace(/lucf/gi, 'LUCF')
     .replace(/luc/gi, 'LUC')
     .replace(/abs/gi, 'ABS')
+    .replace(/gdp/gi, 'GDP')
     .replace(/prct/gi, '%');
 
   return formatted.charAt(0).toUpperCase() + formatted.slice(1);
