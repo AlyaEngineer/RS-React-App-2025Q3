@@ -5,7 +5,11 @@ import Modal from '../Modal/Modal';
 import { TableBodyProps } from '@/types/tableTypes';
 import Button from '../ui/Button';
 
-export default function TableBody({ selectedColumns, setSelectedColumns }: TableBodyProps) {
+export default function TableBody({
+  selectedColumns,
+  setSelectedColumns,
+  selectedYear,
+}: TableBodyProps) {
   const data = useData();
   const countries = Object.keys(data);
 
@@ -16,7 +20,7 @@ export default function TableBody({ selectedColumns, setSelectedColumns }: Table
     <>
       <tbody className="block md:table-row-group">
         {countries.map((name, index) => {
-          const latest = data[name].data.at(-1);
+          const yearData = data[name].data.find((d) => d.year === selectedYear) ?? null;
           return (
             <tr
               key={name}
@@ -34,19 +38,19 @@ export default function TableBody({ selectedColumns, setSelectedColumns }: Table
               </td>
               <td className="block p-2 text-left md:table-cell md:border md:border-gray-200">
                 <span className="inline-block w-1/3 font-bold md:hidden">Year</span>
-                {latest?.year}
+                {yearData?.year ?? 'N/A'}
               </td>
               <td className="block p-2 text-left md:table-cell md:border md:border-gray-200">
                 <span className="inline-block w-1/3 font-bold md:hidden">Population</span>
-                {latest?.population ?? 'N/A'}
+                {yearData?.population ?? 'N/A'}
               </td>
               <td className="block p-2 text-left md:table-cell md:border md:border-gray-200">
                 <span className="inline-block w-1/3 font-bold md:hidden">CO₂</span>
-                {latest?.co2 ?? 'N/A'}
+                {yearData?.co2 ?? 'N/A'}
               </td>
               <td className="block p-2 text-left md:table-cell md:border md:border-gray-200">
                 <span className="inline-block w-1/3 font-bold md:hidden">CO₂ per capita</span>
-                {latest?.co2_per_capita ?? 'N/A'}
+                {yearData?.co2_per_capita ?? 'N/A'}
               </td>
 
               {selectedColumns.map((column) => (
@@ -55,7 +59,7 @@ export default function TableBody({ selectedColumns, setSelectedColumns }: Table
                   className="block p-2 text-left md:table-cell md:border md:border-gray-200"
                 >
                   <span className="inline-block w-1/3 font-bold md:hidden">{column}</span>
-                  {latest?.[column as keyof YearData] ?? 'N/A'}
+                  {yearData?.[column as keyof YearData] ?? 'N/A'}
                 </td>
               ))}
 
@@ -63,7 +67,7 @@ export default function TableBody({ selectedColumns, setSelectedColumns }: Table
                 <span className="inline-block w-1/3 font-bold md:hidden">Actions</span>
                 <Button
                   onClick={() => {
-                    setActiveYearData(latest ?? null);
+                    setActiveYearData(yearData ?? null);
                     setModalOpen(true);
                   }}
                   variant="add"

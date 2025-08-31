@@ -2,8 +2,9 @@ import { Suspense, useState } from 'react';
 import TableHeader from './Table/TableHeader';
 import TableBody from './Table/TableBody';
 import TableSkeleton from './ui/TableSkeleton';
+import { CountryListProps } from '@/types/countryListTypes';
 
-export default function CountryList() {
+export default function CountryList({ selectedYear }: CountryListProps) {
   const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
 
   return (
@@ -14,7 +15,11 @@ export default function CountryList() {
       <table className="w-full border-collapse max-lg:text-sm lg:table">
         <TableHeader selectedColumns={selectedColumns} />
         <Suspense fallback={<TableSkeleton rows={6} />}>
-          <TableBody selectedColumns={selectedColumns} setSelectedColumns={setSelectedColumns} />
+          <TableBody
+            selectedColumns={selectedColumns}
+            setSelectedColumns={setSelectedColumns}
+            selectedYear={selectedYear}
+          />
         </Suspense>
       </table>
     </div>
