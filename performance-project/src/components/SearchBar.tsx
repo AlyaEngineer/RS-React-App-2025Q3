@@ -1,15 +1,18 @@
 import { Search } from 'lucide-react';
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useCallback } from 'react';
 import Button from './ui/Button';
 import { CountrySearchProps } from '@/types/searchTypes';
 
 export default function CountrySearch({ onSearch }: CountrySearchProps) {
   const [query, setQuery] = useState('');
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSearch(query.trim());
-  };
+  const handleSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      onSearch(query.trim());
+    },
+    [query, onSearch]
+  );
 
   return (
     <form className="mx-auto" onSubmit={handleSubmit}>
