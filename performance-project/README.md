@@ -1,69 +1,59 @@
-# React + TypeScript + Vite
+# React Performance
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The "React Performance" task delves into techniques and best practices to optimize the performance of React applications.
 
-Currently, two official plugins are available:
+In this task, it was necessary to fetch data from a huge JSON file ([file](https://nyc3.digitaloceanspaces.com/owid-public/data/co2/owid-co2-data.json)) containing CO2 emissions data by countries. It was also required to implement Year Selection, Filtering, Sorting, and Search, and finally to optimize the application using useMemo, useCallback, React.memo, and proper key props for lists and tables.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Performance Profiling Task
 
-## Expanding the ESLint configuration
+Parameters to Check:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Commit Duration:** Time taken for React to render the committed updates.
+- **Render Duration:** Time taken for individual components to render.
+- **Interactions:** User interactions that triggered the renders.
+- **Flame Graph:** Visual representation of component render times.
+- **Ranked Chart:** Sorted list of components by render duration.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Before optimization
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Year Selection
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+![Profiler Flame Graph](docs/year-selection-flamegraph-before.png)
+![Profiler Ranked Chart](docs/year-selection-ranked-before.png)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Adding columns
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+![Profiler Flame Graph](docs/adding-columns-flamegraph-before.png)
+![Profiler Ranked Chart](docs/adding-columns-ranked-before.png)
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Search
+
+![Profiler Flame Graph](docs/search-flamegraph-before.png)
+![Profiler Ranked Chart](docs/search-ranked-before.png)
+
+### Sort countries by population
+
+![Profiler Flame Graph](docs/sorting-flamegraph-before.png)
+![Profiler Ranked Chart](docs/sorting-ranked-before.png)
+
+## After optimization
+
+### Year Selection
+
+![Profiler Flame Graph](docs/year-selection-flamegraph-after.png)
+![Profiler Ranked Chart](docs/year-selection-ranked-after.png)
+
+### Adding columns
+
+![Profiler Flame Graph](docs/adding-columns-flamegraph-after.png)
+![Profiler Ranked Chart](docs/adding-columns-ranked-after.png)
+
+### Search
+
+![Profiler Flame Graph](docs/search-flamegraph-after.png)
+![Profiler Ranked Chart](docs/search-ranked-after.png)
+
+### Sort countries by population
+
+![Profiler Flame Graph](docs/sorting-flamegraph-after.png)
+![Profiler Ranked Chart](docs/sorting-ranked-after.png)
