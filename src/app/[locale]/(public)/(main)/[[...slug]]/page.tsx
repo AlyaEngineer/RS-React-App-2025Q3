@@ -11,17 +11,17 @@ export const metadata: Metadata = {
 };
 
 export default async function Page({
-  params: routeParams,
-  searchParams: queryParams,
+  params,
+  searchParams,
 }: {
-  params: { slug?: string[] };
-  searchParams: { name?: string };
+  params: Promise<{ slug?: string[] }>;
+  searchParams: Promise<{ name?: string }>;
 }) {
-  const slug = routeParams.slug ?? [];
+  const { slug = [] } = await params;
+  const { name = '' } = await searchParams;
   const currentPage = slug[0] ? Number(slug[0]) : 1;
   const detailsId = slug[1];
-  const query = queryParams.name ?? '';
-
+  const query = name;
   const initialData = await fetchCharactersByName(query, currentPage);
 
   return (
