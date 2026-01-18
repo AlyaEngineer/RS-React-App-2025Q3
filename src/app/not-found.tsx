@@ -5,6 +5,8 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/libs/utils';
 
+export const dynamic = 'force-dynamic';
+
 export default function NotFound() {
   const t = useTranslations('NotFoundPage');
 
