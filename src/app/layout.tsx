@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   title: 'Search App',
   description:
     'My App is an app for searching characters from the Rick and Morty cartoon series, based on the Rick and Morty API as part of the React2025Q3 course of the RSSchool',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
