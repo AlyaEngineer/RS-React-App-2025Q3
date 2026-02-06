@@ -11,7 +11,7 @@ import pluginQuery from '@tanstack/eslint-plugin-query';
 import nextPlugin from '@next/eslint-plugin-next';
 
 export default tseslint.config(
-  { ignores: ['dist', 'coverage', 'next-env.d.ts'] },
+  { ignores: ['dist', 'coverage', 'next-env.d.ts', '.netlify', '.next'] },
   {
     extends: [
       js.configs.recommended,
