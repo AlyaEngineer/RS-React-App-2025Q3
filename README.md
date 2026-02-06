@@ -1,5 +1,7 @@
 # <h1 align="center">🔎 Rick & Morty Explorer</h1>
 
+**[Live Demo](https://alyaengineer-react2025q3-search-panel.netlify.app/ru)**
+
 ## 📝 Description
 
 A web application for searching and browsing characters from the Rick and Morty universe using the official public [Rick and Morty API](https://rickandmortyapi.com/).
