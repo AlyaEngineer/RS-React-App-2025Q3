@@ -1,6 +1,6 @@
 # <h1 align="center">🔎 Rick & Morty Explorer</h1>
 
-**[Live Demo](https://alyaengineer-react2025q3-search-panel.netlify.app/ru)**
+**[Live Demo](https://alyaengineer-react2025q3-search-panel.netlify.app/en)**
 
 ## 📝 Description
 
