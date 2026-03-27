@@ -1,0 +1,120 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@import 'tw-animate-css';
+
+@theme {
+  --shadow-3xl: 0 0 35px 5px oklch(0 0 0 / 25%);
+  --color-checkbox-shadow: var(--checkbox-shadow);
+  --color-main-gradient: var(--main-gradient);
+  --color-dark: var(--dark);
+  --color-input-background: var(--input-background);
+  --color-button-background: var(--button-background);
+  --color-button-background-hover: var(--button-background-hover);
+  --color-button-reload: var(--button-reload);
+  --color-button-reload-hover: var(--button-reload-hover);
+  --color-button-error: var(--button-error);
+  --color-button-error-hover: var(--button-error-hover);
+  --color-item-card: var(--item-card);
+  --color-item-card-hover: var(--item-card-hover);
+  --color-text-content: var(--text-content);
+  --color-text-content-2: var(--text-content-2);
+  --color-flyout-background: var(--flyout-background);
+  --color-checkbox-color: var(--checkbox-color);
+  --color-checkbox-border: var(--checkbox-border);
+  --container-9xl: 96rem;
+  --my-max-width: 1550px;
+}
+
+@layer theme {
+  :root {
+    --font-manrope: 'Manrope', sans-serif;
+    --shadow-3xl: 0 0 35px 5px oklch(0 0 0 / 25%);
+    --main-gradient: linear-gradient(
+      to right top,
+      oklch(0.7631 0.0821 230.97),
+      oklch(0.7779 0.0753 256.74),
+      oklch(0.7915 0.0692 290.34),
+      oklch(0.804 0.0746 324.76),
+      oklch(0.8147 0.0815 352.93)
+    );
+    --dark: #372535;
+    --input-background: oklch(0.8412 0.0527 288.83);
+    --button-background: oklch(0.532 0.1411 296.88);
+    --button-background-hover: oklch(0.4539 0.1285 296.93);
+    --button-reload: oklch(0.5706 0.1281 326.57);
+    --button-reload-hover: oklch(0.4947 0.1139 327.13);
+    --button-error: oklch(0.7232 0.1736 55.83);
+    --button-error-hover: oklch(0.6671 0.1747 48.91);
+    --item-card: oklch(0.5491 0.0795 273.2);
+    --text-content: oklch(0.2854 0.0385 227.09);
+    --text-content-2: oklch(0.4791 0.0643 272.73);
+    --flyout-background: oklch(0.6609 0.0861 251.84);
+    --checkbox-color: oklch(0.9648 0.1253 111.44);
+    --checkbox-shadow: oklch(0.9648 0.1253 111.44);
+    --checkbox-border: oklch(0.5491 0.0795 273.2);
+    --container-9xl: 96rem;
+    --my-max-width: 1550px;
+  }
+}
+
+.dark {
+  --shadow-3xl: 0 0 35px 5px oklch(0 0 0 / 25%);
+  --main-gradient: linear-gradient(
+    to right top,
+    oklch(0.3673 0.0441 324.87),
+    oklch(0.4808 0.0495 285.85),
+    oklch(0.593 0.0614 251.25),
+    oklch(0.7041 0.0765 225.53),
+    oklch(0.8156 0.083 202.45)
+  );
+  --dark: #372535;
+  --input-background: oklch(0.6754 0.0519 243.95);
+  --button-background: oklch(0.8056 0.1886 131.07);
+  --button-background-hover: oklch(0.7462 0.1955 132.6);
+  --button-reload: oklch(0.8555 0.0651 185.04);
+  --button-reload-hover: oklch(0.7933 0.0816 186.72);
+  --button-error: oklch(0.7232 0.1736 55.83);
+  --button-error-hover: oklch(0.6671 0.1747 48.91);
+  --item-card: oklch(0.3717 0.0449 257.42);
+  --text-content: oklch(1 0 0);
+  --text-content-2: oklch(0.3456 0.0355 258.33);
+  --flyout-background: oklch(0.4808 0.0495 285.85);
+  --checkbox-color: oklch(0.9648 0.1253 111.44);
+  --checkbox-shadow: oklch(0.9648 0.1253 111.44);
+  --checkbox-border: oklch(0.5491 0.0795 273.2);
+  --container-9xl: 96rem;
+  --my-max-width: 1550px;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-manrope);
+    background: var(--main-gradient);
+  }
+  /* input, button {
+    font-family: var(--font-manrope);
+    padding: 5px 10px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 0 35px 5px oklch(0 0 0 / 25%);
+    height: 40px;
+  }
+  input {
+    color: #4b5563;
+    margin-right: 10px;
+  }
+ input:focus {
+    outline: none;
+  }
+  input:hover {
+    outline: none;
+  }
+  button{
+    color: #ffffff;
+  }
+  button:hover {
+    box-shadow: 0 0 35px 5px oklch(0 0 0 / 40%);
+  } */
+}

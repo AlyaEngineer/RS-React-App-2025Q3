@@ -1,10 +1,15 @@
-import { Link } from 'react-router-dom';
+import { useTranslations } from 'next-intl';
 
+import { PAGES } from '@/config/pages.config';
+import { Link } from '@/i18n/navigation';
 import { cn } from '@/libs/utils';
 
+import LanguageToggle from '../toggleLanguage/LanguageToggle';
 import { ThemeToggle } from '../toggleTheme/ThemeToggle';
 
 export default function Footer() {
+  const t = useTranslations('Footer');
+
   return (
     <footer
       className={cn(
@@ -20,37 +25,41 @@ export default function Footer() {
       <div className="flex flex-col gap-2">
         <div>
           <Link
-            to={'/'}
+            href={PAGES.MAIN}
             className="hover:text-button-reload transition-colors duration-300 hover:text-shadow-lg/30"
           >
-            <span className="p-2">Home</span>
+            <span className="p-2">{t('home')}</span>
           </Link>
         </div>
         <div>
           <Link
-            to={'/about'}
+            href={PAGES.ABOUT_US}
             className="hover:text-button-reload transition-colors duration-300 hover:text-shadow-lg/30"
           >
-            <span className="p-2">About us</span>
+            <span className="p-2">{t('about')}</span>
           </Link>
         </div>
         <div>
-          <Link
-            to="https://rs.school/courses/reactjs"
+          <a
+            href="https://rs.school/courses/reactjs"
             target="_blank"
+            rel="noopener noreferrer"
             className="hover:text-button-reload transition-colors duration-300 hover:text-shadow-lg/30"
           >
             <span className="p-2">Rolling Scopes School / React Course</span>
-          </Link>
+          </a>
         </div>
         <div>
           <ThemeToggle />
         </div>
+        <div>
+          <LanguageToggle />
+        </div>
       </div>
 
       <div className="max-md:px-2">
-        <p>&copy; {new Date().getFullYear()} Rick & Morty API Search</p>
-        <p>All rights reserved</p>
+        <p>&copy; 2025 Rick & Morty API Search</p>
+        <p>{t('rights')}</p>
       </div>
     </footer>
   );

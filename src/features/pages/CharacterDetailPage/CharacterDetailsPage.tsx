@@ -1,5 +1,7 @@
+'use client';
+
 import { Loader, RefreshCw } from 'lucide-react';
-import { useOutletContext, useParams } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
 import { RefreshButton } from '@/features/components/refreshButton/RefreshButton';
 import CharacterDetails from '@/features/pages/CharacterDetailPage/CharacterDetails';
@@ -7,13 +9,13 @@ import { useCharacterById } from '@/hooks/useCharacterById';
 
 import { CloseButton } from './CloseButton';
 
-type OutletContextType = {
+interface CharacterDetailsPageProps {
   onCloseDetails: () => void;
-};
+}
 
-export default function CharacterDetailsPage() {
-  const { detailsId } = useParams<{ detailsId: string }>();
-  const { onCloseDetails } = useOutletContext<OutletContextType>();
+export default function CharacterDetailsPage({ onCloseDetails }: CharacterDetailsPageProps) {
+  const router = useRouter();
+  const { detailsId } = router.query;
 
   const {
     data: character,
@@ -22,7 +24,7 @@ export default function CharacterDetailsPage() {
     isError,
     error,
     refetch,
-  } = useCharacterById(detailsId ?? '');
+  } = useCharacterById(detailsId as string);
 
   if (isLoading) {
     return (
@@ -47,7 +49,7 @@ export default function CharacterDetailsPage() {
           <CloseButton onClose={onCloseDetails} />
         </div>
         <p className="mb-4 max-w-56 text-center text-3xl font-bold text-red-400">
-          Error loading character: {error.message ?? 'Something went wrong'}
+          Error loading character: {error?.message ?? 'Something went wrong'}
         </p>
       </div>
     );

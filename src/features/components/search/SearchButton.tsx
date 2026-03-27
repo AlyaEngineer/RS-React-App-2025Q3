@@ -1,9 +1,11 @@
 import { Rocket } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 import { SearchButtonProps } from '@/features/types/searchTypes';
 import { cn } from '@/libs/utils';
 
 export default function SearchButton({ onClick }: SearchButtonProps) {
+  const t = useTranslations('Search');
   return (
     <button
       type="submit"
@@ -19,7 +21,7 @@ export default function SearchButton({ onClick }: SearchButtonProps) {
       )}
     >
       <Rocket strokeWidth={1.25} />
-      Let&apos;s search
+      {t('search-button')}
     </button>
   );
 }

@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { Checkbox } from '@/features/components/checkbox/Checkbox';
 import { CloseButton } from '@/features/pages/CharacterDetailPage/CloseButton';
 import { CharacterDetailsProps } from '@/features/types/viewTypes';
@@ -12,7 +14,9 @@ export default function CharacterDetails({ character, onClose }: CharacterDetail
         <CloseButton onClose={onClose} />
       </div>
       <div className="flex flex-col text-2xl max-lg:text-lg max-md:text-base">
-        <img
+        <Image
+          width={200}
+          height={200}
           src={image}
           alt={name}
           className="shadow-3xl/20 mb-4 h-auto w-full self-center rounded-md object-cover"

@@ -1,14 +1,18 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 import { cn } from '@/libs/utils';
 import { useCharactersStore } from '@/store/useCharactersStore';
 
-import { DownloadButton } from './DownloadButton';
+import { DownloadButton } from './DownloadButton/DownloadButton';
 import { RemoveAllButton } from './RemoveAllButton';
 
 export const Flyout = () => {
   const selectedCharacters = useCharactersStore((state) => state.selectedCharacters);
-  const [, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const t = useTranslations('Flyout');
 
   useEffect(() => {
     if (selectedCharacters.length > 0) {
@@ -19,6 +23,8 @@ export const Flyout = () => {
     }
   }, [selectedCharacters.length]);
 
+  if (!isVisible) return null;
+
   return (
     <div
       className={cn(
@@ -27,9 +33,7 @@ export const Flyout = () => {
         selectedCharacters.length > 0 ? 'translate-y-0' : 'translate-y-full'
       )}
     >
-      <span>
-        {selectedCharacters.length} item{selectedCharacters.length > 1 ? 's are' : ' is'} selected
-      </span>
+      <span>{t('count', { count: selectedCharacters.length })}</span>
       <RemoveAllButton />
       <DownloadButton items={selectedCharacters} />
     </div>
